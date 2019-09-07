@@ -59,7 +59,7 @@ func main() {
 	e.HideBanner = true
 	e.HidePort = true
 
-	cookieStore := sessions.NewCookieStore([]byte("secret"))
+	cookieStore := sessions.NewCookieStore([]byte(os.Getenv("COOKIE_SECRET")))
 	e.Use(session.Middleware(cookieStore)) //Required for OAuth2 Shit
 
 	t := echo_template.New(echo_template.TemplateConfig{

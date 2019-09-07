@@ -10,17 +10,12 @@ import (
 	"contrib.go.opencensus.io/exporter/stackdriver"
 	"github.com/99designs/gqlgen-contrib/gqlopencensus"
 	"github.com/99designs/gqlgen/handler"
-	"github.com/gorilla/sessions"
 	"github.com/gorilla/websocket"
 	_ "github.com/joho/godotenv/autoload"
-	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	log "github.com/sirupsen/logrus"
 	"github.com/tribehq/platform/controllers/chatbots"
-	"github.com/tribehq/platform/controllers/oauth2/oauth"
-	sessionservice "github.com/tribehq/platform/controllers/oauth2/session"
-	"github.com/tribehq/platform/controllers/oauth2/web"
 	"github.com/tribehq/platform/controllers/payments"
 	"github.com/tribehq/platform/directives"
 	"github.com/tribehq/platform/lib/cache"
@@ -30,11 +25,8 @@ import (
 	smw "github.com/tribehq/platform/middleware"
 	"github.com/tribehq/platform/resolvers"
 	"github.com/tribehq/platform/utils/auth"
-	"github.com/tribehq/platform/utils/echo_template"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"go.opencensus.io/trace"
-	"html/template"
-	"io"
 	"net/http"
 	"os"
 	"time"
@@ -47,21 +39,12 @@ func init() {
 }
 
 
-
-type Template struct {
-	templates *template.Template
-}
-
-func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	return t.templates.ExecuteTemplate(w, name, data)
-}
-
 // GraphQL Based API Server
 func main() {
 
 	//Profiler initialization, best done as early as possible.
 	if err := profiler.Start(profiler.Config{
-		ProjectID: os.Getenv("GOOGLE_PROJECT_ID"),
+		ProjectID: os.Getenv("GOOGLE_CLOUD_PROJECT"),
 	}); err != nil {
 		log.Fatal(err)
 	}
@@ -81,17 +64,6 @@ func main() {
 	e.HidePort = true
 
 
-	cookieStore := sessions.NewCookieStore([]byte("secret"))
-	e.Use(session.Middleware(cookieStore)) //Required for OAuth2 Shit
-
-	t := echo_template.New(echo_template.TemplateConfig{
-		Root:         "public/views",
-		Extension:    ".html",
-		Master:       "layouts/outside",
-		DisableCache: true,
-	})
-
-	e.Renderer = t
 
 	//Logging
 	e.Use(echo_logger.LogrusLogger())
@@ -102,7 +74,7 @@ func main() {
 	//GZip Stuff
 	e.Use(middleware.Gzip())
 	//JWT Auth
-	e.Use(smw.JWT([]byte("jwtsecret")))
+	e.Use(smw.JWT([]byte(os.Getenv("JWT_SECRET"))))
 	e.Use(middleware.Recover())
 	e.Use(middleware.RequestID())
 	e.Use(auth.EchoContextToGraphQLContext) //Make echo.Context available in resolver function context
@@ -112,12 +84,6 @@ func main() {
 	var mb int64 = 1 << 20
 	uploadMaxMemory := handler.UploadMaxMemory(32 * mb)
 	uploadMaxSize := handler.UploadMaxSize(50 * mb)
-
-	//OAuth Related middlewares
-	sessionService := sessionservice.NewService(cookieStore)
-	guestMw := web.NewGuestMiddleware(*sessionService)
-	loggedInMw := web.NewLoggedInMiddleware(*sessionService)
-	clientMw := web.NewClientMiddleware(*sessionService)
 
 	database.ConnectMongo() //Connect to MongoDB
 	cache.ConnectRedis()
@@ -140,18 +106,6 @@ func main() {
 				return true
 			},
 		}), uploadMaxMemory, uploadMaxSize)))
-
-
-	//OAuth2 Server Stuff
-	e.GET("/login", web.LoginForm, guestMw.Serve(), clientMw.Serve())
-	e.POST("/login", web.Login, guestMw.Serve(), clientMw.Serve())
-	e.GET("/signup", web.RegisterForm, guestMw.Serve())
-	e.POST("/signup", web.Register, guestMw.Serve())
-	e.GET("/logout", web.Logout, loggedInMw.Serve())
-	e.GET("/authorize", web.AuthorizeForm, loggedInMw.Serve(), clientMw.Serve())
-	e.POST("/authorize", web.Authorize, loggedInMw.Serve(), clientMw.Serve())
-	e.POST("/v1/oauth/tokens", oauth.TokensHandler)
-	e.POST("/v1/oauth/introspect", oauth.IntrospectHandler)
 
 	hooks := e.Group("/hooks")
 	//Stripe Payments Handling
