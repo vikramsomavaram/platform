@@ -6,12 +6,12 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/tribehq/platform)](https://goreportcard.com/report/github.com/tribehq/platform)
 [![GoDoc](https://godoc.org/github.com/tribehq/platform?status.svg)](https://godoc.org/github.com/tribehq/platform)
 [![GitHub release](https://img.shields.io/github/release/tribehq/platform.svg)](https://github.com/tribehq/platform/releases/latest)
-
-Tribe® is an Open-Source, Real-Time, Extensible, On-Demand Commerce Platform built with Golang.
-
+[![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/tribe)
 [Join Discord Community](https://discord.gg/s5zEucn)
 
-You can use tribe to build anything from Uber to Postmates or Amazon like marketplace itself for on-demand services and e-commerce.
+Tribe® is an Open-Source, Real-Time, Extensible, On-Demand Commerce Platform built with Golang. You can use tribe to build anything from Uber to Postmates or Amazon like marketplace itself for on-demand services and e-commerce.
+
+
 
 ## Technology Stack and Requirements
 * Golang >= 1.12
