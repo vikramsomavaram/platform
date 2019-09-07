@@ -182,7 +182,7 @@ func GetDeclineAlertsForUsers(filter bson.D, limit int, after *string, before *s
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		alert := &DeclineAlertForUser{}
@@ -217,7 +217,7 @@ func GetDeclineAlertsForProviders(filter bson.D, limit int, after *string, befor
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		alert := &DeclineAlertForProvider{}

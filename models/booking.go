@@ -84,7 +84,7 @@ func GetCancelReasons(filter bson.D, limit int, after *string, before *string, f
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		cancelReason := &CancelReason{}
@@ -186,7 +186,7 @@ func GetJobLaterBookings(filter bson.D, limit int, after *string, before *string
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		jobLaterBooking := &JobLaterBooking{}

@@ -10,7 +10,6 @@ import (
 	"github.com/tribehq/platform/lib/database"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"time"
 )
 
 type Blog struct {
@@ -33,7 +32,7 @@ func GetBlogPosts(filter bson.D, limit int, after *string, before *string, first
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		address := &Address{}

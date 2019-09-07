@@ -89,7 +89,7 @@ func (m *Merchant) GetMerchantByMID(mid string) (*Merchant, error) {
 func GetMerchantsByUserID(uid string) []Merchant {
 	db := database.MongoDB
 	var merchants []Merchant
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	merchantCollection := db.Collection(MerchantsCollection)
 	cur, err := merchantCollection.Find(ctx, bson.D{{"users", uid}})
 	if err != nil {
@@ -152,7 +152,7 @@ func GetMerchants(filter bson.D, limit int, after *string, before *string, first
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		merchant := &Merchant{}

@@ -89,7 +89,7 @@ func GetAdminReports(filter bson.D, limit int, after *string, before *string, fi
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		adminReport := &AdminReport{}
@@ -190,7 +190,7 @@ func GetJobRequestAcceptanceReports(filter bson.D, limit int, after *string, bef
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		jobRequestAcceptanceReport := &JobRequestAcceptanceReport{}
@@ -291,7 +291,7 @@ func GetJobTimeVariances(filter bson.D, limit int, after *string, before *string
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		jobTimeVariance := &JobTimeVariance{}
@@ -389,7 +389,7 @@ func GetProviderLogReports(filter bson.D, limit int, after *string, before *stri
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		providerLogReport := &ProviderLogReport{}
@@ -498,7 +498,7 @@ func GetProviderPaymentReports(filter bson.D, limit int, after *string, before *
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		providerPaymentReport := &ProviderPaymentReport{}
@@ -612,7 +612,7 @@ func GetStorePaymentReports(filter bson.D, limit int, after *string, before *str
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		storePaymentReport := &StorePaymentReport{}
@@ -714,7 +714,7 @@ func GetCancelledReports(filter bson.D, limit int, after *string, before *string
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		cancelledReport := &CancelledReport{}
@@ -814,7 +814,7 @@ func GetUserWalletReports(filter bson.D, limit int, after *string, before *strin
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		userWalletReport := &UserWalletReport{}

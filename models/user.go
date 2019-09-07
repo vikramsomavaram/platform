@@ -95,7 +95,7 @@ func GetUsers(filter bson.D, limit int, after *string, before *string, first *in
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		user := &User{}
@@ -371,7 +371,7 @@ func GetAllUserRoles(filter bson.D, limit int, after *string, before *string, fi
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		userRole := &UserRole{}
@@ -571,7 +571,7 @@ func GetUserRoleGroups(filter bson.D, limit int, after *string, before *string, 
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		userRoleGroup := &UserRoleGroup{}
@@ -745,7 +745,7 @@ func GetUserRolePermissions(filter bson.D, limit int, after *string, before *str
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		userRolePermission := &UserRolePermissions{}

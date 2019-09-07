@@ -106,7 +106,7 @@ func GetGeneralLabels(filter bson.D, limit int, after *string, before *string, f
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		generalLabel := &GeneralLabel{}
@@ -272,7 +272,7 @@ func GetFoodDeliveryLabels(filter bson.D, limit int, after *string, before *stri
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		foodDeliveryLabel := &FoodDeliveryLabel{}
@@ -439,7 +439,7 @@ func GetGroceryDeliveryLabels(filter bson.D, limit int, after *string, before *s
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		groceryDeliveryLabel := &GroceryDeliveryLabel{}
@@ -604,7 +604,7 @@ func GetWineDeliveryLabels(filter bson.D, limit int, after *string, before *stri
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		wineDeliveryLabel := &WineDeliveryLabel{}

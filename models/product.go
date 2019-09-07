@@ -187,7 +187,7 @@ func GetProducts(filter bson.D, limit int, after *string, before *string, first 
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		product := &Product{}
@@ -352,7 +352,7 @@ func GetProductMetadatas(filter bson.D, limit int, after *string, before *string
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		productMetadata := &ProductMetadata{}
@@ -511,7 +511,7 @@ func GetProductDownloads(filter bson.D, limit int, after *string, before *string
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		prodDownload := &ProductDownload{}
@@ -675,7 +675,7 @@ func GetProductImages(filter bson.D, limit int, after *string, before *string, f
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		prodImage := &ProductImage{}

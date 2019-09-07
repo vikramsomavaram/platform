@@ -65,7 +65,7 @@ func GetOAuthScopesByFilter(filter bson.D, limit int, after *string, before *str
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		oAuthScope := &OAuthScope{}
@@ -217,7 +217,7 @@ func GetOAuthApplications(filter bson.D, limit int, after *string, before *strin
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		oAuthApp := &OAuthApplication{}
@@ -421,7 +421,7 @@ func GetRefreshTokens(filter bson.D, limit int, after *string, before *string, f
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		refreshToken := &RefreshToken{}
@@ -746,7 +746,7 @@ func GetAccessTokens(filter bson.D, limit int, after *string, before *string, fi
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		accessToken := &AccessToken{}

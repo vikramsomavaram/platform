@@ -106,7 +106,7 @@ func GetAirportSurcharges(filter bson.D, limit int, after *string, before *strin
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		airportSurcharge := &AirportSurcharge{}

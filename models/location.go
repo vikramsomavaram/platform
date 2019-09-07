@@ -108,7 +108,7 @@ func GetGeoFenceLocations(filter bson.D, limit int, after *string, before *strin
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		geoFenceLocation := &GeoFenceLocation{}
@@ -278,7 +278,7 @@ func GetUserLocations(filter bson.D, limit int, after *string, before *string, f
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		userLocation := &UserLocation{}
@@ -441,7 +441,7 @@ func GetServiceProviderLocations(filter bson.D, limit int, after *string, before
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		serviceProviderLocation := &ServiceProviderLocation{}
@@ -606,7 +606,7 @@ func GetGeoFenceRestrictedAreas(filter bson.D, limit int, after *string, before 
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		geoFenceRestrictedArea := &GeoFenceRestrictedArea{}
