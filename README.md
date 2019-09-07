@@ -1,5 +1,6 @@
 # Tribe Commerce - Open Source On-Demand Services &amp; E-Commerce Marketplace Platform
 
+[![Build Status](https://travis-ci.com/tribehq/platform.svg?branch=master)](https://travis-ci.com/tribehq/platform)
 [![codecov](https://codecov.io/gh/tribehq/platform/branch/master/graph/badge.svg)](https://codecov.io/gh/tribehq/platform) 
 [![Go Report Card](https://goreportcard.com/badge/github.com/tribehq/platform)](https://goreportcard.com/report/github.com/tribehq/platform)
 [![GoDoc](https://godoc.org/github.com/tribehq/platform?status.svg)](https://godoc.org/github.com/tribehq/platform)
