@@ -1,8 +1,8 @@
 package oauth
 
 import (
-	"gitlab.com/mytribe/platform/controllers/oauth2/config"
-	"gitlab.com/mytribe/platform/models"
+	"github.com/tribehq/platform/controllers/oauth2/config"
+	"github.com/tribehq/platform/models"
 	"net/http"
 )
 
