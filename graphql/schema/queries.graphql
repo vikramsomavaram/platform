@@ -1,0 +1,1843 @@
+# Tribe GraphQL Schema
+# © Copyright 2019 - Pandranki Global Private Limited
+type Query {
+
+    """Get current logged in user profile"""
+    me: User! @isAuthenticated @hasScope(scopes: ["User:Read"])
+
+    """Get Restaurants"""
+    restaurants(
+        name: String
+
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): RestaurantConnection! @isAuthenticated @hasScope(scopes: ["Order:List"])
+    
+
+    """Get user orders"""
+    orders(
+        fromDate: DateTime
+
+        toDate: DateTime
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int
+        serviceProviderId:ID
+        serviceCompanyId:ID
+        ): OrderConnection! @isAuthenticated @hasScope(scopes: ["Order:List"])
+
+    """To get order"""
+    order(id:ID!):Order! @isAuthenticated @hasScope(scopes: ["Order:Read"])
+
+    """Get user wallet transactions"""
+    userWalletTransactions(fromDate: DateTime,toDate: DateTime
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): WalletTransactionConnection! @isAuthenticated @hasScope(scopes: ["Wallet:List"])
+
+    """To get user wallet transaction"""
+    userWalletTransaction(id:ID!):WalletTransaction! @isAuthenticated @hasScope(scopes: ["Wallet:Read"])
+
+    """Get currently logged in Service provider profile"""
+    currentServiceProviderProfile: ServiceProvider! @isAuthenticated @hasScope(scopes: ["ServiceProvider:Read"])
+
+    """Get service provider vehicles"""
+    serviceProviderVehicles(vehicleType: ProviderVehicleType
+        vehicleStatus: ProviderVehicleStatus
+        text: String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ServiceProviderVehicleDetailsConnection! @isAuthenticated @hasScope(scopes: ["ServiceProviderVehicle:List"])
+
+    """To get service provider vehicle"""
+    serviceProviderVehicle(id:ID!):ServiceProviderVehicleDetails! @isAuthenticated @hasScope(scopes: ["ServiceProviderVehicle:Read"])
+
+    """Get service vehicle types"""
+    serviceVehicleTypes(serviceVehicleType: ServiceVehicleServiceType
+        serviceVehicleTypeStatus: ServiceVehicleTypeStatus
+        text: String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ServiceVehicleTypeConnection! @isAuthenticated @hasScope(scopes: ["ServiceVehicleType:List"])
+
+    """To get service vehicle type"""
+    serviceVehicleType(id:ID!):ServiceVehicleType! @isAuthenticated @hasScope(scopes: ["ServiceVehicleType:Read"])
+
+    """Get service provider wallet transactions"""
+    providerWalletTransactions(fromDate: DateTime,toDate: DateTime
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProviderWalletTransactionConnection! @isAuthenticated  @hasScope(scopes: ["Wallet:List"])
+
+    """To get provider wallet transactions"""
+    providerWalletTransaction(id:ID!):ProviderWalletTransaction! @isAuthenticated @hasScope(scopes: ["Wallet:Read"])
+
+    """Provider Earnings"""
+    recentUnpaidJobs(
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): RecentUnpaidEarningConnection! @isAuthenticated @hasScope(scopes: ["Job:List"])
+
+    withdrawals(
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int
+    ): WithdrawalConnection! @isAuthenticated @hasScope(scopes: ["Wallet:List"])
+
+    """To get withdrawal"""
+    withdrawal(id:ID!):Withdrawal! @isAuthenticated  @hasScope(scopes: ["Wallet:Read"])
+
+    paidJobs(
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int
+    ): PaidEarningConnection! @isAuthenticated @hasScope(scopes: ["Job:List"])
+
+    country(countryCode:String!): Country!
+
+    #TODO write some filters for the query
+    """Get app installations"""
+    installations(
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): InstallationConnection! @isAuthenticated @hasScope(scopes: ["AppInstallation:List"])
+
+    """All over market statistics"""
+    marketStatistics(city:String,service:String,country:String!,state:String,currency:String): MarketStatistics! @isAuthenticated @hasScope(scopes: ["MarketStatistics:Read"])
+
+    """Get service provider companies"""
+    serviceCompanies(
+        companiesType: CompaniesSearchType
+        text: String
+        companiesStatus: CompaniesStatus
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int
+    ): ServiceCompaniesConnection! @isAuthenticated @hasScope(scopes: ["ServiceCompany:List"])
+
+    """Get a service company details"""
+    serviceCompany(companyID: String!): ServiceCompany! @isAuthenticated @hasScope(scopes: ["serviceCompany:Read"])
+
+    companyProviderDocuments(
+        companyID: String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): DocumentConnection! @isAuthenticated @hasScope(scopes: ["ServiceCompany:List"])
+
+    """To get company provider document"""
+    companyProviderDocument(id:ID!):Document! @isAuthenticated @hasScope(scopes: ["ServiceCompany:Read"])
+
+    """Get Individual Service Providers"""
+    serviceProviders(searchProvidersType: SearchProviderType,text: String,providerStatus: ProviderStatus
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ServiceProviderConnection! @isAuthenticated @hasScope(scopes: ["ServiceProvider:List"])
+
+    """To get service provider"""
+    serviceProvider(id:ID!):ServiceProvider! @isAuthenticated @hasScope(scopes: ["ServiceProvider:Read"])
+
+    """Service Provider Documents"""
+    serviceProviderDocuments(
+        serviceProviderID: String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): DocumentConnection! @isAuthenticated @hasScope(scopes: ["ServiceProvider:List"])
+
+    """To get service provider document"""
+    serviceProviderDocument(id:ID!):Document! @isAuthenticated @hasScope(scopes: ["ServiceProvider:Read"])
+
+    """Required Documents"""
+    requiredDocuments(
+        ID: String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): RequiredDocumentConnection! @isAuthenticated @hasScope(scopes: ["RequiredDocument:List"])
+
+    """To get a required document"""
+    requiredDocument(id:ID!):RequiredDocument! @isAuthenticated @hasScope(scopes: ["RequiredDocument:Read"])
+
+    """Get list of services available"""
+    services(serviceStatus:ServiceStatus
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int
+    ): ServiceConnection! @isAuthenticated @hasScope(scopes: ["Service:List"])
+
+    """To get service"""
+    service(id:ID!):Service! @isAuthenticated @hasScope(scopes: ["Service:Read"])
+
+    """Get Service Sub Categories"""
+    serviceSubCategories(text:String
+        serviceSubCategoryStatus:ServiceSubCategoryStatus
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ServiceSubCategoryConnection! @isAuthenticated @hasScope(scopes: ["ServiceSubCategory:List"])
+
+    """To get service category"""
+    serviceSubCategory(id:ID!):ServiceSubCategory! @isAuthenticated @hasScope(scopes: ["ServiceSubCategory:Read"])
+
+    serviceTypes(text:String
+        serviceTypeSubCategory:String
+        serviceTypeStatus: ServiceTypeStatus
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ServiceTypeConnection! @isAuthenticated @hasScope(scopes: ["ServiceType:List"])
+
+    """To get service type"""
+    serviceType(id:ID!):ServiceType! @isAuthenticated @hasScope(scopes: ["ServiceType:Read"])
+
+    coupons(couponType: CouponType
+        couponStatus: CouponStatus
+        text: String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): CouponConnection! @isAuthenticated @hasScope(scopes: ["Coupon:List"])
+
+    """To get coupon"""
+    coupon(id:ID!):Coupon! @isAuthenticated @hasScope(scopes: ["Coupon:Read"])
+
+    reviews(reviewType: ReviewType
+        text: String,
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ReviewConnection! @isAuthenticated @hasScope(scopes: ["Review:List"])
+
+    """To get Review"""
+    review(id:ID!):Review! @isAuthenticated @hasScope(scopes: ["Review:Read"])
+
+    users(userType: UserSearchType
+        text: String
+        userStatus: UserStatus
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): UserConnection! @isAuthenticated @hasScope(scopes: ["User:List"])
+
+    """To get user"""
+    user(id:ID!):User! @isAuthenticated @hasScope(scopes: ["User:Read"])
+
+    userRoles(
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): UserRoleConnection! @isAuthenticated @hasScope(scopes: ["UserRole:List"])
+
+    """To get user role"""
+    userRole(id:ID!):UserRole! @isAuthenticated @hasScope(scopes: ["UserRole:Read"])
+
+    userRoleGroups(
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): UserRoleGroupConnection! @isAuthenticated @hasScope(scopes: ["UserRoleGroup:List"])
+
+    """To get user role group"""
+    userRoleGroup(id:ID!):UserRoleGroup! @isAuthenticated @hasScope(scopes: ["UserRoleGroup:Read"])
+
+
+    """Jobs  Trips"""
+    jobs(fromDate: DateTime
+        toDate: DateTime
+        jobStatus: JobStatus
+        jobNumber: String
+        company: String
+        provider: String
+        user: String
+        serviceType: JobServiceType
+        laterJobsOnly: Boolean
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): JobConnection! @isAuthenticated @hasScope(scopes: ["Job:List"])
+
+    """To get the given job details"""
+    job(jobID:String!): Job! @isAuthenticated @hasScope(scopes: ["Job:Read"])
+
+    """Get static pages"""
+    pages(searchType:PageType,text:String!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): PageConnection! @isAuthenticated @hasScope(scopes: ["Page:List"])
+
+    """Get given static page details"""
+    page(pageID: String!): Page! @isAuthenticated @hasScope(scopes: ["Page:Read"])
+
+    """Package Types"""
+    packageTypes(
+        searchPackageType:SearchPackageType
+        text:String
+        searchPackageTypeStatus:SearchPackageTypeStatus
+
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): PackageTypeConnection! @isAuthenticated @hasScope(scopes: ["PackageType:List"])
+
+    """Get given package type"""
+    packageType(packageTypeID: String!): PackageType! @isAuthenticated @hasScope(scopes: ["PackageType:Read"])
+
+    """Cancel Reasons"""
+    cancelReasons(
+        searchCancelReasonType:SearchCancelReasonType
+        text:String
+        searchCancelReasonStatus:SearchCancelReasonStatus
+        cancelReasonServiceType:CancelReasonServiceType
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): CancelReasonConnection! @isAuthenticated @hasScope(scopes: ["CancelReason:List"])
+
+    """To get Cancelled reason"""
+    cancelReason(id:ID!):CancelReason! @isAuthenticated @hasScope(scopes: ["CancelReason:Read"])
+
+    """RideJob Later Bookings"""
+    jobLaterBookings(
+        jobLaterSearchServiceType:JobLaterSearchServiceType
+
+        jobLaterType:JobLaterType
+
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): JobLaterBookingConnection! @isAuthenticated @hasScope(scopes: ["Job:List"])
+
+    """To get Job later booking"""
+    jobLaterBooking(Id:ID!):JobLaterBooking! @isAuthenticated @hasScope(scopes: ["Job:Read"])
+
+    """God's View"""
+    godsView(
+        vehicleStatusType:VehicleStatusType
+        latitude:Float
+        longitude:Float
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): GodsViewConnection! @isAuthenticated @hasScope(scopes: ["View:Read"])
+
+    """Heat View"""
+    heatView(
+
+        latitude:Float
+
+        longitude:Float
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): HeatViewConnection! @isAuthenticated @hasScope(scopes: ["View:Read"])
+
+    """Advertisement Banners"""
+    advertisementBanners(bannersType:BannersType
+        text:String
+        bannerStatus:BannerStatusInput
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): AdvertisementBannerConnection! @isAuthenticated @hasScope(scopes: ["AdvertisementBanner:List"])
+
+    """To get advertisement banner"""
+    advertisementBanner(id:ID!):AdvertisementBanner! @isAuthenticated @hasScope(scopes: ["AdvertisementBanner:Read"])
+
+    """Products"""
+    products(
+        productType:ProductSearchType
+        text:String
+        productStatus:ProductStatus
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProductConnection! @isAuthenticated @hasScope(scopes: ["Product:List"])
+
+    """To get a product"""
+    product(id:ID!):Product! @isAuthenticated @hasScope(scopes: ["Product:Read"])
+
+    """Product Reviews"""
+    productReviews(
+        productReviewID: ID
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProductReviewConnection! @isAuthenticated @hasScope(scopes: ["ProductReview:List"])
+
+    """To get a product Review"""
+    productReview(id:ID!):ProductReview! @isAuthenticated @hasScope(scopes: ["ProductReview:Read"])
+
+    """Product Variations"""
+    productVariations(
+        productVariationID: ID
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProductVariationConnection! @isAuthenticated @hasScope(scopes: ["ProductVariation:List"])
+
+    """To get a product Variation"""
+    productVariation(id:ID!):ProductVariation! @isAuthenticated @hasScope(scopes: ["ProductVariation:Read"])
+
+    """Product categories"""
+    productCategories(
+        productCategoryType:ItemCategoryType
+        text:String
+        productCategoryStatus:ProductStatus
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProductCategoryConnection! @isAuthenticated @hasScope(scopes: ["ProductCategory:List"])
+
+    """To get Product category"""
+    productCategory(id:ID!):ProductCategory! @isAuthenticated @hasScope(scopes: ["ProductCategory:Read"])
+
+    """Carts"""
+    carts(
+        cartID:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): CartConnection! @isAuthenticated @hasScope(scopes: ["Cart:List"])
+
+    """To get cart"""
+    cart(id:ID!):Cart! @isAuthenticated @hasScope(scopes: ["Cart:Read"])
+
+    """Product Brands"""
+    productBrands(
+        brandID:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProductBrandConnection! @isAuthenticated @hasScope(scopes: ["ProductBrand:List"])
+
+    """To get Brand"""
+    productBrand(id:ID!):ProductBrand! @isAuthenticated @hasScope(scopes: ["ProductBrand:Read"])
+
+    """Product Collections"""
+    productCollections(
+        id:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProductCollectionConnection! @isAuthenticated @hasScope(scopes: ["ProductCollection:List"])
+
+    """To get Product Collection"""
+    productCollection(id:ID!):ProductCollection! @isAuthenticated @hasScope(scopes: ["ProductCollection:Read"])
+
+    """Stores"""
+    stores(storeType:StoreType
+        text:String
+        storeStatus:StoreStatus
+        storeCategory:StoreCategory
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): StoreConnection! @isAuthenticated @hasScope(scopes: ["Store:List"])
+
+    """To get store """
+    store(id:ID!):Store! @isAuthenticated @hasScope(scopes: ["Store:Read"])
+
+    """Store locations"""
+    storeLocations(storeLocationID : ID
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): StoreLocationConnection! @isAuthenticated @hasScope(scopes: ["StoreLocation:List"])
+
+    """To get store location """
+    storeLocation(id:ID!):StoreLocation! @isAuthenticated @hasScope(scopes: ["StoreLocation:Read"])
+
+    """Delivery Vehicle Type"""
+    deliveryVehicleTypes(deliveryVehicleType: DeliveryVehicleSearchType
+        text:String
+        deliveryVehicleTypeStatus:DeliveryVehicleTypeStatus
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): DeliveryVehicleTypeConnection! @isAuthenticated @hasScope(scopes: ["DeliveryVehicleType:List"])
+
+    """To get delivery vehicle type"""
+    deliveryVehicleType(id:ID!):DeliveryVehicleType! @isAuthenticated @hasScope(scopes: ["DeliveryVehicleType:Read"])
+
+    """Order Status Utilities"""
+    orderStatusUtilities(orderStatusUtilityType:OrderStatusUtilitySearchType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): OrderStatusUtilityConnection! @isAuthenticated @hasScope(scopes: ["OrderStatusUtility:List"])
+
+    """To get order status utility  """
+    orderStatusUtility(id:ID!):OrderStatusUtility! @isAuthenticated @hasScope(scopes: ["OrderStatusUtility:Read"])
+
+    """Delivery Charges Utilities"""
+    deliveryChargesUtilities(deliveryChargesUtilityType:DeliveryChargesUtilityType
+        text:String
+        deliveryChargesUtilityStatus:DeliveryChargesUtilityStatus
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): DeliveryChargesUtilityConnection! @isAuthenticated @hasScope(scopes: ["DeliveryChargesUtility:List"])
+
+    """To get delivery charges utility"""
+    deliveryChargesUtility(id:ID!):DeliveryChargesUtility! @isAuthenticated @hasScope(scopes: ["DeliveryChargesUtility:Read"])
+
+    """Geo Fence Locations"""
+    geoFenceLocations(
+        geoFenceLocationType:GeoFenceLocationSearchType
+        text:String
+        geoFenceLocationStatus:GeoFenceLocationStatus
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): GeoFenceLocationConnection! @isAuthenticated @hasScope(scopes: ["GeoFenceLocation:List"])
+
+    """To get Geo fence location"""
+    geoFenceLocation(id:ID!):GeoFenceLocation! @isAuthenticated @hasScope(scopes: ["GeoFenceLocation:Read"])
+
+    """Geo Fence Restricted Areas"""
+    geoFenceRestrictedAreas(
+        geoFenceRestrictedAreaType:GeoFenceRestrictedAreaSearchType
+        text:String
+        geoFenceRestrictedAreaStatus: GeoFenceRestrictedAreaStatus
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): GeoFenceRestrictedAreaConnection! @isAuthenticated @hasScope(scopes: ["GeoFenceRestrictedArea:List"])
+
+    """To get geo fence restricted area"""
+    geoFenceRestrictedArea(id:ID!):GeoFenceRestrictedArea! @isAuthenticated @hasScope(scopes: ["GeoFenceRestrictedArea:Read"])
+
+    """Email & SMS Templates"""
+    emailTemplates(emailTemplateSearchType:EmailTemplateSearchType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): EmailTemplateConnection! @isAuthenticated @hasScope(scopes: ["EmailTemplate:List"])
+
+    emailTemplate(templateId:ID!): EmailTemplate! @isAuthenticated @hasScope(scopes: ["EmailTemplate:Read"])
+
+    smsTemplates(smsTemplateType:SMSTemplateSearchType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): SMSTemplateConnection! @isAuthenticated @hasScope(scopes: ["SMSTemplate:List"])
+
+    smsTemplate(templateId:ID!): SMSTemplate! @isAuthenticated @hasScope(scopes: ["SMSTemplate:Read"])
+
+    """Vehicle Makes"""
+    vehicleMakes(vehicleMakeType:VehicleMakeType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): VehicleMakeConnection! @isAuthenticated @hasScope(scopes: ["VehicleMake:List"])
+
+    """To get vehicle make """
+    vehicleMake(id:ID!):VehicleMake! @isAuthenticated @hasScope(scopes: ["VehicleMake:Read"])
+
+    """Vehicle models"""
+    vehicleModels(vehicleModelType:VehicleModelSearchType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): VehicleModelConnection! @isAuthenticated @hasScope(scopes: ["VehicleModel:List"])
+
+    """To get Vehicle model"""
+    vehicleModel(id:ID!):VehicleModel! @isAuthenticated @hasScope(scopes: ["VehicleModel:Read"])
+
+    visitLocations(
+        visitLocationType:VisitLocationType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): VisitLocationConnection! @isAuthenticated @hasScope(scopes: ["VisitLocation:List"])
+
+    """To get visiting location"""
+    visitLocation(id:ID!):VisitLocation! @isAuthenticated @hasScope(scopes: ["VisitLocation:Read"])
+
+    """Enterprise accounts"""
+    enterpriseAccounts(enterpriseAccountType:EnterpriseAccountType,enterpriseAccountStatus:EnterpriseAccountStatus
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): EnterpriseAccountConnection! @isAuthenticated @hasScope(scopes: ["EnterpriseAccount:List"])
+
+    """To get details of the specified enterprise account ID"""
+    enterpriseAccount(id:ID!):EnterpriseAccount!  @isAuthenticated @hasScope(scopes: ["EnterpriseAccount:Read"])
+
+    """Ride Profile Types"""
+    rideProfileTypes(rideProfileType:RideProfileSearchType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): RideProfileTypeConnection! @isAuthenticated @hasScope(scopes: ["RideProfileType:List"])
+
+    """To get Ride profile type"""
+    rideProfileType(id:ID!):RideProfileType!  @isAuthenticated @hasScope(scopes: ["RideProfileType:Read"])
+
+    """Business Trip Reasons"""
+    businessTripReasons(reasonType:BusinessTripReasonType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): BusinessTripReasonConnection! @isAuthenticated @hasScope(scopes: ["BusinessTripReason:List"])
+
+    """To get business trip reason"""
+    businessTripReason(id:ID!):BusinessTripReason!  @isAuthenticated @hasScope(scopes: ["BusinessTripReason:Read"])
+
+    """EnterpriseAccount Payment Reports"""
+    enterpriseAccountPaymentReports(FromDate:DateTime,toDate:DateTime
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): EnterpriseAccountPaymentReportConnection! @isAuthenticated @hasScope(scopes: ["EnterpriseAccount:List"])
+
+    """ To get enterprise account payment report"""
+    enterpriseAccountPaymentReport(id:ID!):EnterpriseAccountPaymentReport!  @isAuthenticated @hasScope(scopes: ["EnterpriseAccount:Read"])
+
+    """Get Countries"""
+    countries(
+        countryType:CountryType,
+        countryStatus:CountryStatus
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+        """ Returns the first n elements from the list."""
+        first: Int
+        """ Returns the last n elements from the list."""
+        last: Int): CountryConnection!
+
+    """Get State"""
+    countryStates(
+        country: String
+        stateType:StateType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): StateConnection!
+
+    countryState(
+        country:String!
+        state: String!
+    ): State!
+
+    """Get Cities"""
+    cities(cityType:CityType
+        text: String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): CityConnection!
+
+    """Get City"""
+    city(id:ID!):City!
+
+    """Newsletter Subscribers"""
+    newsletterSubscribers(newsletterSubscriberType:NewsletterSubscriberType
+        newsletterSubscriberStatus:NewsletterSubscriberStatus
+        text: String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): NewsletterSubscriberConnection! @isAuthenticated @hasScope(scopes: ["NewsletterSubscriber:List"])
+
+    """To get newsletter subscriber"""
+    newsletterSubscriber(id:ID!):NewsletterSubscriber!  @isAuthenticated @hasScope(scopes: ["NewsletterSubscriber:Read"])
+
+    """FAQs"""
+    faqs(faqType:FAQType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): FAQConnection!  @isAuthenticated @hasScope(scopes: ["FAQ:List"])
+
+    """To get FAQs"""
+    faq(id:ID!):FAQ!  @isAuthenticated @hasScope(scopes: ["FAQ:Read"])
+
+    """FAQ Categories"""
+    faqCategories(faqCategoryType:FAQCategorySearchType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): FAQCategoryConnection! @isAuthenticated  @hasScope(scopes: ["FAQCategory:List"])
+
+    """To get the FAQ Category"""
+    faqCategory(id:ID!):FAQCategory!  @isAuthenticated @hasScope(scopes: ["FAQCategory:Read"])
+
+    """Help Details"""
+    helpDetails(helpDetailType:HelpDetailType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): HelpDetailConnection! @isAuthenticated @hasScope(scopes: ["HelpDetail:List"])
+
+    """To get the help detail """
+    helpDetail(id:ID!):HelpDetail!  @isAuthenticated @hasScope(scopes: ["HelpDetail:Read"])
+
+    """Help Detail Categories"""
+    helpCategories(helpCategoryType:HelpCategoryType
+        text: String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): HelpCategoryConnection! @isAuthenticated @hasScope(scopes: ["HelpCategory:List"])
+
+    """To get help category"""
+    helpCategory(id:ID!):HelpCategory! @isAuthenticated @hasScope(scopes: ["HelpCategory:Read"])
+
+    """Decline Alert for Providers"""
+    declineAlertForProviders(providerType:DeclineAlertForProviderType
+        providerStatus:DeclineAlertForProviderStatus
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): DeclineAlertForProviderConnection! @isAuthenticated @hasScope(scopes: ["DeclineAlert:List"])
+
+
+    """To get the decline alert for provider"""
+    declineAlertForProvider(id:ID!):DeclineAlertForProvider!  @isAuthenticated @hasScope(scopes: ["DeclineAlert:Read"])
+
+    """Decline Alert for Users"""
+    declineAlertForUsers(userType:DeclineAlertForUserType
+        userStatus:DeclineAlertForUserStatus
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): DeclineAlertForUserConnection! @isAuthenticated @hasScope(scopes: ["DeclineAlert:List"])
+
+    """To get the decline alert for user"""
+    declineAlertForUser(id:ID!):DeclineAlertForUser! @isAuthenticated @hasScope(scopes: ["DeclineAlert:Read"])
+
+    """Get Delivery Charges"""
+    deliveryCharges(deliveryChargeSearch:DeliveryChargesSearch
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): DeliveryChargeConnection! @isAuthenticated @hasScope(scopes: ["DeliveryCharge:List"])
+
+    """To get delivery charge"""
+    deliveryCharge(id:ID!):DeliveryCharge!  @isAuthenticated @hasScope(scopes: ["DeliveryCharge:Read"])
+
+    """Get Location Wise Fares"""
+    locationWiseFares(locationFareSearch:LocationWiseFareSearch
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): LocationWiseFareConnection! @isAuthenticated @hasScope(scopes: ["LocationWiseFare:List"])
+
+    """To get location wise fare"""
+    locationWiseFare(id:ID!):LocationWiseFare!  @isAuthenticated  @hasScope(scopes: ["LocationWiseFare:Read"])
+
+    """Get Airport Surcharges"""
+    airportSurcharges(airportSurchargeSearch:AirportSurchargeSearch
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): AirportSurchargeConnection! @isAuthenticated @hasScope(scopes: ["AirportSurcharge:List"])
+
+    """To get Airport Surcharge"""
+    airportSurcharge(id:ID!):AirportSurcharge!   @isAuthenticated  @hasScope(scopes: ["AirportSurcharge:Read"])
+
+    """Get General Labels"""
+    generalLabels(generalLabelSearch:GeneralLabelSearch
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): GeneralLabelConnection! @isAuthenticated @hasScope(scopes: ["GeneralLabel:List"])
+
+    """To get general label"""
+    generalLabel(id:ID!):GeneralLabel!  @isAuthenticated @hasScope(scopes: ["GeneralLabel:Read"])
+
+    """Get Food Delivery Labels"""
+    foodDeliveryLabels(foodDeliveryLabelSearch:FoodDeliveryLabelSearch
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): FoodDeliveryLabelConnection! @isAuthenticated @hasScope(scopes: ["FoodDeliveryLabel:List"])
+
+    """To get food delivery label"""
+    foodDeliveryLabel(id:ID!):FoodDeliveryLabel!  @isAuthenticated @hasScope(scopes: ["FoodDeliveryLabel:Read"])
+
+    """Get Grocery Delivery Labels"""
+    groceryDeliveryLabels(
+        groceryDeliveryLabelSearch:GroceryDeliveryLabelSearch
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): GroceryDeliveryLabelConnection! @isAuthenticated @hasScope(scopes: ["GroceryDeliveryLabel:List"])
+
+    """To get grocery delivery label"""
+    groceryDeliveryLabel(id:ID!):GroceryDeliveryLabel!  @isAuthenticated @hasScope(scopes: ["GroceryDeliveryLabel:Read"])
+
+    """Get Wine Delivery Labels"""
+    wineDeliveryLabels(
+        wineDeliveryLabelSearch:WineDeliveryLabelSearch
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): WineDeliveryLabelConnection! @isAuthenticated @hasScope(scopes: ["WineDeliveryLabel:List"])
+
+    """To get food delivery label"""
+    wineDeliveryLabel(id:ID!):WineDeliveryLabel!  @isAuthenticated @hasScope(scopes: ["WineDeliveryLabel:Read"])
+
+    """Admin Earning Reports"""
+    adminReports(fromDate:DateTime
+        toDate:DateTime
+        StoreSearch: String
+        PaymentType:PaymentType
+        ServiceType:String
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): AdminReportConnection! @isAuthenticated @hasScope(scopes: ["AdminReport:List"])
+
+    """To get admin earning report"""
+    adminReport(id:ID!): AdminReport!  @isAuthenticated @hasScope(scopes: ["AdminReport:Read"])
+
+    """Store Payment Reports"""
+    storePaymentReports(fromDate:DateTime
+        toDate:DateTime
+        storeSearch: String
+        serviceType: String
+        paymentStatus:PaymentStatus
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+        """ Returns the first n elements from the list."""
+        first: Int
+        """ Returns the last n elements from the list."""
+        last: Int): StorePaymentReportConnection! @isAuthenticated @hasScope(scopes: ["StorePaymentReport:List"])
+
+    """To get store payment report"""
+    storePaymentReport(id:ID!):StorePaymentReport!  @isAuthenticated @hasScope(scopes: ["StorePaymentReport:Read"])
+
+    """Provider Payment Reports"""
+    providerPaymentReports(
+        fromDate:DateTime,
+        toDate:DateTime,
+        company:String,
+        provider:String,
+        paymentType:PaymentType,
+        paymentStatus:PaymentStatus,
+        serviceType:String,
+        text: String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProviderPaymentReportConnection! @isAuthenticated @hasScope(scopes: ["ProviderPaymentReport:List"])
+
+    """To get provider payment report"""
+    providerPaymentReport(id:ID!):ProviderPaymentReport!  @isAuthenticated @hasScope(scopes: ["ProviderPaymentReport:Read"])
+
+    """Cancelled/ Refunded Reports"""
+    cancelledReports(fromDate:DateTime
+        toDate:DateTime
+        paymentType:PaymentType
+        serviceType: String
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int
+    ): CancelledReportConnection! @isAuthenticated @hasScope(scopes: ["CancelledReport:List"])
+
+    """To get cancelled report"""
+    cancelledReport(id:ID!):CancelledReport!  @isAuthenticated @hasScope(scopes: ["CancelledReport:Read"])
+
+    """Store Order Reviews"""
+    storeReviews(storeReviewType:StoreReviewType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int
+    ): StoreReviewConnection! @isAuthenticated @hasScope(scopes: ["StoreReview:List"])
+
+    """To get store review"""
+    storeReview(id:ID!):StoreReview!  @isAuthenticated @hasScope(scopes: ["StoreReview:Read"])
+
+    """Get User Wallet Reports"""
+    userWalletReports(
+        fromDate:DateTime
+        toDate:DateTime
+        searchByUser:UserWalletReportSearchByUserType
+        searchByPayment:WalletTransactionType
+        searchByBalance:UserWalletReportSearchByBalanceType
+        selectProvider:String
+        selectUser:String
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int
+    ): UserWalletReportConnection! @isAuthenticated @hasScope(scopes: ["UserWalletReport:List"])
+
+    """To get User wallet report"""
+    userWalletReport(id:ID!):UserWalletReport!   @isAuthenticated @hasScope(scopes: ["UserWalletReport:Read"])
+
+    """Get Provider Log Reports"""
+    providerLogReports(
+        fromDate:DateTime
+        toDate:DateTime
+        provider:String
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProviderLogReportConnection! @isAuthenticated @hasScope(scopes: ["ProviderLogReport:List"])
+
+    """To get Provider Log Report"""
+    providerLogReport(id:ID!):ProviderLogReport!   @isAuthenticated @hasScope(scopes: ["ProviderLogReport:Read"])
+
+    """Get Cancelled Jobs"""
+    cancelledJobs(
+        fromDate:DateTime
+        toDate:DateTime
+        provider:String
+        cancelledJobserviceType:CancelledJobServiceType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): JobConnection! @isAuthenticated @hasScope(scopes: ["Job:List"])
+
+    """Get Job Request Acceptance Reports"""
+    jobRequestAcceptanceReports(fromDate:DateTime
+        toDate:DateTime
+        provider:String
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): JobRequestAcceptanceReportConnection! @isAuthenticated @hasScope(scopes: ["JobRequestAcceptanceReport:List"])
+
+    """To get job request acceptance Report"""
+    jobRequestAcceptanceReport(id:ID!):JobRequestAcceptanceReport!   @isAuthenticated @hasScope(scopes: ["JobRequestAcceptanceReport:Read"])
+
+    """Get Job Time Variances"""
+    jobTimeVariances(fromDate:DateTime
+        toDate:DateTime
+        driver:String
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): JobTimeVarianceConnection! @isAuthenticated @hasScope(scopes: ["JobTimeVariance:List"])
+
+    """Get Job Time Variance"""
+    jobTimeVariance(id:ID!):JobTimeVariance!  @isAuthenticated @hasScope(scopes: ["JobTimeVariance:Read"])
+
+    """Market Settings"""
+    marketSettings: MarketSettings @isAuthenticated @hasScope(scopes: ["MarketSetting:Read"])
+
+    """SEO Settings"""
+    seoSettings(seoSettingType:SEOSettingType
+        text:String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int
+    ): SEOSettingConnection @isAuthenticated @hasScope(scopes: ["SEOSetting:List"])
+
+    """To get SEO setting"""
+    seoSetting(id:ID!):SEOSetting!  @isAuthenticated @hasScope(scopes: ["SEOSetting:Read"])
+
+    """Admin Dashboard"""
+    adminDashboard(city: String): AdminDashboard @isAuthenticated @hasScope(scopes: ["AdminDashboard:Read"])
+
+    """Get latest & minimum app version along download store url"""
+    appLatestVersion(OSType:String!
+        packageID:ID!
+        currentVersion:String!): AppVersion!
+
+    """Developer Oauth applications"""
+    oAuthApplications(
+        appStatus:AppStatus
+        text: String
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int):OAuthApplicationConnection! @isAuthenticated  @hasScope(scopes: ["OAuthApplication:List"])
+
+    """To get OAuthApplication"""
+    oAuthApplication(appId:ID!):OAuthApplication! @isAuthenticated @hasScope(scopes: ["OAuthApplication:Read"])
+
+    """oAuth application Statistics"""
+    oAuthApplicationStatistics(appID:ID!):OAuthApplicationStatistics! @isAuthenticated @hasScope(scopes: ["OAuthApplication:Read"])
+
+    """webhooks"""
+    webhooks(
+        """ OAuth application ID"""
+        appId:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int):WebhooksConnection! @isAuthenticated @hasScope(scopes: ["Webhook:List"])
+
+    """To get a webhook"""
+    webhook(id:ID!):Webhook! @isAuthenticated @hasScope(scopes: ["Webhook:Read"])
+
+    """webhook statistics"""
+    webhookStatistics(id:ID!):WebhookStatistics! @isAuthenticated @hasScope(scopes: ["Webhook:Read"])
+
+    """webhook Logs"""
+    webhookLogs(
+        """Unique Webhook ID"""
+        id:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int):WebhookLogConnection! @isAuthenticated @hasScope(scopes: ["WebhookLog:Read"])
+
+    """Currency"""
+    currency(id: ID!): Currency! @isAuthenticated @hasScope (scopes: ["Currency:Read"])
+
+    currencies(
+    """ OAuth application ID"""
+    appId:ID!
+    """ Returns the elements in the list that come after the specified cursor."""
+    after: Cursor
+
+    """Returns the elements in the list that come before the specified cursor."""
+    before: Cursor
+
+    """ Returns the first n elements from the list."""
+    first: Int
+
+    """ Returns the last n elements from the list."""
+    last: Int): CurrencyConnection! @isAuthenticated @hasScope(scopes: ["Currency:List"])
+
+    """Rental Packages"""
+    rentalPackage(id: ID!): RentalPackage! @isAuthenticated @hasScope (scopes: ["RentalPackage:Read"])
+
+    rentalPackages(
+        """ OAuth application ID"""
+        appId:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): RentalPackageConnection! @isAuthenticated @hasScope(scopes: ["RentalPackage:List"])
+
+    """Store Vehicle Types"""
+    storeVehicleType(id: ID!): StoreVehicleType! @isAuthenticated @hasScope (scopes: ["StoreVehicleType:Read"])
+
+    storeVehicleTypes(storeVehicleTypeSearch: StoreVehicleTypeSearch
+        storeVehicleTypeStatus: StoreVehicleTypeStatus
+        storeVehicleTypeLocation: StoreVehicleTypeLocation
+        text: String
+
+        """ OAuth application ID"""
+        appId:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): StoreVehicleTypeConnection! @isAuthenticated @hasScope(scopes: ["StoreVehicleType:List"])
+
+    """Emergency Contacts"""
+    emergencyContacts(id:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int):EmergencyContactConnection! @isAuthenticated @hasScope(scopes: ["EmergencyContact:List"])
+
+    """Emergency Contact"""
+    emergencyContact(id: ID!): EmergencyContact! @isAuthenticated @hasScope (scopes: ["EmergencyContact:Read"])
+
+    """Saved Addresses"""
+    savedAddresses(id:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): AddressConnection! @isAuthenticated @hasScope (scopes: ["Address:List"])
+
+    """Saved Address"""
+    savedAddress(id:ID!):Address! @isAuthenticated @hasScope (scopes: ["Address:Read"])
+
+    """Customers"""
+    customers(id:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): CustomerConnection! @isAuthenticated @hasScope (scopes: ["Customer:List"])
+
+    """Saved Address"""
+    customer(id:ID!):Customer! @isAuthenticated @hasScope (scopes: ["Customer:Read"])
+
+    """Order Notes"""
+    orderNotes(id:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): OrderNoteConnection! @isAuthenticated @hasScope (scopes: ["OrderNote:List"])
+
+    """Order note"""
+    orderNote(id:ID!):OrderNote! @isAuthenticated @hasScope (scopes: ["OrderNote:Read"])
+
+    """Product Images"""
+    productImages(id:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProductImageConnection! @isAuthenticated @hasScope (scopes: ["ProductImage:List"])
+
+    """Product image"""
+    productImage(id:ID!): ProductImage! @isAuthenticated @hasScope (scopes: ["ProductImage:Read"])
+
+    """Product Downloads"""
+    productDownloads(id:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProductDownloadConnection! @isAuthenticated @hasScope (scopes: ["ProductDownload:List"])
+
+    """Product download"""
+    productDownload(id:ID!): ProductDownload! @isAuthenticated @hasScope (scopes: ["ProductDownload:Read"])
+
+    """Product tags"""
+    productTags(id:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProductTagConnection! @isAuthenticated @hasScope (scopes: ["ProductTag:List"])
+
+    """Product tag"""
+    productTag(id:ID!): ProductTag! @isAuthenticated @hasScope (scopes: ["ProductTag:Read"])
+
+    """Product metadatas"""
+    productMetadatas(id:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProductMetadataConnection! @isAuthenticated @hasScope (scopes: ["ProductMetadata:List"])
+
+    """Product metadata"""
+    productMetadata(id:ID!): ProductMetadata! @isAuthenticated @hasScope (scopes: ["ProductMetadata:Read"])
+
+    """Product attributes"""
+    productAttributes(id:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProductAttributeConnection! @isAuthenticated @hasScope (scopes: ["ProductAttribute:List"])
+
+    """Product attribute"""
+    productAttribute(id:ID!): ProductAttribute! @isAuthenticated @hasScope (scopes: ["ProductAttribute:Read"])
+
+    """Product attributes terms"""
+    productAttributeTerms(id:ID!
+        """ Returns the elements in the list that come after the specified cursor."""
+        after: Cursor
+
+        """Returns the elements in the list that come before the specified cursor."""
+        before: Cursor
+
+        """ Returns the first n elements from the list."""
+        first: Int
+
+        """ Returns the last n elements from the list."""
+        last: Int): ProductAttributeTermConnection! @isAuthenticated @hasScope (scopes: ["ProductAttributeTerm:List"])
+
+    """Product attribute term"""
+    productAttributeTerm(id:ID!): ProductAttributeTerm! @isAuthenticated @hasScope (scopes: ["ProductAttributeTerm:Read"])
+}

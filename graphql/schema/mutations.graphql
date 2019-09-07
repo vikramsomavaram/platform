@@ -1,0 +1,920 @@
+# Tribe GraphQL Schema
+# © Copyright 2019 - Pandranki Global Private Limited
+
+type Mutation {
+    """Installations"""
+    updateInstallation(input: InstallationInput!): Installation #@hasScope(scopes: ["AppInstallation:Update"]).
+
+    """Login user with email and password"""
+    loginWithCredentials(
+        email: String!
+        password: String!
+    ): AuthPayload
+
+    """Logout from current user session"""
+    logout: Boolean! @isAuthenticated
+
+    """Block service provider"""
+    blockServiceProvider(
+        """Service provider's profile ID"""
+        id:ID!
+    ):Boolean  @isAuthenticated @hasScope(scopes: ["ServiceProvider:Update"])
+
+    """Unblock service provider"""
+    unblockServiceProvider(
+        """Service provider's profile ID"""
+        id:ID!
+    ):Boolean  @isAuthenticated @hasScope(scopes: ["ServiceProvider:Update"])
+
+    """Approve service provider"""
+    approveServiceProvider(
+        id:ID!
+    ):Boolean @isAuthenticated @hasScope (scopes: ["ServiceProvider:Update"])
+
+    """Block store"""
+    blockStore(
+        """store's profile ID"""
+        id:ID!
+    ):Boolean  @isAuthenticated @hasScope(scopes: ["Store:Update"])
+
+    """Unblock store"""
+    unblockStore(
+        """store's profile ID"""
+        id:ID!
+    ):Boolean  @isAuthenticated @hasScope(scopes: ["Store:Update"])
+
+    """Approve store"""
+    approveStore(
+        id:ID!
+    ):Boolean @isAuthenticated @hasScope (scopes: ["Store:Update"])
+
+    """Block user"""
+    blockUser(
+        """User's profile ID"""
+        id:ID!
+    ):Boolean  @isAuthenticated @hasScope(scopes: ["User:Update"])
+
+    """Signup with email and password"""
+    signUpWithEmail(input: UserSignUpDetails!): AuthPayload
+
+    """Request for OTP login"""
+    requestLoginOTP(countryCode:String!
+        mobileNo: String!): Boolean
+
+    """Verify the OTP login"""
+    verifyLoginOTP(countryCode:String!
+        mobileNo:String!
+        otp: String!
+    ): AuthPayload
+
+    """Update user location"""
+    updateUserLocation(latitude:Float!,longitude:Float!): Boolean! @hasScope(scopes: ["UserLocation:Update"])
+
+    """Update service provider location"""
+    updateProviderLocation(latitude:Float!,longitude:Float!): Boolean! @hasScope(scopes: ["ProviderLocation:Update"])
+
+    """Login  Signup with social authentication providers using oAuth2"""
+    loginWithSocialAuth(provider: SocialAuthProvder!,accessToken: String!,accessSecret: String): AuthPayload
+
+    """Add a service company"""
+    addServiceCompany(input: AddServiceCompanyInput!): ServiceCompany @isAuthenticated @hasScope(scopes: ["ServiceCompany:Create"])
+    """Update a service company"""
+    updateServiceCompany(input: UpdateServiceCompanyInput!): ServiceCompany @isAuthenticated @hasScope(scopes: ["ServiceCompany:Update"])
+    """Delete a service company"""
+    deleteServiceCompany(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceCompany:Delete"])
+    """Activate a service company"""
+    deactivateServiceCompany(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceCompany:Update"])
+    """Deactivate a service company"""
+    activateServiceCompany(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceCompany:Update"])
+
+    """Add a user"""
+    addUser(input: AddUserInput!): User @isAuthenticated @hasScope(scopes: ["User:Create"])
+    """Update a user"""
+    updateUser(input:UpdateUserInput!): User @isAuthenticated @hasScope(scopes: ["User:Update"])
+    """Delete a user"""
+    deleteUser(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["User:Delete"])
+    """Activate a user"""
+    deactivateUser(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["User:Update"])
+    """Deactivate a user"""
+    activateUser(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["User:Update"])
+
+    """Add Products"""
+    addProduct(input: AddProductInput!): Product @isAuthenticated @hasScope(scopes: ["Product:Create"])
+    """Update products"""
+    updateProduct(input: UpdateProductInput!): Product @isAuthenticated @hasScope(scopes: ["Product:Update"])
+    """Delete products"""
+    deleteProduct(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Product:Delete"])
+    """Activate products"""
+    activateProduct(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Product:Update"])
+    """Deactivate products"""
+    deactivateProduct(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Product:Update"])
+
+    """Add product variation"""
+    addProductVariation(input: AddProductVariationInput!): ProductVariation @isAuthenticated @hasScope(scopes: ["ProductVariation:Create"])
+    """Update product variation"""
+    updateProductVariation(input: UpdateProductVariationInput!): ProductVariation @isAuthenticated @hasScope(scopes: ["ProductVariation:Update"])
+    """Delete product variation"""
+    deleteProductVariation(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductVariation:Delete"])
+
+    """Add Product review"""
+    addProductReview(input: AddProductReviewInput!): ProductReview @isAuthenticated @hasScope(scopes: ["ProductReview:Create"])
+    """Update product review"""
+    updateProductReview(input: UpdateProductReviewInput!): ProductReview @isAuthenticated @hasScope(scopes: ["ProductReview:Update"])
+    """Delete product review"""
+    deleteProductReview(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductReview:Delete"])
+
+
+    """Add product category"""
+    addProductCategory(input: AddProductCategoryInput!): ProductCategory @isAuthenticated @hasScope(scopes: ["ProductCategory:Create"])
+    """Update product category"""
+    updateProductCategory(input: UpdateProductCategoryInput!): ProductCategory @isAuthenticated @hasScope(scopes: ["ProductCategory:Update"])
+    """Delete product category"""
+    deleteProductCategory(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductCategory:Delete"])
+    """Activate product category"""
+    activateProductCategory(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductCategory:Update"])
+    """Deactivate product category"""
+    deactivateProductCategory(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductCategory:Update"])
+
+    """Add product image"""
+    addProductImage(input: AddProductImageInput!): ProductImage @isAuthenticated @hasScope(scopes: ["ProductImage:Create"])
+    """Update product image"""
+    updateProductImage(input: UpdateProductImageInput!): ProductImage @isAuthenticated @hasScope(scopes: ["ProductImage:Update"])
+    """Delete product image"""
+    deleteProductImage(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductImage:Delete"])
+
+    """Add product download"""
+    addProductDownload(input: AddProductDownloadInput!): ProductDownload @isAuthenticated @hasScope(scopes: ["ProductDownload:Create"])
+    """Update product download"""
+    updateProductDownload(input: UpdateProductDownloadInput!): ProductDownload @isAuthenticated @hasScope(scopes: ["ProductDownload:Update"])
+    """Delete product download"""
+    deleteProductDownload(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductDownload:Delete"])
+
+    """Add product tag"""
+    addProductTag(input: AddProductTagInput!): ProductTag @isAuthenticated @hasScope(scopes: ["ProductTag:Create"])
+    """Update product tag"""
+    updateProductTag(input: UpdateProductTagInput!): ProductTag @isAuthenticated @hasScope(scopes: ["ProductTag:Update"])
+    """Delete product tag"""
+    deleteProductTag(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductTag:Delete"])
+
+    """Add product metadata"""
+    addProductMetadata(input: AddProductMetadataInput!): ProductMetadata @isAuthenticated @hasScope(scopes: ["ProductMetadata:Create"])
+    """Update product metadata"""
+    updateProductMetadata(input: UpdateProductMetadataInput!): ProductMetadata @isAuthenticated @hasScope(scopes: ["ProductMetadata:Update"])
+    """Delete product metadata"""
+    deleteProductMetadata(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductMetadata:Delete"])
+
+    """Add product attribute"""
+    addProductAttribute(input: AddProductAttributeInput!): ProductAttribute @isAuthenticated @hasScope(scopes: ["ProductAttribute:Create"])
+    """Update product attribute"""
+    updateProductAttribute(input: UpdateProductAttributeInput!): ProductAttribute @isAuthenticated @hasScope(scopes: ["ProductAttribute:Update"])
+    """Delete product attribute"""
+    deleteProductAttribute(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductAttribute:Delete"])
+
+    """Add product attribute term"""
+    addProductAttributeTerm(input: AddProductAttributeTermInput!): ProductAttributeTerm @isAuthenticated @hasScope(scopes: ["ProductAttributeTerm:Create"])
+    """Update product attribute term"""
+    updateProductAttributeTerm(input: UpdateProductAttributeTermInput!): ProductAttributeTerm @isAuthenticated @hasScope(scopes: ["ProductAttributeTerm:Update"])
+    """Delete product attribute term"""
+    deleteProductAttributeTerm(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductAttributeTerm:Delete"])
+
+    """Delete cart"""
+    deleteCart(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Cart:Delete"])
+    """Add a product to the cart"""
+    addProductToCart(productID:ID!, variationID:ID, quantity:Int!): Cart
+
+    """Add Product brand"""
+    addProductBrand(input: AddProductBrandInput!): ProductBrand @isAuthenticated @hasScope(scopes: ["ProductBrand:Create"])
+    """Update Product brand"""
+    updateProductBrand(input: UpdateProductBrandInput!): ProductBrand @isAuthenticated @hasScope(scopes: ["ProductBrand:Update"])
+    """Delete Product brand"""
+    deleteProductBrand(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductBrand:Delete"])
+    """Activate a Product Brand"""
+    deactivateProductBrand(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductBrand:Update"])
+    """Deactivate a Product Brand"""
+    activateProductBrand(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductBrand:Update"])
+
+    """Add Product collection"""
+    addProductCollection(input: AddProductCollectionInput!): ProductCollection @isAuthenticated @hasScope(scopes: ["ProductCollection:Create"])
+    """Update Product collection"""
+    updateProductCollection(input: UpdateProductCollectionInput!): ProductCollection @isAuthenticated @hasScope(scopes: ["ProductCollection:Update"])
+    """Delete Product collection"""
+    deleteProductCollection(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductCollection:Delete"])
+    """Activate a Product collection"""
+    deactivateProductCollection(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductCollection:Update"])
+    """Deactivate a Product collection"""
+    activateProductCollection(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["ProductCollection:Update"])
+
+    """Add a service provider"""
+    addServiceProvider(input: AddServiceProviderInput!): ServiceProvider @isAuthenticated @hasScope(scopes: ["ServiceProvider:Create"])
+    """Update a service provider"""
+    updateServiceProvider(input: UpdateServiceProviderInput!): ServiceProvider @isAuthenticated @hasScope(scopes: ["ServiceProvider:Update"])
+    """Delete a service provider"""
+    deleteServiceProvider(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceProvider:Delete"])
+    """Dectivate a service provider"""
+    deactivateServiceProvider(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceProvider:Update"])
+    """Activate a service provider"""
+    activateServiceProvider(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceProvider:Update"])
+
+    """Register as a service provider"""
+    serviceProviderSignUp(input:ServiceProviderSignUpInput!):ServiceProvider @isAuthenticated
+
+    """Register as a store"""
+    storeSignUp(input:StoreSignUpInput!):Store @isAuthenticated
+
+    """Add a service """
+    addService(input: AddServiceInput!): Service @isAuthenticated @hasScope(scopes: ["Service:Create"])
+    """Update a service """
+    updateService(input: UpdateServiceInput!): Service @isAuthenticated @hasScope(scopes: ["Service:Update"])
+    """Delete a service """
+    deleteService(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["Service:Delete"])
+    """Activate a service """
+    activateService(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["Service:Update"])
+    """Deactivate a service """
+    deactivateService(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["Service:Update"])
+
+    """Add a service sub category"""
+    addServiceSubCategory(input: AddServiceSubCategoryInput!): ServiceSubCategory @isAuthenticated @hasScope(scopes: ["ServiceSubCategory:Create"])
+    """Update a service sub category"""
+    updateServiceSubCategory(input: UpdateServiceSubCategoryInput!): ServiceSubCategory @isAuthenticated @hasScope(scopes: ["ServiceSubCategory:Update"])
+    """Delete a service sub category"""
+    deleteServiceSubCategory(id:ID!): Boolean @isAuthenticated  @hasScope(scopes: ["ServiceSubCategory:Delete"])
+    """Activate a service sub category"""
+    deactivateServiceSubCategory(id:ID!): Boolean @isAuthenticated  @hasScope(scopes: ["ServiceSubCategory:Update"])
+    """Deactivate a service sub category"""
+    activateServiceSubCategory(id:ID!): Boolean @isAuthenticated  @hasScope(scopes: ["ServiceSubCategory:Update"])
+
+    """Add a service type"""
+    addServiceType(input: AddServiceTypeInput!): ServiceType @isAuthenticated @hasScope(scopes: ["ServiceType:Create"])
+    """Update a service type"""
+    updateServiceType(input: UpdateServiceTypeInput!): ServiceType @isAuthenticated @hasScope(scopes: ["ServiceType:Update"])
+    """Delete a service type"""
+    deleteServiceType(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceType:Delete"])
+    """Activate a service type"""
+    deactivateServiceType(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceType:Update"])
+    """Deactivate a service type"""
+    activateServiceType(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceType:Update"])
+
+    """Add promo codes and coupons"""
+    addCoupon(input: AddCouponInput!): Coupon @isAuthenticated @hasScope(scopes: ["Coupon:Create"])
+    """Update promo codes and coupons"""
+    updateCoupon(input: UpdateCouponInput!): Coupon @isAuthenticated @hasScope(scopes: ["Coupon:Update"])
+    """Delete promo codes and coupons"""
+    deleteCoupon(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Coupon:Delete"])
+    """Activate promo codes and coupons"""
+    deactivateCoupon(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["Coupon:Update"])
+    """Deactivate promo codes and coupons"""
+    activateCoupon(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["Coupon:Update"])
+
+    """Add cancel reasons"""
+    addCancelReason(input: AddCancelReasonInput!): CancelReason @isAuthenticated @hasScope(scopes: ["CancelReason:Create"])
+    """Update cancel reasons"""
+    updateCancelReason(input: UpdateCancelReasonInput!): CancelReason @isAuthenticated @hasScope(scopes: ["CancelReason:Update"])
+    """Delete cancel reasons"""
+    deleteCancelReason(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["CancelReason:Delete"])
+    """Activate cancel reasons"""
+    deactivateCancelReason(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["CancelReason:Update"])
+    """Deactivate cancel reasons"""
+    activateCancelReason(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["CancelReason:Update"])
+
+    """Add feedback and reviews"""
+    addReview(input:AddReviewInput!): Review @isAuthenticated @hasScope(scopes: ["Review:Create"])
+    """Update feedback and reviews"""
+    updateReview(input:UpdateReviewInput!): Review @isAuthenticated @hasScope(scopes: ["Review:Update"])
+    """Delete feedback and reviews"""
+    deleteReview(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["Review:Delete"])
+
+    """Add store feedback and reviews"""
+    addStoreReview(input:AddReviewInput!): StoreReview @isAuthenticated @hasScope(scopes: ["StoreReview:Create"])
+    """Update store feedback and reviews"""
+    updateStoreReview(input:UpdateReviewInput!): StoreReview @isAuthenticated @hasScope(scopes: ["StoreReview:Update"])
+    """Delete store feedback and reviews"""
+    deleteStoreReview(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["StoreReview:Delete"])
+
+    """Send Push notifications to Users & Service Providers"""
+    sendPushNotification(input: PushNotificationInput!): PushNotification @isAuthenticated @hasScope(scopes: ["PushNotification:Create"])
+    """Add a page"""
+    addPage(input: AddPageInput!): Page @isAuthenticated  @hasScope(scopes: ["Page:Create"])
+    """Update a page"""
+    updatePage(input: UpdatePageInput!): Page @isAuthenticated @hasScope(scopes: ["Page:Update"])
+    """Delete a page"""
+    deletePage(id:ID!): Boolean @isAuthenticated  @hasScope(scopes: ["Page:Delete"])
+    """Activate a page"""
+    deactivatePage(id:ID!): Boolean @isAuthenticated  @hasScope(scopes: ["Page:Update"])
+    """Deactivate a page"""
+    activatePage(id:ID!): Boolean @isAuthenticated  @hasScope(scopes: ["Page:Update"])
+
+    """Add a package type"""
+    addPackageType(input: AddPackageTypeInput!): PackageType @isAuthenticated @hasScope(scopes: ["PackageType:Create"])
+    """Update a package type"""
+    updatePackageType(input: UpdatePackageTypeInput!): PackageType @isAuthenticated @hasScope(scopes: ["PackageType:Update"])
+    """Delete a package type"""
+    deletePackageType(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["PackageType:Delete"])
+    """Activate a package type"""
+    deactivatePackageType(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["PackageType:Update"])
+    """Deactivate a package type"""
+    activatePackageType(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["PackageType:Update"])
+
+    changeUserProfilePassword(currentPassword:String
+        newPassword:String
+        confirmNewPassword:String): Boolean  @isAuthenticated @hasScope(scopes: ["User:Update"])
+
+    #TODO: Verify user mobile number with otp before update in future
+    changeUserMobileNumber(
+        countryCode:String!
+        mobileNumber:Int!
+        changeAuthToken: String!
+    ): Boolean @isAuthenticated @hasScope(scopes: ["User:Update"])
+
+    """Start provider Portal"""
+    updateServiceProviderProfile(input: ServiceProviderProfileInput!): ServiceProvider! @isAuthenticated @hasScope(scopes: ["ServiceProvider:Update"])
+    updateServiceProviderBankDetails(input: UpdateBankDetailsInput!): Boolean! @isAuthenticated @hasScope(scopes: ["ServiceProvider:Update"])
+
+    """Add service provider vehicle"""
+    addServiceProviderVehicle(input: AddServiceProviderVehicleInput!): ServiceProviderVehicleDetails @isAuthenticated @hasScope(scopes: ["ServiceProviderVehicle:Create"])
+    """Update service provider vehicle"""
+    updateServiceProviderVehicle(input: UpdateServiceProviderVehicleInput!): ServiceProviderVehicleDetails @isAuthenticated @hasScope(scopes: ["ServiceProviderVehicle:Update"])
+    """Delete service provider vehicle"""
+    activateServiceProviderVehicle(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceProviderVehicle:Update"])
+    """Activate service provider vehicle"""
+    deactivateServiceProviderVehicle(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceProviderVehicle:Update"])
+    """Deactivate service provider vehicle"""
+    deleteServiceProviderVehicle(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceProviderVehicle:Delete"])
+
+    """Add service vehicle type"""
+    addServiceVehicleType(input: AddServiceVehicleTypeInput!): ServiceVehicleType @isAuthenticated @hasScope(scopes: ["ServiceVehicleType:Create"])
+    """Update service vehicle type"""
+    updateServiceVehicleType(input: UpdateServiceVehicleTypeInput!): ServiceVehicleType @isAuthenticated @hasScope(scopes: ["ServiceVehicleType:Update"])
+    """Delete service vehicle type"""
+    activateServiceVehicleType(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceVehicleType:Update"])
+    """Activate service vehicle type"""
+    deactivateServiceVehicleType(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceVehicleType:Update"])
+    """Deactivate service vehicle type"""
+    deleteServiceVehicleType(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["ServiceVehicleType:Delete"])
+
+    """Create new service booking"""
+    createBooking(input: BookingInput!): Booking @isAuthenticated @hasScope(scopes: ["Booking:Create"])
+    estimateBookingFare(input: BookingInput!): BookingFareEstimate @isAuthenticated @hasScope(scopes: ["BookingFareEstimate:Create"])
+
+    """Add advertisement banner"""
+    addAdvertisementBanner(input:AddBannerInput!): AdvertisementBanner @isAuthenticated @hasScope(scopes: ["AdvertisementBanner:Create"])
+    """Update advertisement banner"""
+    updateAdvertisementBanner(input: UpdateBannerInput!): AdvertisementBanner @isAuthenticated @hasScope(scopes: ["AdvertisementBanner:Update"])
+    """Delete advertisement banner"""
+    deleteAdvertisementBanner(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["AdvertisementBanner:Delete"])
+    """Activate advertisement banner"""
+    activateAdvertisementBanner(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["AdvertisementBanner:Update"])
+    """Deactivate advertisement banner"""
+    deactivateAdvertisementBanner(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["AdvertisementBanner:Update"])
+
+    """Add store"""
+    addStore(input: AddStoreInput!): Store @isAuthenticated @hasScope(scopes: ["Store:Create"])
+    """Update store"""
+    updateStore(input: UpdateStoreInput!): Store @isAuthenticated @hasScope(scopes: ["Store:Update"])
+    """Delete store"""
+    deleteStore(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Store:Delete"])
+    """Activate store"""
+    activateStore(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Store:Update"])
+    """Deactivate store"""
+    deactivateStore(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Store:Update"])
+
+    """Add store location"""
+    addStoreLocation(input: AddStoreLocationInput!): StoreLocation @isAuthenticated @hasScope(scopes: ["StoreLocation:Create"])
+    """Update store location"""
+    updateStoreLocation(input: UpdateStoreLocationInput!): StoreLocation @isAuthenticated @hasScope(scopes: ["StoreLocation:Update"])
+    """Delete store location"""
+    deleteStoreLocation(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["StoreLocation:Delete"])
+
+    """Add App version"""
+    addAppVersion(input: AddAppVersionInput!): AppVersion @isAuthenticated @hasScope(scopes: ["AppVersion:Create"])
+    """Update App version"""
+    updateAppVersion(input: UpdateAppVersionInput!): AppVersion @isAuthenticated @hasScope(scopes: ["AppVersion:Update"])
+    """Delete App version"""
+    deleteAppVersion(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["AppVersion:Delete"])
+    """Activate App version"""
+    activateAppVersion(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["AppVersion:Update"])
+    """Deactivate App version"""
+    deactivateAppVersion(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["AppVersion:Update"])
+
+
+    """Add delivery vehicle type"""
+    addDeliveryVehicleType(input: AddDeliveryVehicleTypeInput!): DeliveryVehicleType @isAuthenticated @hasScope(scopes: ["DeliveryVehicleType:Create"])
+    """Update delivery vehicle type"""
+    updateDeliveryVehicleType(input: UpdateDeliveryVehicleTypeInput!): DeliveryVehicleType @isAuthenticated @hasScope(scopes: ["DeliveryVehicleType:Update"])
+    """Delete delivery vehicle type"""
+    deleteDeliveryVehicleType(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["DeliveryVehicleType:Delete"])
+    """Activate delivery vehicle type"""
+    activateDeliveryVehicleType(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["DeliveryVehicleType:Update"])
+    """Deactivate delivery vehicle type"""
+    deactivateDeliveryVehicleType(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["DeliveryVehicleType:Update"])
+
+    """Cancel order"""
+    cancelOrder(orderID: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Order:Update"])
+
+    """Add order status utility"""
+    addOrderStatusUtility(input: AddOrderStatusUtilityInput!): OrderStatusUtility @isAuthenticated @hasScope(scopes: ["OrderStatusUtility:Create"])
+    """Update order status utility"""
+    updateOrderStatusUtility(input: UpdateOrderStatusUtilityInput!): OrderStatusUtility @isAuthenticated @hasScope(scopes: ["OrderStatusUtility:Update"])
+    """Delete order status utility"""
+    deleteOrderStatusUtility(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["OrderStatusUtility:Delete"])
+    """Activate order status utility"""
+    activateOrderStatusUtility(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["OrderStatusUtility:Update"])
+    """Deactivate order status utility"""
+    deactivateOrderStatusUtility(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["OrderStatusUtility:Update"])
+
+    """Add delivery charges utility"""
+    addDeliveryChargesUtility(input: AddDeliveryChargesUtilityInput!): DeliveryChargesUtility @isAuthenticated @hasScope(scopes: ["DeliveryChargesUtility:Create"])
+    """Update delivery charges utility"""
+    updateDeliveryChargesUtility(input: UpdateDeliveryChargesUtilityInput!): DeliveryChargesUtility @isAuthenticated @hasScope(scopes: ["DeliveryChargesUtility:Update"])
+    """Delete delivery charges utility"""
+    deleteDeliveryChargesUtility(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["DeliveryChargesUtility:Delete"])
+    """Activate delivery charges utility"""
+    activateDeliveryChargesUtility(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["DeliveryChargesUtility:Update"])
+    """Deactivate delivery charges utility"""
+    deactivateDeliveryChargesUtility(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["DeliveryChargesUtility:Update"])
+
+    """Add geo fence locations"""
+    addGeoFenceLocation(input: AddGeoFenceLocationInput!): GeoFenceLocation @isAuthenticated @hasScope(scopes: ["GeoFenceLocation:Create"])
+    """Update geo fence locations"""
+    updateGeoFenceLocation(input: UpdateGeoFenceLocationInput!): GeoFenceLocation @isAuthenticated @hasScope(scopes: ["GeoFenceLocation:Update"])
+    """Delete geo fence locations"""
+    deleteGeoFenceLocation(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["GeoFenceLocation:Delete"])
+    """Activate geo fence locations"""
+    activateGeoFenceLocation(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["GeoFenceLocation:Update"])
+    """Deactivate geo fence locations"""
+    deactivateGeoFenceLocation(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["GeoFenceLocation:Update"])
+
+    """Add geo fence restricted area"""
+    addGeoFenceRestrictedArea(input: AddGeoFenceRestrictedAreaInput!): GeoFenceRestrictedArea @isAuthenticated @hasScope(scopes: ["GeoFenceRestrictedArea:Create"])
+    """Update geo fence restricted area"""
+    updateGeoFenceRestrictedArea(input: UpdateGeoFenceRestrictedAreaInput!): GeoFenceRestrictedArea @isAuthenticated @hasScope(scopes: ["GeoFenceRestrictedArea:Update"])
+    """Delete geo fence restricted area"""
+    deleteGeoFenceRestrictedArea(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["GeoFenceRestrictedArea:Delete"])
+    """Activate geo fence restricted area"""
+    activateGeoFenceRestrictedArea(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["GeoFenceRestrictedArea:Update"])
+    """Deactivate geo fence restricted area"""
+    deactivateGeoFenceRestrictedArea(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["GeoFenceRestrictedArea:Update"])
+
+    """Add email template"""
+    addEmailTemplate(input: AddEmailTemplateInput!): EmailTemplate @isAuthenticated @hasScope(scopes: ["EmailTemplate:Create"])
+    """Update email template"""
+    updateEmailTemplate(input: UpdateEmailTemplateInput!): EmailTemplate @isAuthenticated @hasScope(scopes: ["EmailTemplate:Update"])
+    """Delete email template"""
+    deleteEmailTemplate(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["EmailTemplate:Delete"])
+
+    """Add an sms template"""
+    addSmsTemplate(input: AddSmsTemplateInput!): SMSTemplate @isAuthenticated @hasScope(scopes: ["SMSTemplate:Create"])
+    """Update an sms template"""
+    updateSmsTemplate(input: UpdateSmsTemplateInput!): SMSTemplate @isAuthenticated @hasScope(scopes: ["SMSTemplate:Update"])
+    """Delete an sms template"""
+    deleteSmsTemplate(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["SMSTemplate:Delete"])
+
+    """Add a vehicle make"""
+    addVehicleMake(input: AddVehicleMakeInput!): VehicleMake @isAuthenticated @hasScope(scopes: ["VehicleMake:Create"])
+    """Update a vehicle make"""
+    updateVehicleMake(input: UpdateVehicleMakeInput!): VehicleMake @isAuthenticated @hasScope(scopes: ["VehicleMake:Update"])
+    """Delete a vehicle make"""
+    deleteVehicleMake(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["VehicleMake:Delete"])
+    """Activate a vehicle make"""
+    activateVehicleMake(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["VehicleMake:Update"])
+    """Deactivate a vehicle make"""
+    deactivateVehicleMake(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["VehicleMake:Update"])
+
+    """Add a vehicle model"""
+    addVehicleModel(input: AddVehicleModelInput!): VehicleModel @isAuthenticated @hasScope(scopes: ["VehicleModel:Create"])
+    """Update a vehicle model"""
+    updateVehicleModel(input: UpdateVehicleModelInput!): VehicleModel @isAuthenticated @hasScope(scopes: ["VehicleModel:Update"])
+    """Delete a vehicle model"""
+    deleteVehicleModel(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["VehicleModel:Delete"])
+    """Activate a vehicle model"""
+    activateVehicleModel(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["VehicleModel:Update"])
+    """Deactivate a vehicle model"""
+    deactivateVehicleModel(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["VehicleModel:Update"])
+
+    """Add a visit location"""
+    addVisitLocation(input: AddVisitLocationInput!): VisitLocation @isAuthenticated @hasScope(scopes: ["VisitLocation:Update"])
+    """Update a visit location"""
+    updateVisitLocation(input: UpdateVisitLocationInput!): VisitLocation @isAuthenticated @hasScope(scopes: ["VisitLocation:Update"])
+    """Delete a visit location"""
+    deleteVisitLocation(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["VisitLocation:Delete"])
+    """Activate a visit location"""
+    activateVisitLocation(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["VisitLocation:Update"])
+    """Deactivate a visit location"""
+    deactivateVisitLocation(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["VisitLocation:Update"])
+
+    """Add an organization"""
+    addEnterpriseAccount(input: AddEnterpriseAccountInput!): EnterpriseAccount @isAuthenticated @hasScope(scopes: ["EnterpriseAccount:Create"])
+    """Update an organization"""
+    updateEnterpriseAccount(input: UpdateEnterpriseAccountInput!): EnterpriseAccount @isAuthenticated @hasScope(scopes: ["EnterpriseAccount:Update"])
+    """Delete an organization"""
+    deleteEnterpriseAccount(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["EnterpriseAccount:Delete"])
+    """Activate an organization"""
+    activateEnterpriseAccount(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["EnterpriseAccount:Update"])
+    """Deactivate an organization"""
+    deactivateEnterpriseAccount(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["EnterpriseAccount:Update"])
+
+    """Add a ride profile type"""
+    addRideProfileType(input: AddRideProfileTypeInput!): RideProfileType @isAuthenticated @hasScope(scopes: ["RideProfileType:Create"])
+    """Update a ride profile type"""
+    updateRideProfileType(input: UpdateRideProfileTypeInput!): RideProfileType @isAuthenticated @hasScope(scopes: ["RideProfileType:Update"])
+    """Delete a ride profile type"""
+    deleteRideProfileType(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["RideProfileType:Delete"])
+    """Activate a ride profile type"""
+    activateRideProfileType(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["RideProfileType:Update"])
+    """Deactivate a ride profile type"""
+    deactivateRideProfileType(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["RideProfileType:Update"])
+
+    """Add a business trip reason"""
+    addBusinessTripReason(input: AddBusinessTripReasonInput!):BusinessTripReason @isAuthenticated @hasScope(scopes: ["BusinessTripReason:Create"])
+    """Update a business trip reason"""
+    updateBusinessTripReason(input: UpdateBusinessTripReasonInput!):BusinessTripReason @isAuthenticated @hasScope(scopes: ["BusinessTripReason:Update"])
+    """Delete a business trip reason"""
+    deleteBusinessTripReason(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["BusinessTripReason:Delete"])
+    """Activate a business trip reason"""
+    activateBusinessTripReason(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["BusinessTripReason:Update"])
+    """Deactivate a business trip reason"""
+    deactivateBusinessTripReason(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["BusinessTripReason:Update"])
+
+    """Add a country"""
+    addCountry(input: AddCountryInput!): Country @isAuthenticated @hasScope(scopes: ["Country:Create"])
+    """Update a country"""
+    updateCountry(input: UpdateCountryInput!): Country @isAuthenticated @hasScope(scopes: ["Country:Update"])
+    """Delete a country"""
+    deleteCountry(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Country:Delete"])
+    """Activate a country"""
+    activateCountry(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Country:Update"])
+    """Deactivate a country"""
+    deactivateCountry(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Country:Update"])
+
+    """Add a state"""
+    addState(input: AddStateInput!): State @isAuthenticated @hasScope(scopes: ["State:Create"])
+    """Update a state"""
+    updateState(input: UpdateStateInput!): State @isAuthenticated @hasScope(scopes: ["State:Update"])
+    """Delete a state"""
+    deleteState(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["State:Delete"])
+    """Activate a state"""
+    activateState(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["State:Update"])
+    """Deactivate a state"""
+    deactivateState(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["State:Update"])
+
+    """Add a city"""
+    addCity(input: AddCityInput!): City @isAuthenticated @hasScope(scopes: ["City:Create"])
+    """Update a city"""
+    updateCity(input: UpdateCityInput!): City @isAuthenticated @hasScope(scopes: ["City:Update"])
+    """Delete a city"""
+    deleteCity(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["City:Delete"])
+    """Activate a city"""
+    activateCity(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["City:Update"])
+    """Deactivate a city"""
+    deactivateCity(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["City:Update"])
+
+    """Single file upload"""
+    singleUpload(file: Upload!): File! @isAuthenticated @hasScope(scopes: ["File:Upload"])
+    """single upload with payload"""
+    singleUploadWithPayload(req: UploadFile!): File! @isAuthenticated @hasScope(scopes: ["File:Upload"])
+    """multiple upload"""
+    multipleUpload(files: [Upload!]!): [File!]! @isAuthenticated @hasScope(scopes: ["File:Upload"])
+    """multiple upload with payload"""
+    multipleUploadWithPayload(req: [UploadFile!]!): [File!]! @isAuthenticated @hasScope(scopes: ["File:Upload"])
+
+    """Add new Delivery Charges"""
+    addDeliveryCharges(input: AddDeliveryChargeInput!): DeliveryCharge @isAuthenticated @hasScope(scopes: ["DeliveryCharge:Create"])
+    """Update Delivery Charges"""
+    updateDeliveryCharges(input: UpdateDeliveryChargeInput!): DeliveryCharge @isAuthenticated @hasScope(scopes: ["DeliveryCharge:Update"])
+    """Delete Delivery Charges"""
+    deleteDeliveryCharges(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["DeliveryCharge:Delete"])
+    """Deactivate Delivery Charges"""
+    deactivateDeliveryCharges(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["DeliveryCharge:Update"])
+    """Activate Delivery Charges"""
+    activateDeliveryCharges(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["DeliveryCharge:Update"])
+
+    """Add new Location Wise Fare"""
+    addLocationWiseFare(input: AddLocationWiseFareInput!): LocationWiseFare @isAuthenticated @hasScope(scopes: ["LocationWiseFare:Create"])
+    """Update Location Wise Fare"""
+    updateLocationWiseFare(input: UpdateLocationWiseFareInput!): LocationWiseFare @isAuthenticated @hasScope(scopes: ["LocationWiseFare:Update"])
+    """Delete Location Wise Fare"""
+    deleteLocationWiseFare(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["LocationWiseFare:Delete"])
+    """Activate Location Wise Fare"""
+    activateLocationWiseFare(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["LocationWiseFare:Update"])
+    """Deactivate Location Wise Fare"""
+    deactivateLocationWiseFare(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["LocationWiseFare:Update"])
+
+    """Add new Airport Surcharge"""
+    addAirportSurcharge(input: AddAirportSurchargeInput!): AirportSurcharge @isAuthenticated @hasScope(scopes: ["AirportSurcharge:Create"])
+    """Update Airport Surcharge"""
+    updateAirportSurcharge(input: UpdateAirportSurchargeInput!): AirportSurcharge @isAuthenticated @hasScope(scopes: ["AirportSurcharge:Update"])
+    """delete Airport Surcharge"""
+    deleteAirportSurcharge(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["AirportSurcharge:Delete"])
+    """Activate Airport Surcharge"""
+    activateAirportSurcharge(id: ID!): Boolean @isAuthenticated  @hasScope(scopes: ["AirportSurcharge:Update"])
+    """Deactivate Airport Surcharge"""
+    deactivateAirportSurcharge(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["AirportSurcharge:Update"])
+
+    """Add new General Label"""
+    addGeneralLabel(input: AddGeneralLabelInput!): GeneralLabel @isAuthenticated @hasScope(scopes: ["GeneralLabel:Create"])
+    """Update General Label"""
+    updateGeneralLabel(input: UpdateGeneralLabelInput!): GeneralLabel @isAuthenticated @hasScope(scopes: ["GeneralLabel:Update"])
+    """delete General Label"""
+    deleteGeneralLabel(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["GeneralLabel:Delete"])
+
+    """Add new Food Delivery Label"""
+    addFoodDeliveryLabel(input: AddFoodDeliveryLabelInput!): FoodDeliveryLabel @isAuthenticated @hasScope(scopes: ["FoodDeliveryLabel:Create"])
+    """Update Food Delivery Label"""
+    updateFoodDeliveryLabel(input: UpdateFoodDeliveryLabelInput!): FoodDeliveryLabel @isAuthenticated @hasScope(scopes: ["FoodDeliveryLabel:Update"])
+    """delete Food Delivery Label"""
+    deleteFoodDeliveryLabel(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["FoodDeliveryLabel:Delete"])
+
+    """Add new Grocery Delivery Label"""
+    addGroceryDeliveryLabel(input: AddGroceryDeliveryLabelInput!): GroceryDeliveryLabel @isAuthenticated @hasScope(scopes: ["GroceryDeliveryLabel:Create"])
+    """Update Grocery Delivery Label"""
+    updateGroceryDeliveryLabel(input: UpdateGroceryDeliveryLabelInput!): GroceryDeliveryLabel @isAuthenticated @hasScope(scopes: ["GroceryDeliveryLabel:Update"])
+    """delete Grocery Delivery Label"""
+    deleteGroceryDeliveryLabel(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["GroceryDeliveryLabel:Delete"])
+
+    """Add new Wine Delivery Label"""
+    addWineDeliveryLabel(input: AddWineDeliveryLabelInput!): WineDeliveryLabel @isAuthenticated @hasScope(scopes: ["WineDeliveryLabel:Create"])
+    """Update Wine Delivery Label"""
+    updateWineDeliveryLabel(input: UpdateWineDeliveryLabelInput!): WineDeliveryLabel @isAuthenticated @hasScope(scopes: ["WineDeliveryLabel:Update"])
+    """delete Wine Delivery Label"""
+    deleteWineDeliveryLabel(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["WineDeliveryLabel:Delete"])
+
+    """Add an FAQ"""
+    addFAQ(input: AddFAQInput!): FAQ @isAuthenticated @hasScope(scopes: ["FAQ:Create"])
+    """Update an FAQ"""
+    updateFAQ(input: UpdateFAQInput!): FAQ @isAuthenticated @hasScope(scopes: ["FAQ:Update"])
+    """Delete an FAQ"""
+    deleteFAQ(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["FAQ:Delete"])
+    """Activate an FAQ"""
+    activateFAQ(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["FAQ:Update"])
+    """Deactivate an FAQ"""
+    deactivateFAQ(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["FAQ:Update"])
+
+    """Add an FAQ"""
+    addFAQCategory(input: AddFAQCategoryInput!): FAQCategory @isAuthenticated @hasScope(scopes: ["FAQCategory:Create"])
+    """Update an FAQ category"""
+    updateFAQCategory(input: UpdateFAQCategoryInput!): FAQCategory @isAuthenticated @hasScope(scopes: ["FAQCategory:Update"])
+    """Delete an FAQ category"""
+    deleteFAQCategory(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["FAQCategory:Delete"])
+    """Activate an FAQ category"""
+    activateFAQCategory(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["FAQCategory:Update"])
+    """Deactivate an FAQ category"""
+    deactivateFAQCategory(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["FAQCategory:Update"])
+
+    """Add a help detail"""
+    addHelpDetail(input: AddHelpDetailInput!): HelpDetail @isAuthenticated @hasScope(scopes: ["HelpDetail:Create"])
+    """Update a help detail"""
+    updateHelpDetail(input: UpdateHelpDetailInput!): HelpDetail @isAuthenticated @hasScope(scopes: ["HelpDetail:Update"])
+    """Delete a help detail"""
+    deleteHelpDetail(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["HelpDetail:Delete"])
+    """Activate a help detail"""
+    activateHelpDetail(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["HelpDetail:Update"])
+    """Deactivate a help detail"""
+    deactivateHelpDetail(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["HelpDetail:Update"])
+
+    """Add a help detail category"""
+    addHelpCategory(input: AddHelpCategoryInput!): HelpCategory @isAuthenticated @hasScope(scopes: ["HelpCategory:Create"])
+    """Update a help detail category"""
+    updateHelpCategory(input: UpdateHelpCategoryInput!): HelpCategory @isAuthenticated @hasScope(scopes: ["HelpCategory:Update"])
+    """Delete a help detail category"""
+    deleteHelpCategory(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["HelpCategory:Delete"])
+    """Activate a help detail category"""
+    activateHelpCategory(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["HelpCategory:Update"])
+    """Deactivate a help detail category"""
+    deactivateHelpCategory(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["HelpCategory:Update"])
+
+    """Update market settings"""
+    updateMarketSettings(input: UpdateMarketSettingsInput!): MarketSettings  @isAuthenticated @hasScope(scopes: ["MarketSettings:Update"])
+
+    """Add an OAuth Application"""
+    addOAuthApplication(input: AddOAuthApplicationInput ):OAuthApplication @isAuthenticated @hasScope(scopes: ["OAuthApplication:Create"])
+    """Update OAuth Application"""
+    updateOAuthApplication(input: UpdateOAuthApplicationInput ):OAuthApplication @isAuthenticated @hasScope(scopes: ["OAuthApplication:Update"])
+    """Delete OAuth Application"""
+    deleteOAuthApplication(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["OAuthApplication:Delete"])
+    """Activate OAuth Application"""
+    activateOAuthApplication(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["OAuthApplication:Update"])
+    """Deactivate OAuth Application"""
+    deactivateOAuthApplication(id: ID!): Boolean  @isAuthenticated @hasScope(scopes: ["OAuthApplication:Update"])
+
+    """ Submit App For Approval"""
+    submitAppForApproval(id:ID!):Boolean @isAuthenticated @hasScope(scopes: ["OAuthApplication:Update"])
+
+    """revoke access token"""
+    revokeAccessToken(token: String!):Boolean  @isAuthenticated @hasScope(scopes: ["AccessToken:Delete"])
+
+    """reset application client secret"""
+    resetApplicationClientSecret(appId:ID!): String  @isAuthenticated @hasScope(scopes: ["OAuthApplication:Update"])
+
+    """Add a webhook"""
+    addWebhook(appId:ID!, input: AddWebhookInput! ):Webhook @isAuthenticated  @hasScope(scopes: ["Webhook:Create"])
+    """Update webhook"""
+    updateWebhook(input: UpdateWebhookInput! ):Webhook @isAuthenticated @hasScope(scopes: ["Webhook:Update"])
+    """Delete webhook"""
+    deleteWebhook(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Webhook:Delete"])
+    """Activate webhook """
+    activateWebhook(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Webhook:Update"])
+    """Deactivate webhook"""
+    deactivateWebhook(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Webhook:Update"])
+
+    """Add a new currency"""
+    addCurrency(input: AddCurrencyInput! ): Currency @isAuthenticated @hasScope(scopes: ["Currency:Create"])
+    """Update an existing currency"""
+    updateCurrency(input: UpdateCurrencyInput! ): Currency @isAuthenticated @hasScope(scopes: ["Currency:Update"])
+    """Delete an existing currency"""
+    deleteCurrency(id :ID!): Boolean @isAuthenticated @hasScope(scopes: ["Currency:Delete"])
+    """Activate a currency"""
+    activateCurrency(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Currency:Update"])
+    """Deactivate a currency"""
+    deactivateCurrency(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Currency:Update"])
+
+    """Add a new rental package"""
+    addRentalPackage(input: AddRentalPackageInput! ): RentalPackage @isAuthenticated @hasScope(scopes: ["RentalPackage:Create"])
+    """Update an existing rental package"""
+    updateRentalPackage(input: UpdateRentalPackageInput! ): RentalPackage @isAuthenticated @hasScope(scopes: ["RentalPackage:Update"])
+    """Delete an existing rental package"""
+    deleteRentalPackage(id :ID!): Boolean @isAuthenticated @hasScope(scopes: ["RentalPackage:Delete"])
+
+    """Add a new store vehicle type"""
+    addStoreVehicleType(input: AddStoreVehicleTypeInput! ): StoreVehicleType @isAuthenticated @hasScope(scopes: ["StoreVehicleType:Create"])
+    """Update an existing store vehicle type"""
+    updateStoreVehicleType(input: UpdateStoreVehicleTypeInput! ): StoreVehicleType @isAuthenticated @hasScope(scopes: ["StoreVehicleType:Update"])
+    """Delete an existing store vehicle type"""
+    deleteStoreVehicleType(id :ID!): Boolean @isAuthenticated @hasScope(scopes: ["StoreVehicleType:Delete"])
+    """Activate a store vehicle type"""
+    activateStoreVehicleType(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["StoreVehicleType:Update"])
+    """Deactivate a store vehicle type"""
+    deactivateStoreVehicleType(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["StoreVehicleType:Update"])
+
+    """Add a new required document type"""
+    addRequiredDocument(input: AddManageDocumentInput! ): RequiredDocument @isAuthenticated @hasScope(scopes: ["RequiredDocument:Create"])
+    """Update an existing required document type"""
+    updateRequiredDocument(input: UpdateManageDocumentInput! ): RequiredDocument @isAuthenticated @hasScope(scopes: ["RequiredDocument:Update"])
+    """Delete an existing required document type"""
+    deleteRequiredDocument(id :ID!): Boolean @isAuthenticated @hasScope(scopes: ["RequiredDocument:Delete"])
+    """Activate a required document type"""
+    activateRequiredDocument(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["RequiredDocument:Update"])
+    """Deactivate a required document type"""
+    deactivateRequiredDocument(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["RequiredDocument:Update"])
+
+    """Add a new document"""
+    addDocument(input: AddDocumentInput! ): Document @isAuthenticated @hasScope(scopes: ["Document:Create"])
+    """Update an existing document"""
+    updateDocument(input: UpdateDocumentInput! ): Document @isAuthenticated @hasScope(scopes: ["Document:Update"])
+    """Delete an existing document"""
+    deleteDocument(id :ID!): Boolean @isAuthenticated @hasScope(scopes: ["Document:Delete"])
+    """Activate a document"""
+    activateDocument(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Document:Update"])
+    """Deactivate a document"""
+    deactivateDocument(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Document:Update"])
+
+    """Assign role to user"""
+    assignRoleToUser(roleId: ID!, userId: ID!):Boolean!
+    """Assign role group to user"""
+    assignRoleGroupToUser(roleGroupId: ID!, userId: ID!):Boolean!
+    """Assign role to role group"""
+    assignRoleToRoleGroup(roleId: ID!, roleGroupId: ID!):Boolean!
+    """Assign permission to user role"""
+    assignPermissionToUserRole(permission: String!, roleId: ID!):Boolean!
+
+    """Unassign user role """
+    unAssignUserRole(roleId: ID!, userId: ID!):Boolean!
+    """Unassign user role group """
+    unAssignUserRoleGroup(roleGroupId: ID!, userId: ID!):Boolean!
+    """Unassign role group role"""
+    unAssignRoleGroupRole(roleId: ID!, roleGroupId: ID!):Boolean!
+    """Unassign user role permission"""
+    unAssignUserRolePermission(permission: String!, roleId: ID!):Boolean!
+
+    """Add a user role """
+    addUserRole(input: AddUserRoleInput!): UserRole @isAuthenticated @hasScope(scopes: ["UserRole:Create"])
+    """Update a user role """
+    updateUserRole(input: UpdateUserRoleInput!): UserRole @isAuthenticated @hasScope(scopes: ["UserRole:Update"])
+    """Delete a user role """
+    deleteUserRole(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["UserRole:Delete"])
+
+    """Add a user role group"""
+    addUserRoleGroup(input: AddUserRoleGroupInput!): UserRoleGroup @isAuthenticated @hasScope(scopes: ["UserRoleGroup:Create"])
+    """Update a user role """
+    updateUserRoleGroup(input: UpdateUserRoleGroupInput!): UserRoleGroup @isAuthenticated @hasScope(scopes: ["UserRoleGroup:Update"])
+    """Delete a user role """
+    deleteUserRoleGroup(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["UserRoleGroup:Delete"])
+
+    """Add a emergency contact"""
+    addEmergencyContact(input: AddEmergencyContactInput!): EmergencyContact @isAuthenticated @hasScope(scopes: ["EmergencyContact:Create"])
+    """Update a emergency contact """
+    updateEmergencyContact(input: UpdateEmergencyContactInput!): EmergencyContact @isAuthenticated @hasScope(scopes: ["EmergencyContact:Update"])
+    """Delete emergency contact """
+    deleteEmergencyContact(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["EmergencyContact:Delete"])
+
+    """Add a user role group"""
+    addAddress(input: AddAddressInput!): Address @isAuthenticated @hasScope(scopes: ["Address:Create"])
+    """Update a user role """
+    updateAddress(input: UpdateAddressInput!): Address @isAuthenticated @hasScope(scopes: ["Address:Update"])
+    """Delete a user role """
+    deleteAddress(id:ID!): Boolean @isAuthenticated @hasScope(scopes: ["Address:Delete"])
+
+    """Add a new customer"""
+    addCustomer(input: AddCustomerInput! ): Customer @isAuthenticated @hasScope(scopes: ["Customer:Create"])
+    """Update an existing customer"""
+    updateCustomer(input: UpdateCustomerInput! ): Customer @isAuthenticated @hasScope(scopes: ["Customer:Update"])
+    """Delete an existing customer"""
+    deleteCustomer(id :ID!): Boolean @isAuthenticated @hasScope(scopes: ["Customer:Delete"])
+    """Activate a customer"""
+    activateCustomer(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Customer:Update"])
+    """Deactivate a customer"""
+    deactivateCustomer(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Customer:Update"])
+
+    """Add a new order note"""
+    addOrderNote(input: AddOrderNoteInput! ): OrderNote @isAuthenticated @hasScope(scopes: ["OrderNote:Create"])
+    """Update an existing order note"""
+    updateOrderNote(input: UpdateOrderNoteInput! ): OrderNote @isAuthenticated @hasScope(scopes: ["OrderNote:Update"])
+    """Delete an existing order note"""
+    deleteOrderNote(id :ID!): Boolean @isAuthenticated @hasScope(scopes: ["OrderNote:Delete"])
+    """Activate an order note"""
+    activateOrderNote(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["OrderNote:Update"])
+    """Deactivate an order note"""
+    deactivateOrderNote(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["OrderNote:Update"])
+
+    """Add a new order"""
+    addOrder(input: AddOrderInput! ): Order @isAuthenticated @hasScope(scopes: ["Order:Create"])
+    """Update an existing order"""
+    updateOrder(input: UpdateOrderInput! ): Order @isAuthenticated @hasScope(scopes: ["Order:Update"])
+    """Delete an existing order"""
+    deleteOrder(id :ID!): Boolean @isAuthenticated @hasScope(scopes: ["Order:Delete"])
+    """Activate an order"""
+    activateOrder(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Order:Update"])
+    """Deactivate an order"""
+    deactivateOrder(id: ID!): Boolean @isAuthenticated @hasScope(scopes: ["Order:Update"])
+}
+
+input UpdateAppVersionInput {
+    id:ID!
+    minimumVersion: String!
+    latestVersion: String!
+    downloadUrl: String!
+    channel:String!
+}
+
+input AddAppVersionInput {
+    minimumVersion: String!
+    latestVersion: String!
+    downloadUrl: String!
+    channel:String!
+}
+
+input UpdateWebhookInput {
+    id:ID!
+    url :String !
+    eventTopics :[String!]!
+    secret :String!
+    isEnabled :Boolean!
+}
+
+input AddWebhookInput {
+    url :String!
+    eventTopics :[String!]!
+    secret :String!
+    isEnabled :Boolean!
+}
+
+input AddOAuthApplicationInput{
+    appName:String!
+    publisherName:String!
+    clientDescription:String!
+    redirectURL:String!
+    scopes:[String!]!
+    developers:[String!]!
+    developmentUsers:[String!]!
+    appIcon:String!
+    allowImplicitGrant: AllowImplicitGrant!
+    whiteListedDomains:[String!]!
+    termsOfServiceURL:String!
+    privacyURL:String!
+    website:String!
+    contactEmail:String!
+}
+
+input UpdateOAuthApplicationInput {
+    id:ID!
+    appName:String!
+    publisherName:String!
+    clientDescription:String!
+    redirectURL:String!
+    scopes:[String!]!
+    developers:[String!]!
+    developmentUsers:[String!]!
+    appIcon:String!
+    allowImplicitGrant: AllowImplicitGrant!
+    whiteListedDomains:[String]!
+    termsOfServiceURL:String!
+    privacyURL:String!
+    website:String!
+    contactEmail:String!
+}
+
+#input UpdateReviewInput {
+#    rating: Int
+#}
+#
+#input AddReviewInput {
+#    rating: Int
+#}

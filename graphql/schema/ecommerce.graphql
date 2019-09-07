@@ -1,0 +1,24 @@
+#Woocommerce API Rip off
+
+# Types with identical fields:
+# Collection Self
+
+type Attribute {
+	id: ID!
+	name: String!
+	option: String!
+}
+
+type ProductShippingClass {
+    id: ID!
+    name: String!
+    slug: String!
+    description: String!
+    count: Int!
+}
+
+# Types with identical fields:
+# Up Collection Self
+
+# Types with identical fields:
+# Up Collection Self

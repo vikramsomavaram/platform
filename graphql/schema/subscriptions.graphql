@@ -1,0 +1,15 @@
+# Tribe GraphQL Schema
+# © Copyright 2019 - Pandranki Global Private Limited
+
+type Subscription {
+
+	"""Get nearby drivers  vehicles"""
+	nearbyVehicles(latitude: Float!,longitude: Float!): [NearByVehicle]
+
+	"""support chat replies"""
+	supportChatMessage(chatId: String!): ChatMessage!
+
+	"""Realtime job updates"""
+	jobUpdates(jobId: String!): JobUpdate!
+
+}

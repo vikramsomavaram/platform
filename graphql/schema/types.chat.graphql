@@ -1,0 +1,76 @@
+# Tribe GraphQL Schema
+# © Copyright 2019 - Pandranki Global Private Limited
+
+# supportChats
+# createSupportChat
+# updateSupportChat
+# deleteSupportChat
+# sendChatMessage
+# deleteChatMessage
+# editChatMessage
+# supportDepartments
+
+# createSupportDepartment
+#skills
+#chatNotes
+
+type SupportAgent {
+	id: ID!
+	user: String!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	isEnabled: Boolean!
+	departments: [SupportDepartment]!
+	skills: [SupportSkills]
+}
+
+type SupportDepartment {
+	id: ID!
+	name: String!
+	description: String!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	isEnabled: Boolean!
+}
+
+type SupportSkills {
+	id: ID!
+	name: String!
+}
+
+type Chat {
+	id: ID!
+	name: String!
+	createdAt: DateTime!
+	updatedAt: DateTime!
+	createdBy: ID!
+	startedBy: ID!
+	agents: [SupportAgent]!
+	messages: [ChatMessage]!
+	tags: [String]
+	department: SupportDepartment!
+	rating: String
+	comment: String
+	notes: [ChatNote]
+}
+
+type ChatNote {
+	type: String
+	message: String!
+	createdBy: String!
+	createdAt: DateTime!
+}
+
+type ChatMessage {
+	type: ChatMessageType
+	createdBy: ID!
+	createdAt: DateTime!
+	agentReadAt: DateTime
+	userReadAt: DateTime
+	message: String!
+}
+
+enum ChatMessageType {
+	LIVE_CHAT
+	OFFLINE_MESSAGE
+}

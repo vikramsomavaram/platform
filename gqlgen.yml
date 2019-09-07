@@ -1,0 +1,17 @@
+schema:
+  - graphql/schema/directives.graphql
+  - graphql/schema/types.graphql
+  - graphql/schema/mutations.graphql
+  - graphql/schema/queries.graphql
+  - graphql/schema/subscriptions.graphql
+  - graphql/schema/types.chat.graphql
+exec:
+  filename: resolvers/generated.go
+model:
+  filename: models/generated.go
+resolver:
+  filename: resolver.go
+  type: Resolver
+
+autobind:
+  - github.com/tribehq/platform/models

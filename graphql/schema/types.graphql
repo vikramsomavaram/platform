@@ -1,0 +1,6778 @@
+# Tribe GraphQL Schema
+# © Copyright 2019 - Pandranki Global Private Limited
+
+type AdminDashboard {
+    siteStatistics: SiteStatistics!
+    jobStatistics: JobStatistics!
+    jobsOverview:JobsOverview!
+    providersOverview:ProvidersOverview!
+    latestJobs:[LatestJobs]!
+    notificationPanel:[DashboardNotification]!
+}
+
+type SiteStatistics {
+    users: Int!
+    providers: Int!
+    companies: Int!
+    totalearnings: Int!
+}
+
+type DashboardNotification{
+    action: String!
+    actor: User!
+    createdAt: DateTime!
+}
+
+enum ItemTagName{
+    BESTSELLER
+    NEWLY_ADDED
+    PROMOTED
+}
+
+type LatestJobs{
+    user: User!
+    status: JobStatus!
+    createdAt: DateTime!
+    startingAddress: Address!
+    endingAddress: Address!
+}
+
+type ProvidersOverview {
+    today: Int!
+    thisWeek: Int!
+    thisMonth: Int!
+    thisYear: Int!
+    active: Int!
+    pending: Int!
+}
+
+type JobsOverview {
+    today: Int!
+    thisWeek: Int!
+    thisMonth: Int!
+    thisYear: Int!
+    completed: Int!
+    onGoing: Int!
+    cancelled: Int!
+}
+
+type JobStatistics {
+    totalJobs: Int!
+    onGoingJobs: Int!
+    cancelledJobs: Int!
+    completedJobs: Int!
+}
+
+type RestaurantConnection {
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [RestaurantEdge]
+    """A list of nodes."""
+    nodes: [Restaurant]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+type RestaurantEdge{
+    cursor: Cursor!
+    node: Restaurant
+}
+
+type Restaurant{
+    id : ID!
+    name : String!
+}
+
+""" List of Order"""
+type OrderConnection {
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [OrderEdge]
+    """A list of nodes."""
+    nodes: [Order]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Order"""
+type OrderEdge {
+    cursor: Cursor!
+    node: Order
+}
+
+"""
+List of WalletTransaction"""
+type WalletTransactionConnection {
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [WalletTransactionEdge]
+    """A list of nodes."""
+    nodes: [WalletTransaction]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node WalletTransaction"""
+type WalletTransactionEdge {
+    cursor: Cursor!
+    node: WalletTransaction
+}
+
+""" List of ProviderVehicleDetails"""
+type ServiceProviderVehicleDetailsConnection {
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ServiceProviderVehicleDetailsEdge]
+    """A list of nodes."""
+    nodes: [ServiceProviderVehicleDetails]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node ProviderVehicleDetails"""
+type ServiceProviderVehicleDetailsEdge {
+    cursor: Cursor!
+    node: ServiceProviderVehicleDetails
+}
+
+
+"""
+List of ProviderWalletTransaction"""
+type ProviderWalletTransactionConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProviderWalletTransactionEdge]
+    """A list of nodes."""
+    nodes: [ProviderWalletTransaction]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node ProviderWalletTransaction"""
+type ProviderWalletTransactionEdge {
+    cursor: Cursor!
+    node: ProviderWalletTransaction
+}
+"""List of RecentUnpaidEarning"""
+type RecentUnpaidEarningConnection {
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [RecentUnpaidEarningEdge]
+    """A list of nodes."""
+    nodes: [RecentUnpaidEarning]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node RecentUnpaidEarning"""
+type RecentUnpaidEarningEdge {
+    cursor: Cursor!
+    node: RecentUnpaidEarning
+}
+
+"""
+List of Withdrawal"""
+type WithdrawalConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [WithdrawalEdge]
+    """A list of nodes."""
+    nodes: [Withdrawal]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Withdrawal"""
+type WithdrawalEdge {
+    cursor: Cursor!
+    node: Withdrawal
+}
+
+"""
+List of PaidEarning"""
+type PaidEarningConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [PaidEarningEdge]
+    """A list of nodes."""
+    nodes: [PaidEarning]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node PaidEarning"""
+type PaidEarningEdge {
+    cursor: Cursor!
+    node: PaidEarning
+}
+
+"""
+List of Installation"""
+type InstallationConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [InstallationEdge]
+    """A list of nodes."""
+    nodes: [Installation]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Installation"""
+type InstallationEdge {
+    cursor: Cursor!
+    node: Installation
+}
+
+
+#"""
+#List of AdminGroup"""
+#type AdminGroupsConnection {
+#    """Total number of nodes"""
+#    totalCount: Int!
+#    """A list of edges"""
+#    edges: [AdminGroupEdge]
+#    """A list of nodes."""
+#    nodes: [AdminGroup]
+#    """Information to aid in pagination."""
+#    pageInfo: PageInfo!
+#}
+#
+#""" Paginating the node AdminGroup"""
+#type AdminGroupEdge {
+#    cursor: Cursor!
+#    node: AdminGroup
+#}
+
+"""
+List of Coupon"""
+type CouponConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [CouponEdge]
+    """A list of nodes."""
+    nodes: [Coupon]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Coupon"""
+type CouponEdge {
+    cursor: Cursor!
+    node: Coupon
+}
+
+"""
+List of Review"""
+type ReviewConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ReviewEdge]
+    """A list of nodes."""
+    nodes: [Review]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Review"""
+type ReviewEdge {
+    cursor: Cursor!
+    node: Review
+}
+
+"""
+List of Job"""
+type JobConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [JobEdge]
+    """A list of nodes."""
+    nodes: [Job]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Job"""
+type JobEdge {
+    cursor: Cursor!
+    node: Job
+}
+
+"""
+List of PackageType"""
+type PackageTypeConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [PackageTypeEdge]
+    """A list of nodes."""
+    nodes: [PackageType]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node PackageType"""
+type PackageTypeEdge {
+    cursor: Cursor!
+    node: PackageType
+}
+
+"""
+List of CancelReason"""
+type CancelReasonConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [CancelReasonEdge]
+    """A list of nodes."""
+    nodes: [CancelReason]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node CancelReason"""
+type CancelReasonEdge {
+    cursor: Cursor!
+    node: CancelReason
+}
+
+"""
+List of JobLaterBooking"""
+type JobLaterBookingConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [JobLaterBookingEdge]
+    """A list of nodes."""
+    nodes: [JobLaterBooking]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node JobLaterBooking"""
+type JobLaterBookingEdge {
+    cursor: Cursor!
+    node: JobLaterBooking
+}
+
+"""List of Stores"""
+type StoreConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [StoreEdge]
+    """A list of nodes."""
+    nodes: [Store]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node StoreDetails"""
+type StoreEdge {
+    cursor: Cursor!
+    node: Store
+}
+
+"""List of Store locations"""
+type StoreLocationConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [StoreLocationEdge]
+    """A list of nodes."""
+    nodes: [StoreLocation]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node StoreLocation """
+type StoreLocationEdge {
+    cursor: Cursor!
+    node: StoreLocation
+}
+
+
+""" List of SMSTemplate"""
+type SMSTemplateConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [SMSTemplateEdge]
+    """A list of nodes."""
+    nodes: [SMSTemplate]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node SMSTemplate"""
+type SMSTemplateEdge {
+    cursor: Cursor!
+    node: SMSTemplate
+}
+
+"""
+List of NewsletterSubscriber"""
+type NewsletterSubscriberConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [NewsletterSubscriberEdge]
+    """A list of nodes."""
+    nodes: [NewsletterSubscriber]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node NewsletterSubscriber"""
+type NewsletterSubscriberEdge {
+    cursor: Cursor!
+    node: NewsletterSubscriber
+}
+
+"""
+List of StorePaymentReport"""
+type StorePaymentReportConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [StorePaymentReportEdge]
+    """A list of nodes."""
+    nodes: [StorePaymentReport]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node StorePaymentReport"""
+type StorePaymentReportEdge {
+    cursor: Cursor!
+    node: StorePaymentReport
+}
+
+type JobUpdate {
+    createdAt: DateTime!
+    status: String!
+    endedAt: DateTime
+    latitude: Float!
+    longitude: Float!
+    providerId: String!
+    deliveryTimeEstimate: DateTime!
+    order: Order
+}
+
+type NearByVehicle {
+    latitude: Float!
+    longitude: Float!
+    id: String!
+    type: String!
+    driverId:String!
+    isOccupied: Boolean!
+}
+
+type ServiceCompaniesConnection {
+    totalCount: Int!
+    nodes: [ServiceCompany]!
+    edges: [ServiceCompanyEdge]!
+    pageInfo: PageInfo!
+}
+
+type ServiceCompanyEdge {
+    cursor: Cursor!
+    node: ServiceCompany!
+}
+
+
+type AppVersion {
+    id: ID!
+    minimumVersion: String!
+    latestVersion: String!
+    downloadUrl: String!
+    channel:String!
+}
+
+enum SocialAuthProvder {
+    FACEBOOK
+    GOOGLE
+}
+
+#################### File Uploads #######################
+
+"""The `Upload` scalar type represents a multipart file upload."""
+scalar Upload
+
+"""The `File` type
+represents the response of uploading a file."""
+type File {
+    id: String!
+    name: String!
+    url: String!
+}
+
+"""The `UploadFile` type
+represents the request for uploading a file with certain payload."""
+input UploadFile {
+    id: Int!
+    file: Upload!
+}
+
+####################  SignUp Mutation ####################
+input UserSignUpDetails {
+    firstName: String!
+    lastName: String!
+    email: String!
+    password: String!
+    mobileNo: String
+    country: String
+    state: String
+    city: String
+    gender: String!
+    dateOfBirth: DateTime
+    referralCode: String
+}
+
+####################  Manual Booking ####################
+
+input BookingInput{
+    firstName: String!
+    lastName: String!
+    email: String
+    country: String!
+    mobileNumber: Int!
+    serviceSubCategoryID: ID!
+    rideDetails: RideDetailsInput!
+    deliveryDetails: DeliveryDetailsInput!
+    otherServiceDetails: OtherServiceDetailsInput!
+    coupon: String!
+    providerId: String!
+}
+
+input RideDetailsInput{
+    vehicleType: String!
+    pickUpType: RidePickUpType!
+    pickUpLocation: AddAddressInput!
+    dropOffLocation: AddAddressInput!
+    RideLater: DateTime!
+    ladiesRide: Boolean
+    handicapAccessibility: Boolean
+    childSeat: Boolean
+}
+
+input DeliveryDetailsInput{
+    packageType: String!
+    recipientName: String!
+    recipientMobileNumber: Int!
+    pickUpLocation: AddAddressInput!
+    dropOffLocation: AddAddressInput!
+    pickUpInstructions: String
+    deliveryInstructions: String
+    packageDetails: String
+    pickUpType: DeliverPickUpType
+    deliverLater: DateTime!
+}
+
+input OtherServiceDetailsInput{
+    serviceOrderItems: [ServiceOrderInput]!
+    schedule: DateTime
+    deliveryAddress: AddAddressInput!
+}
+input ServiceOrderInput{
+    serviceTypeID:ID!
+    quantity:Int!
+    deliveryNotes:String!
+}
+
+type BookingFareEstimate{
+    baseFare: Float
+    distance: Float
+    time: Float
+    totalFare: Float
+}
+
+type Booking{
+    jobId: ID
+    vehicleId: ID
+}
+
+enum DeliverPickUpType{
+    DELIVER_NOW
+    DELIVER_LATER
+}
+
+enum RidePickUpType{
+    RIDE_NOW
+    RIDE_LATER
+}
+
+enum BookingType{
+    RIDE
+    DELIVERY
+    OTHER_SERVICES
+}
+
+"""User profile details"""
+
+
+#################### Provider Profile Queries ####################
+#type ProviderProfile{
+#    id: ID!
+#    address: Address!
+#    language: String!
+#    bankAccountDetails: BankAccountDetails!
+#    requiredDocuments: Document!
+#}
+
+#################### Document Queries####################
+type Document{
+    id: ID!
+    expiryDate: Date!
+    name: String!
+    url: String!
+    belongsTo: String!
+    uploaderType: DocumentUploaderType!
+}
+
+enum DocumentUploaderType{
+    USER
+    SERVICE_PROVIDER
+    SERVICE_PROVIDER_COMPANY
+    RESTAURANT
+    GROCERY_STORE
+    WINE_STORE
+}
+
+#################### Manage Documents Queries####################
+enum DocumentType{
+    ALL
+    COUNTRY
+    DOCUMENT_NAME
+    DOCUMENT_FOR
+    STATUS
+}
+
+enum DocumentFor{
+    CAR
+    COMPANY
+    PROVIDER
+    STORE
+}
+
+type RequiredDocument{
+    id: ID!
+    documentFor: DocumentFor!
+    country: Country!
+    expireOnDate: Boolean!
+    documentName: String!
+    isActive: Boolean!
+}
+
+#################### Manage Documents Mutations####################
+input AddManageDocumentInput{
+    documentFor: DocumentFor!
+    country: String!
+    expireOnDate: Boolean!
+    documentName: String!
+    isActive: Boolean!
+}
+
+input UpdateManageDocumentInput{
+    id: ID!
+    documentFor: DocumentFor!
+    country: String!
+    expireOnDate: Boolean!
+    documentName: String!
+    isActive: Boolean!
+}
+
+""" List of Document"""
+type RequiredDocumentConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [RequiredDocumentEdge]
+    """A list of nodes."""
+    nodes: [RequiredDocument]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Document"""
+type RequiredDocumentEdge {
+    cursor: Cursor!
+    node: RequiredDocument
+}
+
+#################### Documents Mutations####################
+input AddDocumentInput{
+    expiryDate: Date!
+    name: String!
+    url: String!
+    belongsTo: String!
+    uploaderType: DocumentUploaderType!
+    isActive: Boolean!
+}
+
+input UpdateDocumentInput{
+    id: ID!
+    expiryDate: Date!
+    name: String!
+    url: String!
+    belongsTo: String!
+    uploaderType: DocumentUploaderType!
+    isActive: Boolean!
+}
+
+""" List of Document"""
+type DocumentConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [DocumentEdge]
+    """A list of nodes."""
+    nodes: [Document]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Document"""
+type DocumentEdge {
+    cursor: Cursor!
+    node: Document
+}
+
+#################### Service Provider Vehicles Queries ####################
+type ServiceProviderVehicleDetails{
+    id: ID!
+    serviceProviderId: String!
+    serviceCompanyId: String!
+    vehicleCompanyName: String!
+    vehicleModelName: String!
+    vehicleYear: String!
+    vehicleNumber: String!
+    vehicleColor: String!
+    vehicleImageUrl: String!
+    vehicleType: String!
+    enabledServiceType: [VehicleServiceTypes!]!
+}
+
+type VehicleServiceTypes{
+    serviceId: ID!
+    serviceName: String!
+    isEnabled: Boolean!
+    serviceOptions: [VehicleServiceOption!]!
+}
+
+type VehicleServiceOption{
+    id: String!
+    isEnabled: Boolean!
+    optionName: String!
+}
+
+enum ProviderVehicleType{
+    ALL
+    VEHICLE
+    COMPANY
+    DRIVER
+    VEHICLE_TYPE
+}
+
+enum ProviderVehicleStatus{
+    ACTIVE
+    INACTIVE
+    DELETED
+}
+
+################ TripsJobs ################
+enum JobServiceType{
+    RIDE
+    HAIL_RIDE
+    RENTAL_RIDE
+    DELIVERY
+    MULTI_DELIVERY
+    OTHER_SERVICES
+    RIDE_POOL
+}
+
+"""Status of given Job"""
+enum JobStatus{
+    ALL_STATUS
+    ON_GOING_RIDE_OR_JOB
+    COMPLETED
+    CANCELLED
+}
+
+type Job{
+    id: ID!
+    jobType: String!
+    bookedFor: String
+    bookingNumber: String!
+    toAddress: Address!
+    fromAddress: Address!
+    jobDate: DateTime!
+    companyId: String!
+    providerId: String!
+    userId: String!
+    fareAmount: Float!
+    serviceType: String!
+    invoiceId: String!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
+
+################ Provider Wallet ################
+type ProviderWalletTransaction{
+    description: String
+    amount: Float
+    balanceFor: BalanceFor
+    createdAt: DateTime
+    type: TransactionType
+    balance: Float
+}
+
+enum BalanceFor{
+    BOOKING
+    DEPOSIT
+}
+
+
+################ Package Type ################
+enum SearchPackageType{
+    ALL
+    PACKAGE_TYPE
+}
+
+enum SearchPackageTypeStatus{
+    ACTIVE
+    INACTIVE
+}
+
+type PackageType{
+    id: String
+    packageType: String
+    language: String
+    isActive: Boolean
+
+}
+################ Cancel Reason ################
+enum SearchCancelReasonType{
+    ALL
+    REASON
+}
+
+enum SearchCancelReasonStatus{
+    ACTIVE
+    INACTIVE
+}
+
+enum CancelReasonServiceType{
+    RIDE
+    DELIVER
+    SERVICE
+    DELIVER_ALL
+}
+
+type CancelReason{
+    id: ID!
+    reason: String!
+    serviceType: String!
+    order: String!
+    isActive: Boolean!
+}
+
+input AddCancelReasonInput{
+    reason: String!
+    serviceType: String!
+    order: String!
+    isActive: Boolean!
+}
+
+input UpdateCancelReasonInput{
+    id: String!
+    reason: String!
+    serviceType: String!
+    order: String!
+    isActive: Boolean!
+}
+
+################ User Wallet ################
+type WalletTransaction{
+    id: ID!
+    description: String!
+    amount: Float!
+    balanceFor: BalanceFor!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    type: TransactionType!
+    balance: Float!
+}
+
+enum TransactionType{
+    DEBIT
+    CREDIT
+}
+
+
+################ Pages Queries ################
+enum PageType{
+    ALL
+    NAME
+    TITLE
+}
+
+type Page{
+    id: ID
+    name: String!
+    title: String!
+    body: String!
+    description: String!
+    language: String!
+    isActive: Boolean!
+}
+
+################ Pages Mutations ################
+"""List of Page"""
+type PageConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [PageEdge]
+    """A list of nodes."""
+    nodes: [Page]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Page"""
+type PageEdge {
+    cursor: Cursor!
+    node: Page
+}
+
+input UpdatePageInput{
+    id: ID!
+    name: String!
+    title: String!
+    body: String!
+    description: String!
+    language: String!
+    isActive: Boolean
+}
+
+input AddPageInput{
+    name: String!
+    title: String!
+    body: String!
+    description: String!
+    language: String!
+    isActive: Boolean
+}
+
+type MarketStatistics {
+    id: String
+
+}
+
+####################  Service Provider dashboard queries  ####################
+scalar Map
+
+type ServiceProvider {
+    id: ID!
+    blocked: Boolean!
+    firstName: String!
+    lastName: String!
+    email: String!
+    gender: Gender!
+    profilePicture: String!
+    country: String!
+    state: String!
+    city: String!
+    address: Address!
+    zipCode: Int!
+    mobileNumber: String!
+    language: String!
+    currency: Currency!
+    bankAccountDetails: BankAccountDetails!
+    serviceCategory: [ServiceCategory!]!
+    serviceSubCategory:[ID!]!
+    approvedBy:ID!
+    approvedAt:DateTime!
+    user: User!
+    companyID: ID!
+    metadata: Map
+}
+
+input ServiceProviderSignUpInput{
+    serviceCategory: ServiceCategory!
+    serviceSubCategory:ID!
+    address:AddAddressInput!
+    bankAccountDetails: AddBankDetailsInput!
+}
+
+enum SearchProviderType{
+    PROVIDER_NAME
+    COMPANY_NAME
+    E_MAIL
+    MOBILE_NUMBER
+}
+
+enum ProviderStatus{
+    ACTIVE
+    INACTIVE
+    DELETED
+}
+
+#################### Provider Profile Mutations ####################
+input ServiceProviderProfileInput{
+    id: ID!
+    address: UpdateAddressInput!
+    language: String!
+    bankAccountDetails: UpdateBankDetailsInput!
+    requiredDocuments: UpdateDocumentInput!
+}
+
+#################### Bank Account Details Queries ####################
+enum BankAccountStatus{
+    ERRORED
+    NEW
+    VALIDATED
+    VERIFICATION_FAILED
+    VERIFIED
+}
+
+type BankAccountDetails{
+    email: String!
+    accountHolderName: String!
+    accountNumber: Int!
+    bankName: String!
+    bankLocation: String!
+    bankCountry: String!
+    swiftCode: String!
+    ifscCode: String!
+    metadata: JSON
+    country: String!
+    currency: Currency!
+    defaultForCurrency: Boolean!
+    fingerprint: String!
+    routingNumber: String!
+    status: BankAccountStatus!
+}
+
+#################### Bank Account Details Mutations ####################
+input CurrencyInput{
+    currencyCode: String!
+    ratio: String!
+    thresholdAmount: String!
+    symbol: String!
+    isDefault: Boolean!
+}
+
+input AddBankDetailsInput{
+    email: String!
+    accountHolderName: String!
+    accountNumber: Int!
+    bankName: String!
+    bankLocation: String!
+    bankCountry: String!
+    swiftCode: String!
+    ifscCode: String!
+    metadata: JSON
+    country: String!
+    currency: String!
+    defaultForCurrency: Boolean!
+    fingerprint: String!
+    routingNumber: String!
+}
+
+input UpdateBankDetailsInput{
+    id: ID!
+    email: String!
+    accountHolderName: String!
+    accountNumber: Int!
+    bankName: String!
+    bankLocation: String!
+    bankCountry: String!
+    swiftCode: String!
+    ifscCode: String!
+    metadata: JSON
+    country: String!
+    currency: String!
+    defaultForCurrency: Boolean!
+    fingerprint: String!
+    routingNumber: String!
+}
+
+#################### Address ####################
+input AddAddressInput{
+    name:String!
+    firstName:String!
+    lastName:String!
+    companyName:String
+    addressDescription: String!
+    city:String!
+    state:String!
+    country:String!
+    postCode:Int!
+    latitude: Float!
+    longitute: Float!
+}
+
+input UpdateAddressInput{
+    id:ID!
+    name:String!
+    firstName:String!
+    lastName:String!
+    companyName:String
+    addressDescription: String!
+    city:String!
+    state:String!
+    country:String!
+    postCode:Int!
+    latitude: Float!
+    longitute: Float!
+}
+
+"""User Address with latitude and longitude"""
+type Address{
+    id:ID!
+    name:String!
+    firstName:String!
+    lastName:String!
+    companyName:String
+    addressDescription: String!
+    city:City!
+    state:State!
+    country:Country!
+    postCode:Int!
+    latitude: Float!
+    longitute: Float!
+}
+
+""" List of addresses"""
+type AddressConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [AddressEdge]
+    """A list of nodes."""
+    nodes: [Address]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node EmergencyContact"""
+type AddressEdge {
+    cursor: Cursor!
+    node: Address
+}
+
+#################### Provider Earnings ####################
+type RecentUnpaidEarning{
+    id: ID!
+    bookingDate: DateTime!
+    fareAmount: Float!
+    commission: Float!
+    bookingCharge: Float!
+    tip: Float!
+    paymentAfterCommission: Float!
+    paymentMethod: PaymentMethodType!
+    invoice: Invoice!
+}
+
+type Withdrawal{
+    id: ID!
+    bookingDate: DateTime!
+    fareAmount: Float!
+    commission: Float!
+    bookingCharge: Float!
+    tip: Float!
+    paymentAfterCommission: Float!
+    paymentMethod: PaymentMethodType!
+    invoice: Invoice!
+}
+
+type PaidEarning{
+    id: ID!
+    bookingDate: DateTime!
+    fareAmount: Float!
+    commission: Float!
+    bookingCharge: Float!
+    tip: Float!
+    paymentAfterCommission: Float!
+    paymentMethod: PaymentMethodType!
+    invoice: Invoice!
+}
+
+type Invoice{
+    id: ID!
+    jobId: ID!
+    fromAddress: Address!
+    toAddress: Address!
+    jobStartTime: DateTime!
+    jobEndTime: DateTime!
+    distance: Float!
+    baseFare: Float!
+    commission: Float!
+    vehicleType: String!
+}
+
+#################### Provider Vehicles Mutations ####################
+input AddServiceProviderVehicleInput{
+    vehicleCompanyName: String!
+    vehicleModelName: String!
+    vehicleYear: String!
+    vehicleNumber: String!
+    vehicleColor: String!
+    vehicleImageUrl: String!
+    vehicleLicensePlate: String!
+    serviceCompanyId: String!
+    enabledServiceType: [VehicleServiceTypesInput!]!
+}
+
+input UpdateServiceProviderVehicleInput{
+    id: ID!
+    vehicleCompanyName: String!
+    vehicleModelName: String!
+    vehicleYear: String!
+    vehicleNumber: String!
+    vehicleColor: String!
+    vehicleImageUrl: String!
+    vehicleLicensePlate: String!
+    serviceCompanyId: String!
+    enabledServiceType: [VehicleServiceTypesInput!]!
+}
+
+input VehicleServiceTypesInput {
+    serviceId: ID!
+    serviceName: String!
+    isEnabled: Boolean!
+    serviceOptions: [VehicleServiceOptionInput!]!
+}
+
+input VehicleServiceOptionInput {
+    id: String!
+    isEnabled: Boolean!
+    optionName: String!
+}
+
+type ServiceProviderVehicle{
+    id: ID!
+    vehicleCompanyName: String!
+    vehicleModelName: String!
+    vehicleYear: String!
+    vehicleNumber: String!
+    vehicleColor: String!
+    vehicleImageUrl: String!
+    vehicleLicensePlate: String!
+    serviceCompanyId: String!
+    enabledServiceType: [VehicleServiceTypes!]!
+    isActive : Boolean!
+}
+
+
+input UpdatePackageTypeInput{
+    id: ID!
+    packageType: String!
+    language: String!
+    isActive: Boolean!
+}
+
+input AddPackageTypeInput{
+    packageType: String!
+    language: String!
+    isActive: Boolean!
+}
+
+
+type AddPackageType{
+    id: ID!
+    packageType: String!
+    language: String!
+    isActive: Boolean!
+}
+
+
+type PushNotification{
+    success: Boolean!
+    message: String!
+}
+
+input PushNotificationInput {
+    UserType: UserTypeOptions!
+    SelectedUsers: [String!]!
+    Title: String!
+    Message: String!
+    Payload: JSON!
+}
+
+enum UserTypeOptions {
+    ALL_USERS
+    ALL_PROVIDERS
+    ALL_LOGGEDIN_PROVIDERS
+    ALL_LOGGEDIN_USERS
+    ALL_STORES
+    ALL_INACTIVE_USERS
+    ALL_INACTIVE_PROVIDERS
+    ALL_LOGGEDIN_STORES
+    ALL_INACTIVE_STORES
+}
+
+input InstallationInput {
+    userId:String!
+    fcmToken: String!
+    deviceId:String!
+    deviceWidth: Decimal!
+    appVersion: String!
+    # Android or iOS
+    deviceType: DeviceType!
+    deviceHeight: Decimal!
+    deviceCountry: String!
+    badge: String!
+    deviceManufacturer: String!
+    systemVersion: String!
+    appIdentifier: String!
+    appName: String!
+    deviceLocale: String!
+    channels: [String]
+    deviceBrand: String!
+    deviceModel: String!
+    buildNumber: String!
+    timeZone : String!
+}
+
+enum DeviceType {
+    ANDROID
+    IOS
+}
+
+type Installation {
+    id:ID!
+    userId:String!
+    fcmToken: String!
+    deviceId:String!
+    deviceWidth: Decimal!
+    appVersion: String!
+    # Android or iOS
+    deviceType: DeviceType!
+    deviceHeight: Decimal!
+    deviceCountry: String!
+    badge: String!
+    deviceManufacturer: String!
+    systemVersion: String!
+    appIdentifier: String!
+    appName: String!
+    deviceLocale: String!
+    channels: [String]
+    deviceBrand: String!
+    deviceModel: String!
+    buildNumber: String!
+    timeZone : String!
+}
+
+type AuthPayload{
+    token: String!
+    user: User!
+}
+
+scalar Date
+scalar DateTime
+scalar Decimal
+
+"""
+A JSON Object.
+"""
+scalar JSON
+
+
+#################### Service Provider Mutations ####################
+input AddServiceProviderInput{
+    firstName: String!
+    lastName: String!
+    email: String!
+    gender: Gender!
+    profilePicture: String!
+    country: String!
+    state: String!
+    city: String!
+    address: AddAddressInput!
+    zipCode: Int!
+    mobileNumber: Int!
+    company: String!
+    language: String!
+    currency: String!
+    bankAccountDetails: ID!
+    serviceDescription: String!
+    companyID: String!
+    metadata: String
+}
+
+input UpdateServiceProviderInput{
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    gender: Gender!
+    profilePicture: String!
+    country: String!
+    state: String!
+    city: String!
+    address: AddAddressInput!
+    zipCode: Int!
+    mobileNumber: Int!
+    company: String!
+    language: String!
+    currency: String!
+    bankAccountDetails: ID!
+    serviceDescription: String!
+    companyID: String!
+    metadata: String
+}
+
+""" List of ServiceProvider"""
+type ServiceProviderConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ServiceProviderEdge]
+    """A list of nodes."""
+    nodes: [ServiceProvider]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node ServiceProvider"""
+type ServiceProviderEdge {
+    cursor: Cursor!
+    node: ServiceProvider
+}
+
+#################### Review queries ####################
+enum ReviewType{
+    RIDE_NUMBER
+    DRIVER_NAME
+    RIDER_NAME
+    RATE
+}
+
+enum ReviewUserType{
+    PROVIDERS
+    USERS
+}
+
+type Review{
+    id: ID!
+    jobId: ID!
+    userName: String!
+    userAverageRating: Float!
+    providerAverageRating: Float!
+    providerName: String!
+    userRating: Float!
+    providerRating: Float!
+    type: ReviewType!
+    from: String!
+    to: String!
+    date: DateTime!
+    comment: String!
+    isActive: String!
+}
+
+input AddReviewInput{
+    jobId: ID!
+    userName: String!
+    userAverageRating: Float!
+    providerAverageRating: Float!
+    providerName: String!
+    userRating: Float!
+    providerRating: Float!
+    type: ReviewType!
+    from: String!
+    to: String!
+    date: DateTime!
+    comment: String!
+    isActive: Boolean!
+}
+
+input UpdateReviewInput{
+    id: ID!
+    jobId: ID!
+    userName: String!
+    userAverageRating: Float!
+    providerAverageRating: Float!
+    providerName: String!
+    userRating: Float!
+    providerRating: Float!
+    type: ReviewType!
+    from: String!
+    to: String!
+    date: DateTime!
+    comment: String!
+    isActive: Boolean!
+}
+#################### Coupon queries ####################
+enum CouponType{
+    GIFT_CODE
+    VALIDITY
+    SYSTEM_TYPE
+    STATUS
+}
+
+enum CouponStatus{
+    ACTIVE
+    INACTIVE
+    DELETE
+}
+
+type Coupon{
+    id:             ID!
+    code:           String!
+    description :   String
+    discountAmount: Float!
+    discountType:   String!
+    validity :      String!
+    validityStart : DateTime!
+    validityExpire: DateTime!
+    usageLimit:     Int!
+    usedLimit: Int!
+    type: CouponType!
+    serviceType:    CouponSystemType!
+    isActive :      Boolean!
+}
+
+enum CouponSystemType{
+    RIDE
+    DELIVERY
+    UBERX
+    DELIVERYALL
+}
+
+#################### Coupon mutations ####################
+input AddCouponInput{
+    code:           String!
+    description :   String!
+    discountAmount: Float!
+    discountType:   String!
+    validity :      String!
+    validityStart : DateTime!
+    validityExpire: DateTime!
+    usageLimit:     Int!
+    usedLimit: Int!
+    type: CouponType!
+    serviceType:    CouponSystemType!
+    isActive :      Boolean!
+}
+
+input UpdateCouponInput {
+    id:             ID!
+    code:           String!
+    description :   String
+    discountAmount: Float!
+    discountType:   String!
+    validity :      String!
+    validityStart : DateTime!
+    validityExpire: DateTime!
+    usageLimit:     Int!
+    type: CouponType!
+    usedLimit: Int!
+    serviceType:    CouponSystemType!
+    isActive :      Boolean!
+
+}
+
+#################### Service Company queries ####################
+enum CompaniesSearchType{
+    NAME
+    EMAIL
+    MOBILE
+}
+
+enum CompaniesStatus{
+    ACTIVE
+    INACTIVE
+    DELETE
+}
+
+type ServiceCompany{
+    id: ID!
+    name:String!
+    providersCount:Int!
+    email:String!
+    isActive:Boolean!
+    country:String!
+    state:String!
+    city:String!
+    address:Address!
+    zipcode:String!
+    phone:String!
+    language:String!
+    vatNo: String!
+}
+
+#################### Service Company mutations ####################
+input AddServiceCompanyInput{
+    name:String!
+    providersCount:Int!
+    email:String!
+    isActive:Boolean!
+    country:String!
+    state:String!
+    city:String!
+    address:AddAddressInput!
+    zipcode:String!
+    phone:String!
+    language:String!
+    vatNo: String!
+}
+
+input UpdateServiceCompanyInput{
+    id: ID!
+    name:String!
+    providersCount:Int!
+    email:String!
+    isActive:Boolean!
+    country:String!
+    state:String!
+    city:String!
+    address:UpdateAddressInput!
+    zipcode:String!
+    phone:String!
+    language:String!
+    vatNo: String!
+}
+
+#################### admin group queries ####################
+#enum AdminGroupSearchType{
+#    GROUP_NAME
+#}
+#
+#enum IAMGroupStatus{
+#    ACTIVE
+#    INACTIVE
+#    DELETE
+#}
+#
+#type AdminGroup{
+#    id: ID!
+#    groupName: String!
+#    permissions: String!
+#    isActive: Boolean!
+#}
+#################### user role queries ####################
+
+type UserRole{
+    id:ID!
+    name:String!
+    description:String!
+    permissions:[String!]!
+}
+
+#################### user roles mutations ####################
+
+input AddUserRoleInput{
+    name:String!
+    description:String!
+    permissions:[String!]!
+}
+
+input UpdateUserRoleInput{
+    id:ID!
+    name:String!
+    description:String!
+    permissions:[String!]!
+}
+
+""" List of User roles"""
+type UserRoleConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [UserRoleEdge]
+    """A list of nodes."""
+    nodes: [UserRole]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node UserRole"""
+type UserRoleEdge {
+    cursor: Cursor!
+    node: UserRole!
+}
+
+#################### user role group queries ####################
+
+type UserRoleGroup{
+    id:ID!
+    name:String!
+    roles:[String!]!
+    description:String!
+}
+
+#################### user role group mutations ####################
+
+input AddUserRoleGroupInput{
+    name:String!
+    roles:[String!]!
+    description:String!
+}
+
+input UpdateUserRoleGroupInput{
+    id:ID!
+    name:String!
+    roles:[String!]!
+    description:String!
+}
+
+""" List of User role groups"""
+type UserRoleGroupConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [UserRoleGroupEdge]
+    """A list of nodes."""
+    nodes: [UserRoleGroup]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node UserRoleGroup"""
+type UserRoleGroupEdge {
+    cursor: Cursor!
+    node: UserRoleGroup!
+}
+
+#################### users queries ####################
+enum UserSearchType{
+    NAME
+    EMAIL
+    MOBILE
+}
+
+enum UserStatus{
+    ACTIVE
+    INACTIVE
+    DELETE
+}
+
+enum Gender{
+    MALE
+    FEMALE
+    OTHERS
+}
+
+type User {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    firstName: String!
+    lastName: String!
+    email: String!
+    mobileNo: String!
+    country: String!
+    state: String!
+    city: String!
+    isActive: Boolean!
+    isMobileVerified: Boolean!
+    isEmailVerified: Boolean!
+    isLocked: Boolean!
+    gender: Gender!
+    dateOfBirth: DateTime!
+    referralCode: String!
+    roles: [UserRole!]!
+    roleGroups: [UserRoleGroup!]!
+}
+
+#################### users mutations ####################
+input UpdateUserInput {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    mobileNo: String!
+    password: String!
+    gender: Gender!
+    profilePhoto: String!
+    phone: Int!
+    language: String!
+    currency: String!
+    isActive: Boolean!
+}
+
+input AddUserInput {
+    firstName: String!
+    mobileNo: String!
+    lastName: String!
+    email: String!
+    password: String!
+    gender: Gender!
+    profilePhoto: String!
+    phone: Int!
+    language: String!
+    currency: String!
+    isActive: Boolean!
+}
+
+""" List of User"""
+type UserConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [UserEdge]
+    """A list of nodes."""
+    nodes: [User]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node User"""
+type UserEdge {
+    cursor: Cursor!
+    node: User!
+}
+
+#################### Vehicle Type queries ####################
+enum ServiceVehicleServiceType{
+    ALL
+    VEHICLE_TYPE
+    PRICE_PER_KMS
+    PRICE_PER_MINUTE
+    PERSON_CAPACITY
+    LOCATION
+    SERVICE_TYPE
+}
+
+enum ServiceVehicleTypeStatus{
+    ACTIVE
+    INACTIVE
+    DELETED
+}
+
+type ServiceVehicleType{
+    id: ID!
+    vehicleServiceType: VehicleServiceType!
+    enablePoolRide: Boolean!
+    vehicleType: VehicleType!
+    vehicleCategory: VehicleCategory!
+    location: String!
+    pricePerKms: Float!
+    pricePerMinute: Float!
+    baseFare: Float!
+    commission: Float!
+    minimumFare: Float!
+    userCancellationTimeLimit: Int!
+    userCancellationCharges: Float!
+    waitingTimeLimit: Int!
+    waitingCharges: Float!
+    inTransitWaitingFeePerMinute: Float!
+    personCapacity: Int!
+    peakTimeSurcharge: Boolean!
+    nightCharges: Boolean!
+    vehiclePicture: String!
+    order: Int!
+    isActive: Boolean!
+}
+
+#################### Vehicle Type mutations ####################
+input AddServiceVehicleTypeInput{
+    vehicleServiceType: VehicleServiceType!
+    enablePoolRide: Boolean!
+    vehicleType: VehicleType!
+    vehicleCategory: VehicleCategory!
+    location: String!
+    pricePerKms: Float!
+    pricePerMinute: Float!
+    baseFare: Float!
+    commission: Float!
+    minimumFare: Float!
+    userCancellationTimeLimit: Int!
+    userCancellationCharges: Float!
+    waitingTimeLimit: Int!
+    waitingCharges: Float!
+    inTransitWaitingFeePerMinute: Float!
+    personCapacity: Int!
+    peakTimeSurcharge: Boolean!
+    nightCharges: Boolean!
+    vehiclePicture: String!
+    order: Int!
+    isActive: Boolean!
+}
+
+input UpdateServiceVehicleTypeInput{
+    id: ID!
+    vehicleServiceType: VehicleServiceType!
+    enablePoolRide: Boolean!
+    vehicleType: VehicleType!
+    vehicleCategory: VehicleCategory!
+    location: String!
+    pricePerKms: Float!
+    pricePerMinute: Float!
+    baseFare: Float!
+    commission: Float!
+    minimumFare: Float!
+    userCancellationTimeLimit: Int!
+    userCancellationCharges: Float!
+    waitingTimeLimit: Int!
+    waitingCharges: Float!
+    inTransitWaitingFeePerMinute: Float!
+    personCapacity: Int!
+    peakTimeSurcharge: Boolean!
+    nightCharges: Boolean!
+    vehiclePicture: String!
+    order: Int!
+    isActive: Boolean!
+}
+
+enum VehicleServiceType{
+    RIDE
+    DELIVERY
+}
+
+enum VehicleType{
+    CAR
+    MOTO_BIKE
+    CYCLE
+    TRUCK
+}
+
+enum VehicleCategory{
+    HATCHBACK
+    SEDAN
+    SUV
+    VAN
+    LUXURIOUS_CAR
+    HEAVY_DUTY_VEHICLE
+}
+
+""" List of ServiceVehicleType"""
+type ServiceVehicleTypeConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ServiceVehicleTypeEdge]
+    """A list of nodes."""
+    nodes: [ServiceVehicleType]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node ServiceVehicleType"""
+type ServiceVehicleTypeEdge {
+    cursor: Cursor!
+    node: ServiceVehicleType
+}
+
+#################### Service Queries ####################
+enum ServiceStatus{
+    ACTIVE
+    INACTIVE
+}
+enum ServiceCategory{
+    TAXI_SERVICE
+    PROFESSIONAL_SERVICE
+    RENTAL_SERVICE
+    DELIVERY_SERVICE
+}
+
+type Service{
+    id: ID!
+    name: String!
+    category: ServiceCategory!
+    icon: String!
+    tags:[String!]!
+    displayOrder: Int!
+    subCategories:[ServiceSubCategory]!
+    isActive: Boolean!
+}
+
+type ServiceConnection {
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ServiceEdge]
+    """A list of nodes."""
+    nodes: [Service]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+type ServiceEdge {
+    cursor: Cursor!
+    node: Service
+}
+
+#################### Service Mutations ####################
+input AddServiceInput{
+    name: String!
+    priceBasedOn: PriceBasedOn!
+    commissionOnMaterial: Boolean! #TODO : figure out what this is
+    category: ServiceCategory!
+    userCancellationTimeLimit: Int! # in seconds
+    userCancellationCharges: Float! #percentage of the total charged amount
+    waitingTimeLimit: Int! #in seconds
+    waitingCharges: Float! #percentage of the total charged amount per minute
+    categoryViewType: CategoryViewType!
+    icon: String!
+    tags:[String!]!
+    displayOrder: Int!
+    isActive: Boolean!
+}
+
+input UpdateServiceInput{
+    id: ID!
+    name: String!
+    priceBasedOn: PriceBasedOn!
+    commissionOnMaterial: Boolean!
+    category: ServiceCategory!
+    userCancellationTimeLimit: Int!
+    userCancellationCharges: Float!
+    waitingTimeLimit: Int!
+    waitingCharges: Float!
+    categoryViewType: CategoryViewType!
+    icon: String!
+    displayOrder: Int!
+    tags:[String!]!
+    isActive: Boolean!
+}
+
+enum PriceBasedOn{
+    SITE_ADMINISTRATOR
+    PROVIDER
+}
+
+enum CategoryViewType{
+    ICON
+    BANNER
+    ICON_BANNER
+}
+
+#################### Service Sub Category Queries ####################
+enum ServiceSubCategoryStatus{
+    ACTIVE
+    INACTIVE
+    DELETED
+}
+
+type ServiceSubCategory{
+    id: ID!
+    serviceID: String!
+    name: String!
+    serviceType: String!
+    description: String!
+    icon:String!
+    bannerImage:String!
+    displayOrder: Int!
+    isActive: Boolean!
+}
+
+#################### Service Sub Category Mutations ####################
+input AddServiceSubCategoryInput{
+    serviceID: String!
+    name: String!
+    description: String!
+    icon:String!
+    bannerImage:String!
+    displayOrder: Int!
+    isActive: Boolean!
+    serviceType: String!
+}
+
+input UpdateServiceSubCategoryInput{
+    id: ID!
+    serviceID: String!
+    name: String!
+    description: String!
+    serviceType: String!
+    icon:String!
+    bannerImage:String!
+    displayOrder: Int!
+    isActive: Boolean!
+}
+
+""" List of ServiceSubCategory"""
+type ServiceSubCategoryConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ServiceSubCategoryEdge]
+    """A list of nodes."""
+    nodes: [ServiceSubCategory]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node ServiceCategory"""
+type ServiceSubCategoryEdge {
+    cursor: Cursor!
+    node: ServiceSubCategory
+}
+
+#################### Service Type Queries ####################
+enum ServiceTypeStatus{
+    ACTIVE
+    INACTIVE
+    DELETED
+}
+
+type ServiceType{
+    id: ID!
+    serviceCategory: String!   #fetch the data from DB
+    ServiceSubCategoryID:String!
+    serviceType: String!
+    serviceDescription: String!
+    location: String!
+    fareType: FareType!
+    serviceCharge: Float!
+    commission: Float!
+    allowQuantity: Boolean!
+    displayOrder: Int!
+    isActive: Boolean!
+}
+
+#################### Service Type Mutations ####################
+input AddServiceTypeInput{
+    serviceCategory: String!   #fetch the data from DB
+    ServiceSubCategoryID:String!
+    serviceType: String!
+    serviceDescription: String!
+    location: String!
+    fareType: FareType!
+    serviceCharge: Float!
+    commission: Float!
+    allowQuantity: Boolean!
+    displayOrder: Int!
+    isActive: Boolean!
+}
+
+input UpdateServiceTypeInput{
+    id: ID!
+    serviceCategory: String!   #fetch the data from DB
+    ServiceSubCategoryID:String!
+    serviceType: String!
+    serviceDescription: String!
+    location: String!
+    fareType: FareType!
+    serviceCharge: Float!
+    commission: Float!
+    allowQuantity: Boolean!
+    displayOrder: Int!
+    isActive: Boolean!
+}
+
+enum FareType{
+    FIXED
+    HOURLY
+    TIME_AND_DISTANCE
+}
+
+
+
+""" List of service types"""
+type ServiceTypeConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ServiceTypeEdge]
+    """A list of nodes."""
+    nodes: [ServiceType]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node ServiceType"""
+type ServiceTypeEdge {
+    cursor: Cursor!
+    node: ServiceType
+}
+
+#################### RideJob Later Bookings  ####################
+enum JobLaterSearchServiceType{
+    RIDE
+    RENTAL_RIDE
+    DELIVERY
+    OTHER_SERVICES
+}
+
+enum JobLaterType{
+    ALL
+    USERS
+    EXPECTED_SOURCE_LOCATION
+    EXPECTED_DESTINATION_LOCATION
+    BOOKING_NUMBER
+    STATUS
+}
+
+type JobLaterBooking{
+    id: ID!
+    jobType: String!
+    bookedBy: String!
+    bookingNumber: Int!
+    users: String!
+    date: DateTime!
+    expectedSourceLocation: Address!
+    expectedDestinationLocation: Address!
+    provider: String!
+    jobDetails: String!
+    status: String!
+    isActive: Boolean!
+}
+
+#################### God's View Queries  ####################
+enum VehicleStatusType{
+    ENROUTE_TO_PICKUP
+    REACHED_PICKUP
+    JOURNEY_STARTED
+    AVAILABLE
+    ALL
+}
+
+#TODO: Implement this later
+type GodsView{
+    latitude: Float!
+    longitude: Float!
+}
+
+""" List of GodsView"""
+type GodsViewConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [GodsViewEdge]
+    """A list of nodes."""
+    nodes: [GodsView]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node GodsView"""
+type GodsViewEdge {
+    cursor: Cursor!
+    node: GodsView
+}
+
+#################### Heat View Queries  ####################
+""" List of HeatView"""
+type HeatViewConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [HeatViewEdge]
+    """A list of nodes."""
+    nodes: [HeatView]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node HeatView"""
+type HeatViewEdge {
+    cursor: Cursor!
+    node: HeatView
+}
+
+#TODO: Implement this later
+type HeatView {
+    latitude: Float!
+    longitude: Float!
+}
+
+#################### Advertisement Banner Queries  ####################
+type AdvertisementBanner{
+    id: ID!
+    bannerName: String!
+    bannerImage: String!
+    displayOrder: Int!
+    redirectURL: String!
+    timePeriod: String!
+    addedDate: DateTime!
+    totalImpression: String!
+    usedImpression: String!
+    validity: Validity!
+    clickCount: ClickCount!
+    isActive: Boolean!
+}
+
+enum BannersType{
+    All
+    NAME
+    URL
+}
+
+enum BannerStatusInput{
+    ACTIVE
+    INACTIVE
+    DELETED
+}
+
+#################### Advertisement Banner Mutations ####################
+input AddBannerInput{
+    bannerName: String!
+    bannerImage: String!
+    displayOrder: Int!
+    redirectURL: String!
+    timePeriod: String!
+    addedDate: DateTime!
+    totalImpression: String!
+    usedImpression: String!
+    validity: Validity!
+    clickCount: ClickCount!
+    isActive: Boolean!
+
+}
+
+input UpdateBannerInput{
+    id: ID!
+    bannerName: String!
+    bannerImage: String!
+    displayOrder: Int!
+    redirectURL: String!
+    timePeriod: String!
+    addedDate: DateTime!
+    totalImpression: String!
+    usedImpression: String!
+    validity: Validity!
+    clickCount: ClickCount!
+    isActive: Boolean!
+}
+
+enum Validity{
+    PERMANENT
+    CUSTOM
+}
+
+enum ClickCount{
+    LIMITED
+    UNLIMITED
+}
+
+""" List of AdvertisementBanner"""
+type AdvertisementBannerConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [AdvertisementBannerEdge]
+    """A list of nodes."""
+    nodes: [AdvertisementBanner]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node AdvertisementBanner"""
+type AdvertisementBannerEdge {
+    cursor: Cursor!
+    node: AdvertisementBanner
+}
+
+#################### Store Queries ####################
+enum StoreType{
+    ALL
+    NAME
+    E_MAIL
+    MOBILE_NUMBER
+}
+
+enum StoreStatus{
+    ACTIVE
+    INACTIVE
+    DELETED
+}
+
+enum StoreCategory{
+    FOOD_DELIVERY
+    GROCERY_DELIVERY
+    WINE_DELIVERY
+}
+
+type StoreDetails{
+    id: ID!
+    storeName: String!
+    email: String!
+    serviceCategory: String!
+    itemCategories: Int!
+    mobileNumber: Int!
+    editDocuments: String!
+}
+
+#################### Store Mutations ####################
+input AddStoreInput{
+    storeName: String!
+    serviceCategory: StoreCategory!
+    email: String!
+    password: String!
+    storeAddress: AddAddressInput!
+    storeLocation:[AddStoreLocationInput!]!
+    zipCode: String!
+    country: String!
+    state: String!
+    contactPersonName: String!
+    mobileNumber: String!
+    storeLogo: String!
+    language: String!
+    availableStoreItemTypes: String!
+    slot1: Time!  #Monday - Friday
+    slot2: Time!  #Saturday & Sunday
+    minimumAmountPerOrder: Float!
+    additionalPackingCharges: Float!
+    maxOrderQuantity: String!
+    estimatedOrderTime: Int!
+    offerAppliesOn: OfferAppliesOn!
+    bankAccountDetails: UpdateBankDetailsInput!
+}
+
+input UpdateStoreInput{
+    id: ID!
+    storeName: String!
+    serviceCategory: StoreCategory!
+    email: String!
+    password: String!
+    storeLocation:[UpdateStoreLocationInput!]!
+    storeAddress: AddAddressInput!
+    zipCode: String!
+    country: String!
+    state: String!
+    contactPersonName: String!
+    mobileNumber: String!
+    storeLogo: String!
+    language: String!
+    availableStoreItemTypes: String!
+    slot1: Time!  #Monday - Friday
+    slot2: Time!  #Saturday & Sunday
+    minimumAmountPerOrder: Float!
+    additionalPackingCharges: Float!
+    maxOrderQuantity: String!
+    estimatedOrderTime: Int!
+    offerAppliesOn: OfferAppliesOn!
+    bankAccountDetails: UpdateBankDetailsInput!
+}
+
+input StoreSignUpInput{
+    storeName: String!
+    serviceCategory: StoreCategory!
+    email: String!
+    storeLocation:[AddStoreLocationInput!]!
+    storeAddress: AddAddressInput!
+    zipCode: String!
+    country: String!
+    state: String!
+    contactPersonName: String!
+    mobileNumber: String!
+    storeLogo: String!
+    language: String!
+    bankAccountDetails: ID!
+}
+
+enum OfferAppliesOn{
+    NONE
+    FIRST_ORDER
+    ALL_ORDERS
+}
+
+type Store{
+    id: ID!
+    storeName: String!
+    serviceCategory: StoreCategory!
+    email: String!
+    password: String!
+    storeLocations: [StoreLocation!]!
+    storeAddress: Address!
+    zipCode: String!
+    country: String!
+    state: String!
+    contactPersonName: String!
+    mobileNumber: String!
+    storeLogo: String!
+    language: String!
+    availableStoreItemTypes: String!
+    slot1: Time!  #Monday - Friday
+    slot2: Time!  #Saturday & Sunday
+    minimumAmountPerOrder: Float!
+    additionalPackingCharges: Float!
+    maxOrderQuantity: String!
+    estimatedOrderTime: Int!
+    offerAppliesOn: OfferAppliesOn!
+    bankAccountDetails: BankAccountDetails!
+    approvedBy:ID!
+    approvedAt:DateTime!
+    Blocked:Boolean!
+}
+
+type StoreLocation {
+    id:ID!
+    storeID:ID!
+    storeLocationName:String!
+    storeAddress:Address!
+}
+
+input AddStoreLocationInput {
+    storeID:ID
+    storeLocationName:String!
+    storeAddress:AddAddressInput!
+}
+
+input UpdateStoreLocationInput {
+    id:ID!
+    storeID:ID!
+    storeLocationName:String!
+    storeAddress:UpdateAddressInput!
+}
+
+#################### Delivery Vehicle Type Queries ####################
+enum DeliveryVehicleSearchType{
+    ALL
+    VEHICLE_TYPE
+    DELIVERY_CHARGE_FOR_COMPLETED_ORDER
+    DELIVERY_CHARGE_FOR_CANCELLED_ORDER
+    DELIVERY_RADIUS
+}
+
+enum DeliveryVehicleTypeStatus{
+    ACTIVE
+    INACTIVE
+    DELETED
+}
+
+type DeliveryVehicleType{
+    id: ID!
+    vehicleType: String!
+    location: String!
+    deliveryChargeForCompletedOrder: Float!
+    deliveryChargeForCancelledOrder: Float!
+    deliveryRadius: Float!
+    order: Int!
+    isActive: Boolean!
+}
+
+#################### Delivery Vehicle Type Mutations ####################
+input AddDeliveryVehicleTypeInput{
+    vehicleType: String!
+    location: String!
+    deliveryChargeForCompletedOrder: Float!
+    deliveryChargeForCancelledOrder: Float!
+    deliveryRadius: Float!
+    order: Int!
+    isActive: Boolean!
+}
+
+input UpdateDeliveryVehicleTypeInput{
+    id: ID!
+    vehicleType: String!
+    location: String!
+    deliveryChargeForCompletedOrder: Float!
+    deliveryChargeForCancelledOrder: Float!
+    deliveryRadius: Float!
+    order: Int!
+    isActive: Boolean!
+}
+
+""" List of DeliveryVehicleType"""
+type DeliveryVehicleTypeConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [DeliveryVehicleTypeEdge]
+    """A list of nodes."""
+    nodes: [DeliveryVehicleType]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node DeliveryVehicleType"""
+type DeliveryVehicleTypeEdge {
+    cursor: Cursor!
+    node: DeliveryVehicleType
+}
+
+
+scalar Time
+
+#################### Store order Queries ####################
+type StoreOrder{
+    orderID: ID!
+    orderDate: DateTime!
+    userName: String!
+    storeName: String!
+    providerName: String!
+    deliveryDriver: String!
+    orderTotalAmount: Float!
+    serviceType: String!
+    orderStatus: String!
+    paymentMethod: String!
+    cancellationAndRefundDetails: String!
+
+}
+
+#################### order status utility Queries ####################
+enum OrderStatusUtilitySearchType{
+    STATUS_TITLE
+    STATUS_DESCRIPTION
+}
+
+type OrderStatusUtility{
+    id: ID!
+    statusTitle: String!
+    statusDescription: String!
+    isActive: Boolean!
+}
+
+#################### order status utility Mutations ####################
+input AddOrderStatusUtilityInput{
+    statusTitle: String!
+    statusDescription: String!
+    isActive: Boolean!
+}
+
+input UpdateOrderStatusUtilityInput{
+    id: ID!
+    statusTitle: String!
+    statusDescription: String!
+    isActive: Boolean!
+}
+
+""" List of OrderStatusUtility"""
+type OrderStatusUtilityConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [OrderStatusUtilityEdge]
+    """A list of nodes."""
+    nodes: [OrderStatusUtility]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node OrderStatusUtility"""
+type OrderStatusUtilityEdge {
+    cursor: Cursor!
+    node: OrderStatusUtility
+}
+
+#################### Delivery Charges utility Queries ####################
+enum DeliveryChargesUtilityType{
+    ALL
+    LOCATION
+    ORDER_AMOUNT
+}
+
+enum DeliveryChargesUtilityStatus{
+    ACTIVE
+    INACTIVE
+    DELETED
+}
+
+type DeliveryChargesUtility{
+    id: ID!
+    location: String!
+    orderPrice: Int!
+    orderDeliveryChargesAboveAmout: Int!
+    orderDeliveryChargesBelowAmount: Int!
+    freeOrderDeliveryCharges: Int!
+    freeDeliveryRadius: Int!
+}
+
+#################### Delivery Charges utility Mutations ####################
+input AddDeliveryChargesUtilityInput{
+    location: String!
+    orderPrice: Int!
+    orderDeliveryChargesAboveAmout: Int!
+    orderDeliveryChargesBelowAmount: Int!
+    freeDeliveryForOrderAmountAbove: Int!
+    freeDeliveryRadius: Int!
+}
+
+input UpdateDeliveryChargesUtilityInput{
+    id: ID!
+    location: String!
+    orderPrice: Int!
+    orderDeliveryChargesAboveAmout: Int!
+    orderDeliveryChargesBelowAmount: Int!
+    freeDeliveryForOrderAmountAbove: Int!
+    freeDeliveryRadius: Int!
+}
+
+""" List of DeliveryChargesUtility"""
+type DeliveryChargesUtilityConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [DeliveryChargesUtilityEdge]
+    """A list of nodes."""
+    nodes: [DeliveryChargesUtility]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node DeliveryChargesUtility"""
+type DeliveryChargesUtilityEdge {
+    cursor: Cursor!
+    node: DeliveryChargesUtility
+}
+
+
+#################### Geo Fence Locations Queries ####################
+enum GeoFenceLocationSearchType{
+    ALL
+    LOCATION
+    COUNTRY
+    LOCATION_FOR
+}
+
+enum GeoFenceLocationStatus{
+    ACTIVE
+    INACTIVE
+    DELETED
+}
+
+type GeoFenceLocation{
+    id: ID!
+    name: String!
+    country: String!
+    locationFor: String!
+    LocationType: String!
+    IsActive:Boolean!
+    GeoJSON:String!
+}
+
+#################### Geo Fence Locations Mutations ####################
+input AddGeoFenceLocationInput{
+    name: String!
+    country: String!
+    locationFor: String!
+    LocationType: String!
+    IsActive:Boolean!
+    GeoJSON:String!
+}
+
+input UpdateGeoFenceLocationInput{
+    id: ID!
+    name: String!
+    country: String!
+    locationFor: String!
+    LocationType: String!
+    IsActive:Boolean!
+    GeoJSON:String!
+}
+
+enum LocationFor{
+    RESTRICTION_AREA
+    VEHICLE_TYPE
+    LOCATION_WISE_FARE
+    USER_DELIVERY_CHARGE
+    AIRPORT_SURCHARGE
+}
+
+"""
+List of GeoFenceLocation"""
+type GeoFenceLocationConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [GeoFenceLocationEdge]
+    """A list of nodes."""
+    nodes: [GeoFenceLocation]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node GeoFenceLocation"""
+type GeoFenceLocationEdge {
+    cursor: Cursor!
+    node: GeoFenceLocation
+}
+
+#################### Geo Fence Restricted Area Queries ####################
+enum GeoFenceRestrictedAreaSearchType{
+    ALL
+    ADDRESS
+}
+
+enum GeoFenceRestrictedAreaStatus{
+    ACTIVE
+    INACTIVE
+    DELETED
+}
+
+type GeoFenceRestrictedArea{
+    id: ID!
+    address: String!
+    area: String!
+    isActive:Boolean!
+    geoLocationArea: String!
+    restrictArea: RestrictArea!
+    restrictType: RestrictType!
+}
+
+#################### Geo Fence Restricted Area Mutations ####################
+input AddGeoFenceRestrictedAreaInput{
+    address: String!
+    area: String!
+    isActive:Boolean!
+    geoLocationArea: String!
+    restrictArea: RestrictArea!
+    restrictType: RestrictType!
+}
+
+input UpdateGeoFenceRestrictedAreaInput{
+    id: ID!
+    address: String!
+    area: String!
+    isActive:Boolean!
+    geoLocationArea: String!
+    restrictArea: RestrictArea!
+    restrictType: RestrictType!
+}
+
+enum RestrictArea{
+    ALL
+    PICKUP
+    DROPOFF
+}
+
+enum RestrictType{
+    ALLOWED
+    DISALLOWED
+}
+
+""" List of GeoFenceRestrictedArea"""
+type GeoFenceRestrictedAreaConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [GeoFenceRestrictedAreaEdge]
+    """A list of nodes."""
+    nodes: [GeoFenceRestrictedArea]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node GeoFenceRestrictedArea"""
+type GeoFenceRestrictedAreaEdge {
+    cursor: Cursor!
+    node: GeoFenceRestrictedArea
+}
+
+#################### Email Template Queries ####################
+enum EmailTemplateSearchType {
+    ALL
+    EMAIL_SUBJECT
+    PURPOSE
+}
+
+type EmailTemplate {
+    id: ID
+    subject: String!
+    purpose: String!
+    from : String!
+    textBody: String!
+    htmlBody: String!
+    language: String!
+    templateId: String!
+}
+
+#################### Email Template Mutations ####################
+input AddEmailTemplateInput {
+    subject: String!
+    purpose: String!
+    from : String!
+    textBody: String!
+    htmlBody: String!
+    language: String!
+    templateId: String!
+
+}
+
+input UpdateEmailTemplateInput {
+    id: ID!
+    subject: String!
+    purpose: String!
+    from : String!
+    textBody: String!
+    htmlBody: String!
+    language: String!
+    templateId: String!
+}
+
+""" List of EmailTemplate"""
+type EmailTemplateConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [EmailTemplateEdge]
+    """A list of nodes."""
+    nodes: [EmailTemplate]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node EmailTemplate"""
+type EmailTemplateEdge {
+    cursor: Cursor!
+    node: EmailTemplate
+}
+
+#################### Sms Template Queries ####################
+enum SMSTemplateSearchType {
+    ALL
+    SMS_TITLE
+    SMS_CODE
+}
+
+type SMSTemplate {
+    id: ID!
+    code: String!
+    body: String!
+    language: String!
+    templateId: String!
+    purpose: String!
+    title: String!
+}
+
+#################### Sms Template Mutations ####################
+input AddSmsTemplateInput {
+    code: String!
+    body: String!
+    language: String!
+    templateId: String!
+    purpose: String!
+    title: String!
+}
+
+input UpdateSmsTemplateInput {
+    id: ID!
+    code: String!
+    body: String!
+    language: String!
+    templateId: String!
+    purpose: String!
+    title: String!
+}
+
+"""List of SMS templates"""
+type SmsTemplateConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [SMSTemplateEdge]
+    """A list of nodes."""
+    nodes: [SMSTemplate]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+#################### Vehicle Make Queries ####################
+enum VehicleMakeType{
+    ALL
+    MAKE
+    STATUS
+}
+
+type VehicleMake{
+    id: ID!
+    make: String!
+    isActive: Boolean!
+}
+
+#################### Vehicle Make Mutations ####################
+input AddVehicleMakeInput{
+    make: String!
+    isActive: Boolean!
+}
+
+input UpdateVehicleMakeInput{
+    id: ID!
+    make: String!
+    isActive: Boolean!
+}
+
+""" List of VehicleMake"""
+type VehicleMakeConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [VehicleMakeEdge]
+    """A list of nodes."""
+    nodes: [VehicleMake]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node VehicleMake"""
+type VehicleMakeEdge {
+    cursor: Cursor!
+    node: VehicleMake
+}
+
+#################### Vehicle Model Queries ####################
+enum VehicleModelSearchType{
+    ALL
+    TITLE
+    MAKE
+    STATUS
+}
+
+type VehicleModel{
+    id: ID!
+    model: String!
+    make: String!
+    isActive: Boolean!
+}
+
+#################### Vehicle Model Mutations ####################
+input AddVehicleModelInput{
+    make: String!
+    model: String!
+    isActive: Boolean!
+}
+
+input UpdateVehicleModelInput{
+    id: ID!
+    make: String!
+    model: String!
+    isActive: Boolean!
+}
+
+""" List of VehicleModel"""
+type VehicleModelConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [VehicleModelEdge]
+    """A list of nodes."""
+    nodes: [VehicleModel]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node VehicleModel"""
+type VehicleModelEdge {
+    cursor: Cursor!
+    node: VehicleModel
+}
+
+#################### Visit Location Queries ####################
+enum VisitLocationType{
+    ALL
+    DESTINATION_LOCATION_TITLE
+    DESTINATION_LOCATION
+    STATUS
+}
+
+type VisitLocation{
+    id: ID!
+    destinationTitle: String!
+    destination: String!
+    isActive: Boolean!
+}
+
+#################### Visit Location Mutations ####################
+input AddVisitLocationInput{
+    destinationTitle: String!
+    destination: String!
+    isActive: Boolean!
+}
+
+input UpdateVisitLocationInput{
+    id: ID!
+    destinationTitle: String!
+    destination: String!
+    isActive: Boolean!
+}
+
+""" List of VisitLocation"""
+type VisitLocationConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [VisitLocationEdge]
+    """A list of nodes."""
+    nodes: [VisitLocation]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node VisitLocation"""
+type VisitLocationEdge {
+    cursor: Cursor!
+    node: VisitLocation
+}
+
+#################### Enterprise account Queries ####################
+enum EnterpriseAccountSearchType{
+    ALL
+    ORGANIZATION_NAME
+    ORGANIZATION_TYPE
+    EMAIL
+    MOBILE
+}
+
+enum EnterpriseAccountStatus{
+    ACTIVE
+    INACTIVE
+    DELETE
+}
+
+enum PaymentBy{
+    USER
+    ORGANIZATION
+}
+
+type EnterpriseAccount{
+    id: ID!
+    organizationName: String!
+    organizationType: String!
+    paymentMethod: String!
+    email: String!
+    country: String!
+    state: String!
+    city: String!
+    address: Address!
+    zipCode: String!
+    language: String!
+    paymentBy: PaymentBy!
+    phone: String!
+    isActive: Boolean!
+}
+
+#################### EnterpriseAccount Mutations ####################
+input AddEnterpriseAccountInput{
+    organizationName: String!
+    organizationType: String!
+    paymentMethod: String!
+    email: String!
+    country: String!
+    state: String!
+    city: String!
+    address: AddAddressInput!
+    zipCode: String!
+    language: String!
+    paymentBy: PaymentBy!
+    phone: String!
+    isActive: Boolean!
+}
+
+input UpdateEnterpriseAccountInput{
+    id: ID!
+    organizationName: String!
+    organizationType: String!
+    paymentMethod: String!
+    email: String!
+    country: String!
+    state: String!
+    city: String!
+    address: AddAddressInput!
+    zipCode: String!
+    language: String!
+    paymentBy: PaymentBy!
+    phone: String!
+    isActive: Boolean!
+}
+
+""" List of Enterprise account connection"""
+type EnterpriseAccountConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [EnterpriseAccountEdge]
+    """A list of nodes."""
+    nodes: [EnterpriseAccount]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Enterprise Account"""
+type EnterpriseAccountEdge {
+    cursor: Cursor!
+    node: EnterpriseAccount
+}
+
+#################### Ride Profile Type ####################
+enum RideProfileSearchType{
+    ALL
+    PROFILE_NAME
+    TITLE
+    SUB_TITLE
+}
+
+type RideProfileType{
+    id: ID!
+    profileShortName: String!
+    organizationType: String!
+    profileTitle: String!
+    titleDescription: String!
+    screenHeading: String!
+    screenTitle: String!
+    buttonText: String!
+    profileIcon: String!
+    welcomePicture: String!
+    isActive: Boolean
+}
+
+#################### Ride Profile Type Mutations ####################
+input AddRideProfileTypeInput{
+    profileShortName: String!
+    organizationType: String!
+    profileTitle: String!
+    titleDescription: String!
+    screenHeading: String!
+    screenTitle: String!
+    buttonText: String!
+    profileIcon: String!
+    welcomePicture: String!
+    isActive: Boolean
+}
+
+input UpdateRideProfileTypeInput{
+    id: ID!
+    profileShortName: String!
+    organizationType: String!
+    profileTitle: String!
+    titleDescription: String!
+    screenHeading: String!
+    screenTitle: String!
+    buttonText: String!
+    profileIcon: String!
+    welcomePicture: String!
+    isActive: Boolean
+}
+
+""" List of RideProfileType"""
+type RideProfileTypeConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [RideProfileTypeEdge]
+    """A list of nodes."""
+    nodes: [RideProfileType]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node RideProfileType"""
+type RideProfileTypeEdge {
+    cursor: Cursor!
+    node: RideProfileType
+}
+
+#################### Business Trip Reason ####################
+enum BusinessTripReasonType{
+    ALL
+    TRIP_REASON
+    PROFILE_SHORTNAME
+    ORGANIZATION_TYPE
+    PROFILE_TITLE
+    TITLE_DESCRIPTION
+}
+
+enum EnterpriseAccountType{
+    BUSINESS
+}
+
+type BusinessTripReason{
+    id: ID!
+    tripReason: String!
+    profileShortName: String!
+    organizationType: String!
+    profileTitle: String!
+    titleDescription: String!
+    reason: String!
+    isActive: Boolean!
+}
+
+#################### Business Trip Reason Mutation ####################
+input AddBusinessTripReasonInput{
+    tripReason: String!
+    profileShortName: String!
+    organizationType: String!
+    profileTitle: String!
+    titleDescription: String!
+    reason: String!
+    isActive: Boolean!
+}
+
+input UpdateBusinessTripReasonInput{
+    id: ID!
+    tripReason: String!
+    profileShortName: String!
+    organizationType: String!
+    profileTitle: String!
+    titleDescription: String!
+    reason: String!
+    isActive: Boolean!
+}
+
+""" List of BusinessTripReason"""
+type BusinessTripReasonConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [BusinessTripReasonEdge]
+    """A list of nodes."""
+    nodes: [BusinessTripReason]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node BusinessTripReason"""
+type BusinessTripReasonEdge {
+    cursor: Cursor!
+    node: BusinessTripReason
+}
+
+#################### EnterpriseAccount Payment Report ####################
+enum EnterpriseAccountPaymentReportServiceType{
+    RIDE
+    RENTAL_RIDE
+    RIDE_POOL
+}
+
+enum EnterpriseAccountPaymentReportSelectProviderPaymentStatus{
+    SETTLED
+    UNSETTLED
+}
+
+enum EnterpriseAccountPaymentReportSelectUserPaymentStatus{
+    PAID_BY_USER_YES
+    PAID_BY_USER_NO
+}
+
+type EnterpriseAccountPaymentReport{
+    id: ID!
+    jobType: String!
+    rideJobNo: String!
+    user: String!
+    jobDate: String!
+    totalFare: String!
+    platformFees: String!
+    walletDebit: String!
+    tip: String!
+    jobOutstandingAmount: String!
+    organizationPayAmount: String!
+    jobStatus: String!
+    paymentMethod: String!
+    organizationPaymentStatus: String!
+    cancelledRideJobNo: String!
+    organization: String!
+    provider: String!
+    totalCancellationFees: String!
+    providerPaymentStatus: String!
+}
+
+#################### EnterpriseAccount Payment Report Mutation ####################
+""" List of EnterpriseAccountPaymentReport"""
+type EnterpriseAccountPaymentReportConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [EnterpriseAccountPaymentReportEdge]
+    """A list of nodes."""
+    nodes: [EnterpriseAccountPaymentReport]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node EnterpriseAccountPaymentReport"""
+type EnterpriseAccountPaymentReportEdge {
+    cursor: Cursor!
+    node: EnterpriseAccountPaymentReport
+}
+
+#################### Country Queries####################
+enum CountryType{
+    ALL
+    COUNTRY
+    CODE
+}
+
+enum CountryStatus{
+    ACTIVE
+    INACTIVE
+    DELETE
+}
+
+type Country{
+    id: ID!
+    countryName: String!
+    code: String!
+    phoneCode: String!
+    distanceUnit: DistanceUnits!
+    emergencyNumber: String!
+    tax: String!
+    isActive: Boolean!
+}
+
+#################### Country Mutations ####################
+input AddCountryInput{
+    countryName: String!
+    code: String!
+    phoneCode: String!
+    distanceUnit: DistanceUnits!
+    emergencyNumber: String!
+    tax: String!
+    isActive: Boolean!
+}
+
+input UpdateCountryInput{
+    id: ID!
+    countryName: String!
+    code: String!
+    phoneCode: String!
+    distanceUnit: DistanceUnits!
+    emergencyNumber: String!
+    tax: String!
+    isActive: Boolean!
+}
+
+""" List of Country"""
+type CountryConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [CountryEdge]
+    """A list of nodes."""
+    nodes: [Country]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Country"""
+type CountryEdge {
+    cursor: Cursor!
+    node: Country
+}
+
+#################### State Queries ####################
+enum StateType{
+    ALL
+    CODE
+    STATE
+    COUNTRY
+    STATUS
+}
+
+type State{
+    id: ID!
+    countryName: String!
+    countryCode: String!
+    stateName: String!
+    stateCode: String!
+    isActive: Boolean!
+}
+
+#################### State Mutations ####################
+input AddStateInput{
+    countryName: String!
+    countryCode: String!
+    stateName: String!
+    stateCode: String!
+    isActive: Boolean!
+}
+
+input UpdateStateInput{
+    id: ID!
+    countryName: String!
+    countryCode: String!
+    stateName: String!
+    stateCode: String!
+    isActive: Boolean!
+}
+
+""" List of State"""
+type StateConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [StateEdge]
+    """A list of nodes."""
+    nodes: [State]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node State"""
+type StateEdge {
+    cursor: Cursor!
+    node: State
+}
+
+#################### City Queries ####################
+enum CityType{
+    ALL
+    CITY
+    STATE
+    COUNTRY
+    STATUS
+}
+
+type City{
+    id: ID!
+    countryName: String!
+    countryCode: String!
+    stateName: String!
+    stateCode: String!
+    cityName: String!
+    isActive: Boolean!
+}
+
+#################### City Mutations ####################
+input AddCityInput{
+    countryName: String!
+    countryCode: String!
+    stateName: String!
+    stateCode: String!
+    cityName: String!
+    isActive: Boolean!
+}
+
+input UpdateCityInput{
+    id: ID!
+    countryName: String!
+    countryCode: String!
+    stateName: String!
+    stateCode: String!
+    cityName: String!
+    isActive: Boolean!
+}
+
+""" List of City"""
+type CityConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [CityEdge]
+    """A list of nodes."""
+    nodes: [City]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node City"""
+type CityEdge {
+    cursor: Cursor!
+    node: City
+}
+
+#################### Newsletter Subscriber Queries ####################
+enum NewsletterSubscriberType{
+    ALL
+    NAME
+    EMAIL
+}
+
+enum NewsletterSubscriberStatus{
+    SUBSCRIBE
+    UNSUBSCRIBE
+}
+
+type NewsletterSubscriber{
+    id: ID!
+    name: String!
+    email: String!
+    status: NewsletterSubscriberStatus!
+    date: DateTime!
+    ipAddress: String!
+}
+
+#################### Currency Queries####################
+type Currency{
+    id: ID!
+    country: String!
+    name: String!
+    currencyCode: String!
+    ratio: String!
+    thresholdAmount: String!
+    symbol: String!
+    isDefault: Boolean!
+}
+
+#################### Currency Mutations####################
+input AddCurrencyInput{
+    country: String!
+    name: String!
+    currencyCode: String!
+    ratio: String!
+    thresholdAmount: String!
+    symbol: String!
+    isDefault: Boolean!
+}
+
+input UpdateCurrencyInput{
+    id: ID!
+    country: String!
+    name: String!
+    currencyCode: String!
+    ratio: String!
+    thresholdAmount: String!
+    symbol: String!
+    isDefault: Boolean!
+}
+
+"""List of currencies"""
+type CurrencyConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [CurrencyEdge]
+    """A list of nodes."""
+    nodes: [Currency]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node FAQ"""
+type CurrencyEdge {
+    cursor: Cursor!
+    node: Currency
+}
+
+#################### Newsletter Subscriber Mutations ####################
+type SubscriberPayload{
+    id: ID
+    name: String
+    email: String
+    status: NewsletterSubscriberStatus
+    date: DateTime
+    ipAddress: String
+}
+
+#################### FAQ Queries ####################
+enum FAQType{
+    ALL
+    TITLE
+    CATEGORY
+    ORDER
+    STATUS
+}
+
+type FAQ{
+    id: ID!
+    category: FAQCategory!
+    isActive: Boolean!
+    displayOrder: Int!
+    question: String!
+    answer: String!
+}
+
+#################### FAQ Mutations ####################
+input AddFAQInput{
+    category: String!
+    isActive: Boolean!
+    displayOrder: Int!
+    question: String!
+    answer: String!
+}
+
+input UpdateFAQInput{
+    id: ID!
+    category: String!
+    isActive: Boolean!
+    displayOrder: Int!
+    question: String!
+    answer: String!
+}
+
+""" List of FAQ"""
+type FAQConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [FAQEdge]
+    """A list of nodes."""
+    nodes: [FAQ]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node FAQ"""
+type FAQEdge {
+    cursor: Cursor!
+    node: FAQ
+}
+
+
+#################### FAQ Categories Queries ####################
+enum FAQCategorySearchType{
+    ALL
+    TITLE
+    ORDER
+    STATUS
+}
+
+type FAQCategory{
+    id: ID!
+    isActive: Boolean!
+    displayOrder: Int!
+    label: String!
+}
+
+#################### FAQ Categories Mutations ####################
+input AddFAQCategoryInput{
+    isActive: Boolean!
+    displayOrder: Int!
+    label: String!
+}
+
+input UpdateFAQCategoryInput{
+    id: ID!
+    isActive: Boolean!
+    displayOrder: Int!
+    label: String!
+}
+
+""" List of FAQCategory"""
+type FAQCategoryConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [FAQCategoryEdge]
+    """A list of nodes."""
+    nodes: [FAQCategory]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node FAQCategory"""
+type FAQCategoryEdge {
+    cursor: Cursor!
+    node: FAQCategory
+}
+
+#################### Help Detail Queries ####################
+enum HelpDetailType{
+    ALL
+    TITLE
+    CATEGORY
+    ORDER
+    STATUS
+}
+
+enum HelpDetailCategory{
+    DRIVER_WAS_UNPROFESSIONAL
+    I_LOST_AN_ITEM
+    I_WANT_TO_CANCEL_THE_ORDER
+    ISSUE_WITH_ORDER_OR_DELIVERY
+    VEHICLE_WAS_DIFFERENT
+}
+
+type HelpDetail{
+    id: ID!
+    category: HelpDetailCategory!
+    isActive: Boolean!
+    order: String!
+    question: String!
+    answer: String!
+}
+
+#################### Help Detail Mutations ####################
+input AddHelpDetailInput{
+    category: HelpDetailCategory!
+    isActive: Boolean!
+    order: String!
+    question: String!
+    answer: String!
+}
+
+input UpdateHelpDetailInput{
+    id: ID!
+    category: HelpDetailCategory!
+    isActive: Boolean!
+    order: String!
+    question: String!
+    answer: String!
+}
+
+""" List of HelpDetail"""
+type HelpDetailConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [HelpDetailEdge]
+    """A list of nodes."""
+    nodes: [HelpDetail]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node HelpDetail"""
+type HelpDetailEdge {
+    cursor: Cursor!
+    node: HelpDetail
+}
+
+#################### Help Detail Categories Queries ####################
+enum HelpCategoryType{
+    ALL
+    TITLE
+    ORDER
+    STATUS
+}
+
+enum HelpCategoryFor{
+    GENERAL
+    DELIVERALL
+}
+
+type HelpCategory{
+    id: ID!
+    isActive: Boolean!
+    order: String!
+    title: String!
+    categoryFor: HelpCategoryFor!
+}
+
+#################### Help Detail Categories Mutations ####################
+input AddHelpCategoryInput{
+    isActive: Boolean!
+    order: String!
+    title: String!
+    categoryFor: HelpCategoryFor!
+}
+
+input UpdateHelpCategoryInput{
+    id: ID!
+    isActive: Boolean!
+    order: String!
+    title: String!
+    categoryFor: HelpCategoryFor!
+}
+
+""" List of HelpCategory"""
+type HelpCategoryConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [HelpCategoryEdge]
+    """A list of nodes."""
+    nodes: [HelpCategory]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node HelpCategory"""
+type HelpCategoryEdge {
+    cursor: Cursor!
+    node: HelpCategory
+}
+
+#################### Decline Alert For Provider Queries ####################
+enum DeclineAlertForProviderType{
+    ALL
+    PROVIDER_NAME
+    EMAIL
+}
+#################### SEO Settings Queries ####################
+enum SEOSettingType{
+    ALL
+    PAGE_NAME
+}
+
+type SEOSetting{
+    id: ID
+    pageName: String
+    pageTitle: String
+    metaKeyword: String
+    metaDescription: String
+}
+
+#################### SEO Settings Mutations ####################
+
+input UpdateSEOSettingInput{
+    id: ID
+    pageName: String
+    pageTitle: String
+    metaKeyword: String
+    metaDescription: String
+}
+
+""" List of SEOSetting"""
+type SEOSettingConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [SEOSettingEdge]
+    """A list of nodes."""
+    nodes: [SEOSetting]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node SEOSetting"""
+type SEOSettingEdge {
+    cursor: Cursor!
+    node: SEOSetting
+}
+
+#################### Market Settings Queries ####################
+enum PaymentEnvironment {
+    TEST
+    LIVE
+}
+
+enum DistanceUnits {
+    KMS
+    MILES
+}
+
+enum PaymentMode{
+    CASH
+    CARD
+    CASH_CARD
+}
+
+enum AddPaymentMethod{
+    STRIPE
+    BRAINTREE
+    PAYMAYA
+    OMISE
+    ADYEN
+    XENDIT
+}
+
+enum PubSubTechnique{
+    PUBNUB
+    SOCKET_CLUSTER
+    YALGAAR
+    NONE
+}
+
+enum DeliveryVerificationMethod{
+    SIGNATURE
+    CODE
+    NONE
+}
+
+enum ServiceProviderFlow{
+    SERVICE
+    PROVIDER
+}
+
+enum CabRequestMethod{
+    ALL
+    DISTANCE
+    TIME
+}
+
+type PaymentSetting {
+    appPaymentEnvironment: PaymentEnvironment!
+    paymentMode: PaymentMode!
+    addPaymentMethod: AddPaymentMethod!
+    enableProviderCommission: Boolean!
+    minimumWalletAmount: Int!
+    stripePublisherSandboxModeKey: String!
+    stripePublisherLiveModeKey: String!
+    stripeSecretSandboxModeKey: String!
+    stripeSecretLiveModeKey: String!
+}
+
+type StoreSetting {
+    onlineStoreListDistance: Int!
+    adminCommission: Int!
+    userCancellationCharge: Int!
+    enableRestaurantEmailVerification: Boolean!
+    enableRestaurantPhoneVerification: Boolean!
+}
+
+type InstallationSetting {
+    disablePubnub: Boolean!
+    enableCorporateProfile: Boolean!
+    enableSocketCluster: Boolean!
+    googleProjectID: String!
+    googleKeyForPushNotification: String!
+    passPhraseforPEM: Int!
+    fetchTripStatus: Int!
+    enablePubnub: Boolean!
+    pubSubTechnique: PubSubTechnique!
+    minAutoComplete: Int!
+    yalgaarClientKey: String!
+    pubnubPublishKey: String!
+    pubnubSubscribeKey: String!
+    pubnubSecretKey: String!
+    googleKeyForWebPanel: String!
+    tollCostCalculation: Boolean!
+    tollCostAppID: String!
+    tollCostAppCode: String!
+    pubnubUUID: String!
+}
+
+type AppSetting {
+    bookingAcceptTime: Int!
+    sinchSecretKey: String!
+    sinchEnvironmentHost: String!
+    sinchAppKey: String!
+    deliveryVerificationMethod: DeliveryVerificationMethod!
+    enableRideLater: Boolean!
+    allowProviderEditVehicleDetails: Boolean!
+    surgeCharge: Boolean!
+    publishDriverDistanceLimit: Int!
+    enablePool: Boolean!
+    radiusAroundUser: Int!
+    radiusAroundUserForPool: Int!
+    radiusAroundUserProviderDestinationForPool: Int!
+    radiusAroundUserForDestinationEnabledDriver: Int!
+    liveChatLicenceNumber: String!
+    selectedContacts: Int!
+    maxDriveDestinations: String!
+    maxStopOverPoints: String!
+    pemFileName: String!
+    timeForProviderToReach: Int!
+    onlineProviderListLimit: Int!
+    cabRequestMethod: CabRequestMethod!
+    providerTimeout: Int!
+    enableRouteCalculation: Boolean!
+    enableRouteOptimisation: Boolean!
+    maxDestinationMultiDelivery: Int!
+    enableSurgeChargeOnRental: Boolean!
+    enableWaitingChargeOnRental: Boolean!
+    enableWaitingChargeOnFlatFare: Boolean!
+    enableGoogleDirectionForDriver: Boolean!
+    enableGoogleDirectionForUser: Boolean!
+    googleServerPassengerKeyIOS: String!
+    googleAppPassengerKeyIOS: String!
+    googleServerDriverKeyIOS: String!
+    googleAppDriverKeyIOS: String!
+    googleServerPassengerKeyAndroid: String!
+    googleServerDriverKeyAndroid: String!
+    enableFavoriteStore: Boolean!
+    enableFavoriteDriver: Boolean!
+    enableHandicapAccessibility: Boolean!
+    enableGenderBasedRequest: Boolean!
+    enableTaxiHailProviderApp: Boolean!
+    enableLiveChat: Boolean!
+    enableChildSeatAccessibility: Boolean!
+    enableBookForSomeoneElse: Boolean!
+    enableAdvertisementBannerRider: Boolean!
+    enableAdvertisementBannerDriver: Boolean!
+    enableAdvertisementBannerRestaurants: Boolean!
+    displayAdvertisementTime: Int!
+    enableNews: Boolean!
+    enableAirportSurcharge: Boolean!
+    enableTransitShopping: Boolean!
+    enableNewsletterSubscription: Boolean!
+    waybillConfiguration: Boolean!
+    serviceProviderFlow: ServiceProviderFlow!
+    enableDriverDestinationsFeature: Boolean!
+    resetTimeForDriverDestinations: Time!
+    enableStopOverPoint: Boolean!
+}
+
+type SocialMediaSetting {
+    facebookAppID: String!
+    facebook: String!
+    twitter: String!
+    linkedIn: String!
+    instagram: String!
+    twitterConsumerSecret: String!
+    twitterConsumerKey: String!
+    twitterToken: String!
+    twitterTokenSecret: String!
+    googlePlusAppName: String!
+    googlePlusClientID: String!
+    googlePlusSecretKey: String!
+    googlePlusRedirectURI: String!
+    googlePlusSiteLink: String!
+    enableGooglePlusLoginForProvider: Boolean!
+    enableGooglePlusLoginForUser: Boolean!
+    enableFacebookLoginForProvider: Boolean!
+    enableFacebookLoginForUser: Boolean!
+    enableTwitterLoginForProvider: Boolean!
+    enableTwitterLoginForUser: Boolean!
+    enableLinkedInLoginForProvider: Boolean!
+    enableLinkedInLoginForUser: Boolean!
+    footerGoogleLink: String!
+    linkedInAppID: String!
+    facebookSecretKey: String!
+    linkedInSecretKey: String!
+}
+
+type SMSSetting {
+    twilioSID: String!
+    twilioAuthToken: String!
+    twilioMobile: String!
+}
+
+type AppearanceSetting {
+    companyNameInEmail: String!
+    copyrightAdminFooter: String!
+    copyrightWebsiteFooter: String!
+    supportEmail: String!
+    androidAppLink: String!
+    iphoneAppLink: String!
+    companyAddress: String!
+    supportPhone: String!
+}
+
+type EmailSetting {
+    emailFromName: String!
+    adminEmail: String!
+    noReplyEmail: String!
+}
+
+type GeneralSetting {
+    projectName: String!
+    currencyUpdateRatio: String!
+    enableProviderPhoneVerification: Boolean!
+    enableProviderEmailVerification: Boolean!
+    enableUserPhoneVerification: Boolean!
+    enableUserEmailVerification: Boolean!
+    adminCountryISD: String!
+    countryCode: String!
+    defaultDistanceUnit: DistanceUnits!
+    displayRecord: String!
+    referralAmount: String!
+    policeNumber: String!
+    googleAnalyticsCode: String!
+    enableReferralSystem: Boolean!
+    fixedWalletAmount1: Int!
+    fixedWalletAmount2: Int!
+    fixedWalletAmount3: Int!
+    flagDrivers: Int!
+}
+
+#################### Market Settings Mutations ####################
+input PaymentSettingInput {
+    appPaymentEnvironment: PaymentEnvironment!
+    paymentMode: PaymentMode!
+    addPaymentMethod: AddPaymentMethod!
+    enableProviderCommission: Boolean!
+    minimumWalletAmount: Int!
+    stripePublisherSandboxModeKey: String!
+    stripePublisherLiveModeKey: String!
+    stripeSecretSandboxModeKey: String!
+    stripeSecretLiveModeKey: String!
+}
+
+input StoreSettingInput {
+    onlineStoreListDistance: Int!
+    adminCommission: Int!
+    userCancellationCharge: Int!
+    enableRestaurantEmailVerification: Boolean!
+    enableRestaurantPhoneVerification: Boolean!
+}
+
+input InstallationSettingInput {
+    disablePubnub: Boolean!
+    enableCorporateProfile: Boolean!
+    enableSocketCluster: Boolean!
+    googleProjectID: String!
+    googleKeyForPushNotification: String!
+    passPhraseforPEM: Int!
+    fetchTripStatus: Int!
+    enablePubnub: Boolean!
+    pubSubTechnique: PubSubTechnique!
+    minAutoComplete: Int!
+    yalgaarClientKey: String!
+    pubnubPublishKey: String!
+    pubnubSubscribeKey: String!
+    pubnubSecretKey: String!
+    googleKeyForWebPanel: String!
+    tollCostCalculation: Boolean!
+    tollCostAppID: String!
+    tollCostAppCode: String!
+    pubnubUUID: String!
+}
+
+input AppSettingInput {
+    bookingAcceptTime: Int!
+    sinchSecretKey: String!
+    sinchEnvironmentHost: String!
+    sinchAppKey: String!
+    deliveryVerificationMethod: DeliveryVerificationMethod!
+    enableRideLater: Boolean!
+    allowProviderEditVehicleDetails: Boolean!
+    surgeCharge: Boolean!
+    publishDriverDistanceLimit: Int!
+    enablePool: Boolean!
+    radiusAroundUser: Int!
+    radiusAroundUserForPool: Int!
+    radiusAroundUserProviderDestinationForPool: Int!
+    radiusAroundUserForDestinationEnabledDriver: Int!
+    liveChatLicenceNumber: String!
+    selectedContacts: Int!
+    maxDriveDestinations: String!
+    maxStopOverPoints: String!
+    pemFileName: String!
+    timeForProviderToReach: Int!
+    onlineProviderListLimit: Int!
+    cabRequestMethod: CabRequestMethod!
+    providerTimeout: Int!
+    enableRouteCalculation: Boolean!
+    enableRouteOptimisation: Boolean!
+    maxDestinationMultiDelivery: Int!
+    enableSurgeChargeOnRental: Boolean!
+    enableWaitingChargeOnRental: Boolean!
+    enableWaitingChargeOnFlatFare: Boolean!
+    enableGoogleDirectionForDriver: Boolean!
+    enableGoogleDirectionForUser: Boolean!
+    googleServerPassengerKeyIOS: String!
+    googleAppPassengerKeyIOS: String!
+    googleServerDriverKeyIOS: String!
+    googleAppDriverKeyIOS: String!
+    googleServerPassengerKeyAndroid: String!
+    googleServerDriverKeyAndroid: String!
+    enableFavoriteStore: Boolean!
+    enableFavoriteDriver: Boolean!
+    enableHandicapAccessibility: Boolean!
+    enableGenderBasedRequest: Boolean!
+    enableTaxiHailProviderApp: Boolean!
+    enableLiveChat: Boolean!
+    enableChildSeatAccessibility: Boolean!
+    enableBookForSomeoneElse: Boolean!
+    enableAdvertisementBannerRider: Boolean!
+    enableAdvertisementBannerDriver: Boolean!
+    enableAdvertisementBannerRestaurants: Boolean!
+    displayAdvertisementTime: Int!
+    enableNews: Boolean!
+    enableAirportSurcharge: Boolean!
+    enableTransitShopping: Boolean!
+    enableNewsletterSubscription: Boolean!
+    waybillConfiguration: Boolean!
+    serviceProviderFlow: ServiceProviderFlow!
+    enableDriverDestinationsFeature: Boolean!
+    resetTimeForDriverDestinations: Time!
+    enableStopOverPoint: Boolean!
+}
+
+input SocialMediaSettingInput {
+    facebookAppID: String!
+    facebook: String!
+    twitter: String!
+    linkedIn: String!
+    instagram: String!
+    twitterConsumerSecret: String!
+    twitterConsumerKey: String!
+    twitterToken: String!
+    twitterTokenSecret: String!
+    googlePlusAppName: String!
+    googlePlusClientID: String!
+    googlePlusSecretKey: String!
+    googlePlusRedirectURI: String!
+    googlePlusSiteLink: String!
+    enableGooglePlusLoginForProvider: Boolean!
+    enableGooglePlusLoginForUser: Boolean!
+    enableFacebookLoginForProvider: Boolean!
+    enableFacebookLoginForUser: Boolean!
+    enableTwitterLoginForProvider: Boolean!
+    enableTwitterLoginForUser: Boolean!
+    enableLinkedInLoginForProvider: Boolean!
+    enableLinkedInLoginForUser: Boolean!
+    footerGoogleLink: String!
+    linkedInAppID: String!
+    facebookSecretKey: String!
+    linkedInSecretKey: String!
+}
+
+input SMSSettingInput {
+    twilioSID: String!
+    twilioAuthToken: String!
+    twilioMobile: String!
+}
+
+input AppearanceSettingInput {
+    companyNameInEmail: String!
+    copyrightAdminFooter: String!
+    copyrightWebsiteFooter: String!
+    supportEmail: String!
+    androidAppLink: String!
+    iphoneAppLink: String!
+    companyAddress: String!
+    supportPhone: String!
+}
+
+input EmailSettingInput {
+    emailFromName: String!
+    adminEmail: String!
+    noReplyEmail: String!
+}
+
+input GeneralSettingInput {
+    projectName: String!
+    currencyUpdateRatio: String!
+    enableProviderPhoneVerification: Boolean!
+    enableProviderEmailVerification: Boolean!
+    enableUserPhoneVerification: Boolean!
+    enableUserEmailVerification: Boolean!
+    adminCountryISD: String!
+    countryCode: String!
+    defaultDistanceUnit: DistanceUnits!
+    displayRecord: String!
+    referralAmount: String!
+    policeNumber: String!
+    googleAnalyticsCode: String!
+    enableReferralSystem: Boolean!
+    fixedWalletAmount1: Int!
+    fixedWalletAmount2: Int!
+    fixedWalletAmount3: Int!
+    flagDrivers: Int!
+}
+
+input UpdateMarketSettingsInput{
+    id: ID!
+    general: GeneralSettingInput!
+    email: EmailSettingInput!
+    appearance: AppearanceSettingInput!
+    sms: SMSSettingInput!
+    socialMedia: SocialMediaSettingInput!
+    app: AppSettingInput!
+    installation: InstallationSettingInput!
+    store: StoreSettingInput!
+    payment: PaymentSettingInput!
+}
+
+type MarketSettings{
+    general: GeneralSetting!
+    email: EmailSetting!
+    appearance: AppearanceSetting!
+    sms: SMSSetting!
+    socialMedia: SocialMediaSetting!
+    app: AppSetting!
+    installation: InstallationSetting!
+    store: StoreSetting!
+    payment: PaymentSetting!
+}
+
+
+#################### Decline Alert For Provider Queries ####################
+enum DeclineAlertForProviderStatus{
+    BLOCKED
+    UNBLOCKED
+}
+
+type DeclineAlertForProvider{
+    id: ID!
+    providerName: String!
+    email: String!
+    totalCancelledTrips: String!
+    totalDeclinedTrips: String!
+    totalCancelledTripsTillNow: String!
+    totalDeclinedTripsTillNow: String!
+    blockProvider: Boolean!
+    blockDate: Date!
+}
+
+#################### Decline Alert For Provider Mutations ####################
+""" List of DeclineAlertForProvider"""
+type DeclineAlertForProviderConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [DeclineAlertForProviderEdge]
+    """A list of nodes."""
+    nodes: [DeclineAlertForProvider]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node DeclineAlertForProvider"""
+type DeclineAlertForProviderEdge {
+    cursor: Cursor!
+    node: DeclineAlertForProvider
+}
+
+
+#################### Decline Alert For User Queries ####################
+enum DeclineAlertForUserType{
+    ALL
+    NAME
+    EMAIL
+}
+
+enum DeclineAlertForUserStatus{
+    BLOCKED
+    UNBLOCKED
+}
+
+type DeclineAlertForUser{
+    id: ID!
+    userName: String!
+    email: String!
+    totalCancelledTrips: String!
+    totalCancelledTripsTillNow: String!
+    blockUser: Boolean!
+    blockDate: Date!
+}
+
+#################### Decline Alert For User Mutations ####################
+""" List of DeclineAlertForUser"""
+type DeclineAlertForUserConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [DeclineAlertForUserEdge]
+    """A list of nodes."""
+    nodes: [DeclineAlertForUser]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node DeclineAlertForUser"""
+type DeclineAlertForUserEdge {
+    cursor: Cursor!
+    node: DeclineAlertForUser
+}
+
+#################### Delivery charges ####################
+
+enum DeliveryChargesSearch{
+    ALL
+    LOCATION
+    ORDER_AMOUNT
+}
+
+enum DeliveryChargesSelectStatus{
+    ACTIVE
+    INACTIVE
+    DELETE
+}
+
+type DeliveryCharge{
+    id: ID!
+    locationName: String!
+    orderPrice: Int!
+    orderDeliveryChargesAboveAmount: Int!
+    orderDeliveryChargesBelowAmount: Int!
+    freeOrderDeliveryCharges: Int!
+    freeDeliveryRadius: Int!
+    orderTotal: Int!
+    isActive: Boolean!
+}
+
+#################### Delivery charges Mutations ####################
+input AddDeliveryChargeInput{
+    locationName: String!
+    orderPrice: Int!
+    orderDeliveryChargesAboveAmount: Int!
+    orderDeliveryChargesBelowAmount: Int!
+    freeOrderDeliveryCharges: Int!
+    freeDeliveryRadius: Int!
+    orderTotal: Int!
+    isActive: Boolean!
+}
+
+input UpdateDeliveryChargeInput{
+    id: ID!
+    locationName: String!
+    orderPrice: Int!
+    orderDeliveryChargesAboveAmount: Int!
+    orderDeliveryChargesBelowAmount: Int!
+    freeOrderDeliveryCharges: Int!
+    freeDeliveryRadius: Int!
+    orderTotal: Int!
+    isActive: Boolean!
+}
+
+""" List of DeliveryCharges"""
+type DeliveryChargeConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [DeliveryChargeEdge]
+    """A list of nodes."""
+    nodes: [DeliveryCharge]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node DeliveryCharges"""
+type DeliveryChargeEdge {
+    cursor: Cursor!
+    node: DeliveryCharge
+}
+
+#################### Rental Package Queries ####################
+type RentalPackage{
+    id: ID!
+    name: String!
+    rentalTotalPrice: Int!
+    rentalMiles: Int!
+    rentalHour: Int!
+    additionalPricePerMile: Int!
+    additionalPricePerMin: Int!
+}
+
+#################### Rental Package Mutations ####################
+input AddRentalPackageInput{
+    name: String!
+    rentalTotalPrice: Int!
+    rentalMiles: Int!
+    rentalHour: Int!
+    additionalPricePerMile: Int!
+    additionalPricePerMin: Int!
+}
+
+input UpdateRentalPackageInput{
+    id: ID!
+    name: String!
+    rentalTotalPrice: Int!
+    rentalMiles: Int!
+    rentalHour: Int!
+    additionalPricePerMile: Int!
+    additionalPricePerMin: Int!
+}
+
+""" List of rental packages"""
+type RentalPackageConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [RentalPackageEdge]
+    """A list of nodes."""
+    nodes: [RentalPackage]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node RentalPackages"""
+type RentalPackageEdge {
+    cursor: Cursor!
+    node: RentalPackage
+}
+
+#################### Store Vehicle Type Queries ####################
+enum StoreVehicleTypeSearch{
+    ALL
+    TYPE
+    DELIVERY_CHARGES_PER_ORDER_FOR_COMPLETED_ORDERS
+    DELIVERY_CHARGES_PER_ORDER_FOR_CANCELLED_ORDERS
+    DELIVERY_RADIUS
+}
+
+enum StoreVehicleTypeStatus{
+    ACTIVE
+    INACTIVE
+    DELETE
+}
+
+enum StoreVehicleTypeLocation{
+    ALL
+}
+
+type StoreVehicleType{
+    id: ID!
+    type: String!
+    location: StoreVehicleTypeLocation!
+    chargesForCompletedOrders: Int!
+    chargesForCancelledOrders: Int!
+    deliveryRadius: Int!
+    order: Int!
+    isActive: Boolean!
+}
+
+#################### Store Vehicle Type Mutations ####################
+input AddStoreVehicleTypeInput{
+    type: String!
+    location: StoreVehicleTypeLocation!
+    chargesForCompletedOrders: Int!
+    chargesForCancelledOrders: Int!
+    deliveryRadius: Int!
+    order: Int!
+    isActive: Boolean!
+}
+
+input UpdateStoreVehicleTypeInput{
+    id: ID!
+    type: String!
+    location: StoreVehicleTypeLocation!
+    chargesForCompletedOrders: Int!
+    chargesForCancelledOrders: Int!
+    deliveryRadius: Int!
+    order: Int!
+    isActive: Boolean!
+}
+
+""" List of StoreVehicleType"""
+type StoreVehicleTypeConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [StoreVehicleTypeEdge]
+    """A list of nodes."""
+    nodes: [StoreVehicleType]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node StoreVehicleType"""
+type StoreVehicleTypeEdge {
+    cursor: Cursor!
+    node: StoreVehicleType
+}
+
+#################### Emergency Contact ####################
+type EmergencyContact{
+    id:ID!
+    name:String!
+    mobileNo:Int!
+    emailID:String!
+}
+
+input AddEmergencyContactInput{
+    name:String!
+    mobileNo:Int!
+    emailID:String!
+}
+
+input UpdateEmergencyContactInput{
+    id:ID!
+    name:String!
+    mobileNo:Int!
+    emailID:String!
+}
+
+""" List of EmergencyContacts"""
+type EmergencyContactConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [EmergencyContactEdge]
+    """A list of nodes."""
+    nodes: [EmergencyContact]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node EmergencyContact"""
+type EmergencyContactEdge {
+    cursor: Cursor!
+    node: EmergencyContact
+}
+
+#################### Location Wise Fare ####################
+enum LocationWiseFareSearch{
+    ALL
+    SOURCE_LOCATION
+    DESTINATION_LOCATION
+    FLAT_FARE
+    VEHICLE_TYPE
+}
+
+enum LocationWiseFareSelectStatus{
+    ACTIVE
+    INACTIVE
+    DELETE
+}
+
+type LocationWiseFare{
+    id: ID!
+    sourceLocation: String!
+    destinationLocation: String!
+    flatFare: String!
+    vehicleType: String!
+    isActive : Boolean!
+}
+
+#################### Location Wise Fare Mutation ####################
+input AddLocationWiseFareInput{
+    sourceLocation: String!
+    destinationLocation: String!
+    flatFare: String!
+    vehicleType: String!
+    isActive : Boolean!
+}
+
+input UpdateLocationWiseFareInput{
+    id: ID!
+    sourceLocation: String!
+    destinationLocation: String!
+    flatFare: String!
+    vehicleType: String!
+    isActive : Boolean!
+}
+
+""" List of LocationWiseFare"""
+type LocationWiseFareConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [LocationWiseFareEdge]
+    """A list of nodes."""
+    nodes: [LocationWiseFare]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node LocationWiseFare"""
+type LocationWiseFareEdge {
+    cursor: Cursor!
+    node: LocationWiseFare
+}
+
+#################### Airport Surcharge ####################
+enum AirportSurchargeSearch{
+    ALL
+    AIRPORT_LOCATION
+    VEHICLE_TYPE
+}
+
+enum AirportSurchargeSelectStatus{
+    ACTIVE
+    INACTIVE
+    DELETE
+}
+
+type AirportSurcharge{
+    id: ID!
+    airportLocation: String!
+    pickUpSurcharge: String!
+    dropOffSurcharge: String!
+    vehicleType: String!
+    isActive: Boolean!
+}
+
+#################### Airport Surcharge Mutation ####################
+input AddAirportSurchargeInput{
+    airportLocation: String!
+    pickUpSurcharge: String!
+    dropOffSurcharge: String!
+    vehicleType: String!
+    isActive: Boolean!
+}
+
+input UpdateAirportSurchargeInput{
+    id: ID!
+    airportLocation: String!
+    pickUpSurcharge: String!
+    dropOffSurcharge: String!
+    vehicleType: String!
+    isActive: Boolean!
+}
+
+""" List of AirportSurcharge"""
+type AirportSurchargeConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [AirportSurchargeEdge]
+    """A list of nodes."""
+    nodes: [AirportSurcharge]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node AirportSurcharge"""
+type AirportSurchargeEdge {
+    cursor: Cursor!
+    node: AirportSurcharge
+}
+
+#################### Cart Queries ####################
+type UnitPrice{
+    amount:Int!
+    currency:String!
+    includesTax:Boolean!
+}
+
+type DisplayPrice{
+    priceWithTax:Int!
+    priceWithoutTax:Int!
+}
+
+enum CartItemType{
+    PRODUCT
+    CUSTOM_ITEM
+    PROMOTION
+}
+
+type CartItem {
+    product:Product!
+    quantity:Int!
+    variationID:ID
+    type:CartItemType!
+}
+
+type Cart{
+    id:ID!
+    user:User!
+    storeID:ID!
+    items:[CartItem]
+    cartItemsQuantity:Int!
+    cartTotal:Float!
+}
+
+#################### Cart Mutations ####################
+
+""" List of Carts"""
+type CartConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [CartEdge]
+    """A list of nodes."""
+    nodes: [Cart]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Cart"""
+type CartEdge {
+    cursor: Cursor!
+    node: Cart
+}
+
+#################### Product Brand Queries ####################
+type ProductBrand{
+    id:ID!
+    type:String!
+    isActive:Boolean!
+    name:String!
+    slug:String!
+    description:String!
+    relationships:[String!]!
+}
+
+#################### Product Brand Mutations ####################
+input AddProductBrandInput{
+    type:String!
+    isActive:Boolean!
+    name:String!
+    slug:String!
+    description:String!
+    relationships:[String!]!
+}
+
+input UpdateProductBrandInput{
+    id:ID!
+    type:String!
+    isActive:Boolean!
+    name:String!
+    slug:String!
+    description:String!
+    relationships:[String!]!
+}
+
+""" List of Brands"""
+type ProductBrandConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProductBrandEdge]
+    """A list of nodes."""
+    nodes: [ProductBrand]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node brand"""
+type ProductBrandEdge {
+    cursor: Cursor!
+    node: ProductBrand
+}
+
+#################### Product Collection Queries ####################
+type ProductCollection{
+    id:ID!
+    type:String!
+    isActive:Boolean!
+    name:String!
+    description:String!
+    slug:String!
+    relationships:[productData!]!
+}
+
+type productData {
+    id:ID!
+    type:String!
+}
+#################### Product Collection Queries ####################
+
+input AddProductCollectionInput{
+    type:String!
+    isActive:Boolean!
+    name:String!
+    description:String!
+    slug:String!
+    relationships:[String!]!
+}
+
+input UpdateProductCollectionInput{
+    id:ID!
+    type:String!
+    isActive:Boolean!
+    name:String!
+    description:String!
+    slug:String!
+    relationships:[String!]!
+}
+
+""" List of Product Collection"""
+type ProductCollectionConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProductCollectionEdge]
+    """A list of nodes."""
+    nodes: [ProductCollection]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Collections"""
+type ProductCollectionEdge {
+    cursor: Cursor!
+    node: ProductCollection
+}
+
+#################### Product Attribute Queries ####################
+type ProductAttribute {
+    id: ID!
+    name: String!
+    slug: String!
+    type: String!
+    orderBy: String!
+    hasArchives: Boolean!
+    position:Int!
+    visible:Boolean!
+    variation:Boolean!
+    option:[String!]!
+}
+
+#################### Product Attribute Mutations ####################
+input AddProductAttributeInput {
+    name: String!
+    slug: String!
+    type: String!
+    orderBy: String!
+    hasArchives: Boolean!
+    position:Int!
+    visible:Boolean!
+    variation:Boolean!
+    option:[String!]!
+}
+
+input UpdateProductAttributeInput {
+    id: ID!
+    name: String!
+    slug: String!
+    type: String!
+    orderBy: String!
+    hasArchives: Boolean!
+    position:Int!
+    visible:Boolean!
+    variation:Boolean!
+    option:[String!]!
+}
+
+""" List of Product Attributes"""
+type ProductAttributeConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProductAttributeEdge]
+    """A list of nodes."""
+    nodes: [ProductAttribute]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node product attribute"""
+type ProductAttributeEdge {
+    cursor: Cursor!
+    node: ProductAttribute
+}
+#################### Product Attribute Term Queries ####################
+type ProductAttributeTerm {
+    id: ID!
+    name: String!
+    slug: String!
+    description: String!
+    menuOrder: Int!
+    count: Int!
+}
+#################### Product Attribute Term Mutations ####################
+input AddProductAttributeTermInput {
+    name: String!
+    slug: String!
+    description: String!
+    menuOrder: Int!
+    count: Int!
+}
+
+input UpdateProductAttributeTermInput {
+    id: ID!
+    name: String!
+    slug: String!
+    description: String!
+    menuOrder: Int!
+    count: Int!
+}
+
+""" List of Product Attributes Terms"""
+type ProductAttributeTermConnection{
+"""Total number of nodes"""
+totalCount: Int!
+"""A list of edges"""
+edges: [ProductAttributeTermEdge]
+"""A list of nodes."""
+nodes: [ProductAttributeTerm]
+"""Information to aid in pagination."""
+pageInfo: PageInfo!
+}
+
+""" Paginating the node product attribute terms"""
+type ProductAttributeTermEdge {
+cursor: Cursor!
+node: ProductAttributeTerm
+}
+
+#################### Product Review ####################
+type ProductReview {
+    id: ID!
+    productID: String!
+    status: String!
+    reviewer: String!
+    reviewerEmail: String!
+    review: String!
+    rating: Int!
+    verified: Boolean!
+    reviewerAvatarURLs: ReviewerAvatarUrls!
+}
+#################### Product Review Mutations ####################
+
+type ReviewerAvatarUrls {
+    id: ID!
+    num24: String!
+    num48: String!
+    num96: String!
+}
+
+input ReviewerAvatarUrlsInput {
+    num24: String!
+    num48: String!
+    num96: String!
+}
+
+input AddProductReviewInput {
+    productID: String!
+    status: ProductStatus!
+    reviewer: String!
+    reviewerEmail: String!
+    review: String!
+    rating: Int!
+    verified: Boolean!
+    reviewerAvatarURLs: ReviewerAvatarUrlsInput!
+}
+
+input UpdateProductReviewInput {
+    id: ID!
+    productID: String!
+    status: ProductStatus!
+    reviewer: String!
+    reviewerEmail: String!
+    review: String!
+    rating: Int!
+    verified: Boolean!
+    reviewerAvatarURLs: ReviewerAvatarUrlsInput!
+}
+
+""" List of Product Reviews"""
+type ProductReviewConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProductReviewEdge]
+    """A list of nodes."""
+    nodes: [ProductReview]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Collections"""
+type ProductReviewEdge {
+    cursor: Cursor!
+    node: ProductReview
+}
+
+#################### Product Category Queries ####################
+enum ItemCategoryType{
+    ALL
+    TITLE
+    RESTAURANT_NAME
+}
+
+type ProductCategory {
+    id: ID!
+    name: String!
+    slug: String!
+    parent: Int!
+    store:String!
+    description: String!
+    displayOrder:Int!
+    display: String!
+    serviceType:StoreCategory!
+    menuCategory:String!
+    menuOrder: Int!
+    count: Int!
+    image: ProductImage!
+}
+
+#################### Product Category Mutations ####################
+
+input AddProductCategoryInput {
+    name: String!
+    slug: String!
+    parent: Int!
+    store:String!
+    description: String!
+    displayOrder:Int!
+    display: String!
+    serviceType:StoreCategory!
+    menuCategory:String!
+    menuOrder: Int!
+    count: Int!
+    image: AddProductImageInput!
+}
+
+
+input UpdateProductCategoryInput {
+    id: ID!
+    name: String!
+    slug: String!
+    parent: Int!
+    store:String!
+    description: String!
+    displayOrder:Int!
+    display: String!
+    serviceType:StoreCategory!
+    menuCategory:String!
+    menuOrder: Int!
+    count: Int!
+    image: AddProductImageInput!
+}
+
+""" List of ProductCategory"""
+type ProductCategoryConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProductCategoryEdge]
+    """A list of nodes."""
+    nodes: [ProductCategory]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node ProductCategory"""
+type ProductCategoryEdge {
+    cursor: Cursor!
+    node: ProductCategory
+}
+
+#################### Product Queries ####################
+
+enum ProductSearchType{
+    ALL
+    ITEM
+    CATEGORY
+    RESTAURANT_NAME
+}
+
+enum ProductStatus{
+    ACTIVE
+    INACTIVE
+    DELETED
+    PUBLISH
+    POST
+    DRAFT
+    PENDING
+    PRIVATE
+}
+
+type ProductDimensions {
+    length: Float!
+    width: Float!
+    height: Float!
+}
+
+input ProductDimensionsInput {
+    length: Float!
+    width: Float!
+    height: Float!
+}
+
+type Product {
+    id: ID!
+    name: String!
+    menuItem: String!
+    slug: String!
+    permalink: String!
+    type: String!
+    status: ProductStatus!
+    isFeatured: Boolean!
+    itemTagName:String!
+    catalogVisibility: String!
+    description: String!
+    shortDescription: String!
+    sku: String!
+    price: Float!
+    regularPrice: Float!
+    serviceType:StoreCategory!
+    salePrice: Float!
+    dateOnSaleFrom: DateTime!
+    dateOnSaleTo: DateTime!
+    priceHtml: String!
+    onSale: Boolean!
+    purchasable: Boolean!
+    totalSales: Int!
+    Store:String!
+    virtual: Boolean!
+    displayOrder:Int!
+    downloadable: Boolean!
+    downloads:[ProductDownload!]!
+    downloadLimit: Int!
+    downloadExpiry: Int!
+    externalUrl: String!
+    buttonText: String!
+    taxStatus: String!
+    taxClass: String!
+    manageStock: Boolean!
+    stockQuantity: Int!
+    stockStatus: String!
+    backOrders: String!
+    backOrdersAllowed: Boolean!
+    backOrdered: Boolean!
+    soldIndividually: Boolean!
+    weight: Float!
+    shippingRequired: Boolean!
+    shippingTaxable: Boolean!
+    shippingClass: String!
+    shippingClassId: String!
+    reviewsAllowed: Boolean!
+    averageRating: String!
+    ratingCount: Int!
+    parentId: String!
+    purchaseNote: String!
+    menuOrder: Int!
+    metaData: [ProductMetadata!]!
+    groupedProducts: [String!]!
+    variations: [String!]!
+    defaultAttributes: [ProductAttribute!]!
+    attributes: [ProductAttribute!]!
+    images: [ProductImage!]!
+    tags: [ProductTag!]!
+    categories: [ProductCategory!]!
+    crossSellIds: [String!]!
+    upsellIds: [String!]!
+    relatedIds: [String!]!
+    dimensions: ProductDimensions!
+}
+
+#################### Product Mutations ####################
+input AddProductInput {
+    name: String!
+    menuItem: String!
+    slug: String!
+    permalink: String!
+    type: String!
+    status: ProductStatus!
+    isFeatured: Boolean!
+    itemTagName:String!
+    catalogVisibility: String!
+    description: String!
+    shortDescription: String!
+    sku: String!
+    price: Float!
+    regularPrice: Float!
+    serviceType:StoreCategory!
+    salePrice: Float!
+    dateOnSaleFrom: DateTime!
+    dateOnSaleTo: DateTime!
+    priceHtml: String!
+    onSale: Boolean!
+    purchasable: Boolean!
+    totalSales: Int!
+    Store:String!
+    virtual: Boolean!
+    displayOrder:Int!
+    downloadable: Boolean!
+    downloads:[AddProductDownloadInput!]!
+    downloadLimit: Int!
+    downloadExpiry: Int!
+    externalUrl: String!
+    buttonText: String!
+    taxStatus: String!
+    taxClass: String!
+    manageStock: Boolean!
+    stockQuantity: Int!
+    stockStatus: String!
+    backOrders: String!
+    backOrdersAllowed: Boolean!
+    backOrdered: Boolean!
+    soldIndividually: Boolean!
+    weight: Float!
+    shippingRequired: Boolean!
+    shippingTaxable: Boolean!
+    shippingClass: String!
+    shippingClassId: String!
+    reviewsAllowed: Boolean!
+    averageRating: String!
+    ratingCount: Int!
+    parentId: String!
+    purchaseNote: String!
+    menuOrder: Int!
+    metaData: [AddProductMetadataInput!]!
+    groupedProducts: [String!]!
+    variations: [String!]!
+    defaultAttributes: [AddProductAttributeInput!]!
+    attributes: [AddProductAttributeInput!]!
+    images: [AddProductImageInput!]!
+    tags: [AddProductTagInput!]!
+    categories: [AddProductCategoryInput!]!
+    crossSellIds: [String!]!
+    upsellIds: [String!]!
+    relatedIds: [String!]!
+    dimensions: ProductDimensionsInput!
+}
+
+input UpdateProductInput {
+    id: ID!
+    name: String!
+    menuItem: String!
+    slug: String!
+    permalink: String!
+    type: String!
+    status: ProductStatus!
+    isFeatured: Boolean!
+    itemTagName:String!
+    catalogVisibility: String!
+    description: String!
+    shortDescription: String!
+    sku: String!
+    price: Float!
+    regularPrice: Float!
+    serviceType:StoreCategory!
+    salePrice: Float!
+    dateOnSaleFrom: DateTime!
+    dateOnSaleTo: DateTime!
+    priceHtml: String!
+    onSale: Boolean!
+    purchasable: Boolean!
+    totalSales: Int!
+    Store:String!
+    virtual: Boolean!
+    displayOrder:Int!
+    downloadable: Boolean!
+    downloads:[AddProductDownloadInput!]!
+    downloadLimit: Int!
+    downloadExpiry: Int!
+    externalUrl: String!
+    buttonText: String!
+    taxStatus: String!
+    taxClass: String!
+    manageStock: Boolean!
+    stockQuantity: Int!
+    stockStatus: String!
+    backOrders: String!
+    backOrdersAllowed: Boolean!
+    backOrdered: Boolean!
+    soldIndividually: Boolean!
+    weight: Float!
+    shippingRequired: Boolean!
+    shippingTaxable: Boolean!
+    shippingClass: String!
+    shippingClassId: String!
+    reviewsAllowed: Boolean!
+    averageRating: String!
+    ratingCount: Int!
+    parentId: String!
+    purchaseNote: String!
+    menuOrder: Int!
+    metaData: [UpdateProductMetadataInput!]!
+    groupedProducts: [String!]!
+    variations: [String!]!
+    defaultAttributes: [UpdateProductAttributeInput!]!
+    attributes: [UpdateProductAttributeInput!]!
+    images: [UpdateProductImageInput!]!
+    tags: [UpdateProductTagInput!]!
+    categories: [UpdateProductCategoryInput!]!
+    crossSellIds: [String!]!
+    upsellIds: [String!]!
+    relatedIds: [String!]!
+    dimensions: ProductDimensionsInput!
+}
+
+""" List of Product"""
+type ProductConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProductEdge]
+    """A list of nodes."""
+    nodes: [Product]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Product"""
+type ProductEdge {
+    cursor: Cursor!
+    node: Product
+}
+
+#################### Product Variation ####################
+
+type ProductVariation {
+    id: ID!
+    parentProductID:String!
+    description: String!
+    permalink: String!
+    sku: String!
+    price: Float!
+    regularPrice: Float!
+    salePrice: Float!
+    dateOnSaleFrom: DateTime!
+    dateOnSaleTo: DateTime!
+    onSale: Boolean!
+    status: ProductStatus!
+    purchasable: Boolean!
+    virtual: Boolean!
+    downloadable: Boolean!
+    downloadLimit: Int!
+    downloadExpiry: Int!
+    taxStatus: String!
+    taxClass: String!
+    manageStock: Boolean!
+    stockQuantity: Int!
+    stockStatus: String!
+    backOrders: String!
+    backOrdersAllowed: Boolean!
+    backOrdered: Boolean!
+    weight: Float!
+    shippingClass: String!
+    shippingClassId: String!
+    menuOrder: Int!
+    metaData: [ProductMetadata!]!
+    attributes: [ProductAttribute!]!
+    image: ProductImage!
+    dimensions: ProductDimensions!
+    downloads: [ProductDownload!]!
+}
+
+input AddProductVariationInput {
+    parentProductID:String!
+    description: String!
+    permalink: String!
+    sku: String!
+    price: Float!
+    regularPrice: Float!
+    salePrice: Float!
+    dateOnSaleFrom: DateTime!
+    dateOnSaleTo: DateTime!
+    onSale: Boolean!
+    status: ProductStatus!
+    purchasable: Boolean!
+    virtual: Boolean!
+    downloadable: Boolean!
+    downloadLimit: Int!
+    downloadExpiry: Int!
+    taxStatus: String!
+    taxClass: String!
+    manageStock: Boolean!
+    stockQuantity: Int!
+    stockStatus: String!
+    backOrders: String!
+    backOrdersAllowed: Boolean!
+    backOrdered: Boolean!
+    weight: Float!
+    shippingClass: String!
+    shippingClassId: String!
+    menuOrder: Int!
+    metaData: [AddProductMetadataInput!]!
+    attributes: [AddProductAttributeInput!]!
+    image: AddProductImageInput!
+    dimensions: ProductDimensionsInput!
+    downloads: [AddProductDownloadInput!]!
+}
+
+
+input UpdateProductVariationInput {
+    id: ID!
+    parentProductID:String!
+    description: String!
+    permalink: String!
+    sku: String!
+    price: Float!
+    regularPrice: Float!
+    salePrice: Float!
+    dateOnSaleFrom: DateTime!
+    dateOnSaleTo: DateTime!
+    onSale: Boolean!
+    status: ProductStatus!
+    purchasable: Boolean!
+    virtual: Boolean!
+    downloadable: Boolean!
+    downloadLimit: Int!
+    downloadExpiry: Int!
+    taxStatus: String!
+    taxClass: String!
+    manageStock: Boolean!
+    stockQuantity: Int!
+    stockStatus: String!
+    backOrders: String!
+    backOrdersAllowed: Boolean!
+    backOrdered: Boolean!
+    weight: Float!
+    shippingClass: String!
+    shippingClassId: String!
+    menuOrder: Int!
+    metaData: [UpdateProductMetadataInput!]!
+    attributes: [UpdateProductAttributeInput!]!
+    image: UpdateProductImageInput!
+    dimensions: ProductDimensionsInput!
+    downloads: [UpdateProductDownloadInput!]!
+}
+
+""" List of ProductVariations"""
+type ProductVariationConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProductVariationEdge]
+    """A list of nodes."""
+    nodes: [ProductVariation]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Product Variation"""
+type ProductVariationEdge {
+    cursor: Cursor!
+    node: ProductVariation
+}
+
+#################### General Label ####################
+enum GeneralLabelSearch{
+    ALL
+    CODE
+    VALUE_IN_ENGLISH_LANGUAGE
+}
+
+type GeneralLabel{
+    id: ID!
+    code: String!
+    valueInEnglishLanguage: String!
+    languageLabel: String!
+    isActive:Boolean!
+}
+
+#################### General Label Mutation ####################
+input AddGeneralLabelInput{
+    code: String!
+    valueInEnglishLanguage: String!
+    languageLabel: String!
+    isActive:Boolean!
+}
+
+input UpdateGeneralLabelInput{
+    id: ID!
+    code: String!
+    valueInEnglishLanguage: String!
+    languageLabel: String!
+    isActive:Boolean!
+}
+
+""" List of GeneralLabel"""
+type GeneralLabelConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [GeneralLabelEdge]
+    """A list of nodes."""
+    nodes: [GeneralLabel]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node GeneralLabel"""
+type GeneralLabelEdge {
+    cursor: Cursor!
+    node: GeneralLabel
+}
+
+#################### Food Delivery Label ####################
+enum FoodDeliveryLabelSearch{
+    ALL
+    CODE
+    VALUE_IN_ENGLISH_LANGUAGE
+}
+
+type FoodDeliveryLabel{
+    id: ID!
+    code: String!
+    valueInEnglishLanguage: String!
+    languageLabel: String!
+    isActive: Boolean!
+}
+
+#################### Food Delivery Label Mutation ####################
+input AddFoodDeliveryLabelInput{
+    code: String!
+    valueInEnglishLanguage: String!
+    languageLabel: String!
+    isActive: Boolean!
+}
+
+input UpdateFoodDeliveryLabelInput{
+    id: ID!
+    code: String!
+    valueInEnglishLanguage: String!
+    languageLabel: String!
+    isActive: Boolean!
+}
+
+""" List of FoodDeliveryLabel"""
+type FoodDeliveryLabelConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [FoodDeliveryLabelEdge]
+    """A list of nodes."""
+    nodes: [FoodDeliveryLabel]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node FoodDeliveryLabel"""
+type FoodDeliveryLabelEdge {
+    cursor: Cursor!
+    node: FoodDeliveryLabel
+}
+
+#################### Grocery Delivery Label ####################
+enum GroceryDeliveryLabelSearch{
+    ALL
+    CODE
+    VALUE_IN_ENGLISH_LANGUAGE
+}
+
+type GroceryDeliveryLabel{
+    id: ID!
+    code: String!
+    valueInEnglishLanguage: String!
+    languageLabel: String!
+    IsActive: Boolean!
+}
+
+#################### Grocery Delivery Label Mutation ####################
+input AddGroceryDeliveryLabelInput{
+    code: String!
+    valueInEnglishLanguage: String!
+    languageLabel: String!
+    isActive: Boolean!
+}
+
+input UpdateGroceryDeliveryLabelInput{
+    id: ID!
+    code: String!
+    valueInEnglishLanguage: String!
+    languageLabel: String!
+    isActive: Boolean!
+}
+
+""" List of GroceryDeliveryLabel"""
+type GroceryDeliveryLabelConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [GroceryDeliveryLabelEdge]
+    """A list of nodes."""
+    nodes: [GroceryDeliveryLabel]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node GroceryDeliveryLabel"""
+type GroceryDeliveryLabelEdge {
+    cursor: Cursor!
+    node: GroceryDeliveryLabel
+}
+
+#################### Wine Delivery Label ####################
+enum WineDeliveryLabelSearch{
+    ALL
+    CODE
+    VALUE_IN_ENGLISH_LANGUAGE
+}
+
+type WineDeliveryLabel{
+    id: ID!
+    code: String!
+    valueInEnglishLanguage: String!
+    languageLabel: String!
+    IsActive: Boolean!
+}
+
+#################### Wine Delivery Label Mutation ####################
+input AddWineDeliveryLabelInput{
+    code: String!
+    valueInEnglishLanguage: String!
+    languageLabel: String!
+    isActive: Boolean!
+}
+
+input UpdateWineDeliveryLabelInput{
+    id: ID!
+    code: String!
+    valueInEnglishLanguage: String!
+    languageLabel: String!
+    isActive: Boolean!
+}
+
+""" List of WineDeliveryLabel"""
+type WineDeliveryLabelConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [WineDeliveryLabelEdge]
+    """A list of nodes."""
+    nodes: [WineDeliveryLabel]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node WineDeliveryLabel"""
+type WineDeliveryLabelEdge {
+    cursor: Cursor!
+    node: WineDeliveryLabel
+}
+
+#################### Payment Report ####################
+enum PaymentType{
+    CASH
+    CARD
+    ORGANIZATION
+}
+
+enum SelectProviderPaymentStatus{
+    SETTLED
+    UNSETTLED
+}
+
+enum PaymentReportServiceType{
+    RIDE
+    HAIL_RIDE
+    RENTAL_RIDE
+    DELIVERY
+    OTHER_SERVICES
+    RIDE_POOL
+}
+
+#################### Hotel Payment Report ####################
+enum HotelPaymentReportProviderPaymentStatus{
+    SETTLED
+    UNSETTLED
+}
+
+type HotelPaymentReport{
+    bookedBy: String!
+    jobNo: String!
+    hotelName: String!
+    provider: String!
+    user: String!
+    jobDate: String!
+    totalFare: String!
+    baseFare: String!
+    hotelBookingCharge: String!
+    bookingFees: String!
+    hotelPayAmount: String!
+    jobStatus:String!
+    paymentMethod: String!
+    providerPaymentStatus: String!
+}
+
+####################  Referral Report Queries ####################
+type ReferralReport{
+    provider: UserReferralReport!
+    user: UserReferralReport!
+}
+
+type UserReferralReport{
+    id: ID!
+    memberName: String!
+    totalMembersReferred: String!
+    totalAmountEarned: String!
+    dateReferred: Date!
+}
+
+#################### User Waller Report ####################
+enum UserWalletReportSearchByUserType{
+    PROVIDER
+    USER
+}
+
+enum WalletTransactionType{
+    CREDIT
+    DEBIT
+}
+
+enum UserWalletReportSearchByBalanceType{
+    DEPOSIT
+    BOOKING
+    REFUND
+    WITHDRAWAL
+    CHARGES
+    REFERRAL
+}
+
+type UserWalletReport{
+    id: ID!
+    description: String!
+    amount: String!
+    bookingNo: String!
+    transactionDate: String!
+    balanceType: String!
+    type: String!
+    balance: String!
+}
+#################### User Waller Report Mutation ####################
+""" List of UserWalletReport"""
+type UserWalletReportConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [UserWalletReportEdge]
+    """A list of nodes."""
+    nodes: [UserWalletReport]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node UserWalletReport"""
+type UserWalletReportEdge {
+    cursor: Cursor!
+    node: UserWalletReport
+}
+
+#################### Provider Payment Report Queries ####################
+type ProviderPaymentReport{
+    id: ID!
+    providerName: String!
+    providerBankDetails: String!
+    totalJobCommissionTakeFromProviderForCashJobs: String!
+    totalJobAmountPayToProviderForCardJobs: String!
+    totalFare: String!
+    totalCashReceived: String!
+    totalTaxAmountPayToProvider: String!
+    totalTipAmountPayToProvider: String!
+    totalWalletAdjustmentAmountPaytoProviderForCashJobs: String!
+    totalCouponDiscountAmountPayToProviderForCashJobs: String!
+    totalJobOutstandingAmountTakeFromProviderForCashJobs: String!
+    totalJobBookingFeeForCash: String!
+    finalAmountPayToProvider: String!
+    finalAmountToTakebackFromProvider: String!
+    providerPaymentStatus: String!
+}
+
+#################### Provider Payment Report Mutation ####################
+""" List of ProviderPaymentReport"""
+type ProviderPaymentReportConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProviderPaymentReportEdge]
+    """A list of nodes."""
+    nodes: [ProviderPaymentReport]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node ProviderPaymentReport"""
+type ProviderPaymentReportEdge {
+    cursor: Cursor!
+    node: ProviderPaymentReport
+}
+
+#################### Provider Log Report Queries ####################
+type ProviderLogReport{
+    id: ID!
+    name: String!
+    eMail: String!
+    onlineTime: String!
+    offlineTime: String!
+    totalHoursLogIn: String!
+}
+
+#################### Provider Log Report Mutations ####################
+""" List of ProviderLogReport"""
+type ProviderLogReportConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProviderLogReportEdge]
+    """A list of nodes."""
+    nodes: [ProviderLogReport]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node ProviderLogReport"""
+type ProviderLogReportEdge {
+    cursor: Cursor!
+    node: ProviderLogReport
+}
+
+#################### Cancelled Job Queries ####################
+enum CancelledJobServiceType{
+    RIDE
+    DELIVERY
+    OTHER_SERVICES
+    RIDE_POOL
+}
+
+
+
+#################### Job Request Acceptance Report Queries ####################
+type JobRequestAcceptanceReport{
+    id: ID!
+    providerName: String!
+    totalJobRequests: String!
+    requestsAcceptedJobREquests: String!
+    requestsDeclined: String!
+    requestsTimedOut: String!
+    missedAttempts: String!
+    inProcessRequests: String!
+    acceptancePercentage: String!
+}
+
+#################### Job Request Acceptance Report Mutation ####################
+""" List of JobRequestAcceptanceReport"""
+type JobRequestAcceptanceReportConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [JobRequestAcceptanceReportEdge]
+    """A list of nodes."""
+    nodes: [JobRequestAcceptanceReport]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node JobRequestAcceptanceReport"""
+type JobRequestAcceptanceReportEdge {
+    cursor: Cursor!
+    node: JobRequestAcceptanceReport
+}
+
+#################### Job Time Variance Queries ####################
+type JobTimeVariance{
+    id: ID!
+    bookingNo: String!
+    address: String!
+    jobDate: String!
+    provider: String!
+    estimatedTime: String!
+    actualTime: String!
+    variance: String!
+}
+
+#################### Job Time Variance Mutation ####################
+""" List of JobTimeVariance"""
+type JobTimeVarianceConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [JobTimeVarianceEdge]
+    """A list of nodes."""
+    nodes: [JobTimeVariance]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node JobTimeVariance"""
+type JobTimeVarianceEdge {
+    cursor: Cursor!
+    node: JobTimeVariance
+}
+
+#################### Admin Earning Report Queries ####################
+type AdminReport{
+    id: ID!
+    serviceType: String!
+    orderNo: String!
+    orderDate: DateTime!
+    orderAmount: String!
+    siteCommission: String!
+    deliveryCharges: String!
+    outstandingAmount: String!
+    driverAmount: String!
+    adminEarningAmount: String!
+    orderStatus: String!
+    paymentMethod: PaymentType!
+}
+
+#################### Admin Earning Report Mutations ####################
+""" List of AdminReport"""
+type AdminReportConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [AdminReportEdge]
+    """A list of nodes."""
+    nodes: [AdminReport]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node AdminReport"""
+type AdminReportEdge {
+    cursor: Cursor!
+    node: AdminReport
+}
+
+#################### Store Payment Report Queries ####################
+enum PaymentStatus{
+    SETTLED
+    UNSETTLED
+}
+
+type StorePaymentReport{
+    id: ID!
+    selectStore: String!
+    serviceType: String!
+    storeName: String!
+    storeAccountName: String!
+    bankName: String!
+    accountNumber: String!
+    sortCode: String!
+    finalAmount: String!
+    paymentStatus: PaymentStatus!
+    paymentMethod: PaymentType!
+    orderNumber: String!
+    providerName: String!
+    userName: String!
+    orderDate: DateTime!
+    orderStatus: String!
+    orderAmount: String!
+    siteCommission: String!
+    deliveryCharges: String!
+    offerAmount: String!
+    outstandingAmount: String!
+    storeAmount: String!
+}
+
+#################### Cancelled Report Queries ####################
+type CancelledReport{
+    id: ID!
+    serviceType: String!
+    orderNumber: String!
+    orderDate: DateTime!
+    payoutStore: String!
+    payoutDriver: String!
+    cancellationCharges: String!
+    orderStatus: String!
+    paymentMethod: PaymentType!
+    action: PaymentStatus!
+}
+
+#################### Cancelled Report Mutations ####################
+""" List of CancelledReport"""
+type CancelledReportConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [CancelledReportEdge]
+    """A list of nodes."""
+    nodes: [CancelledReport]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node CancelledReport"""
+type CancelledReportEdge {
+    cursor: Cursor!
+    node: CancelledReport
+}
+
+#################### Store Order Reviews Queries ####################
+enum StoreReviewType{
+    ALL
+    ORDER_NAME
+    RESTAURANT_NAME
+    USERS_NAME
+    RATE
+}
+
+type StoreReview{
+    id: ID!
+    restaurant: RestaurantReview!
+    providers: ProviderReview!
+    users: UserReview!
+}
+
+type RestaurantReview{
+    orderNumber: String!
+    fromUserName: String!
+    toRestaurantName: String!
+    rate: String!
+    date: DateTime!
+    comment: String!
+}
+
+type ProviderReview{
+    orderNumber: String!
+    fromUserName: String!
+    toProviderName: String!
+    rate: String!
+    date: DateTime!
+    comment: String!
+}
+
+type UserReview{
+    orderNumber: String!
+    fromProviderName: String!
+    toUserName: String!
+    rate: String!
+    date: DateTime!
+    comment: String!
+}
+#################### Store Order Reviews Mutations ####################
+""" List of StoreReview"""
+type StoreReviewConnection {
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [StoreReviewEdge]
+    """A list of nodes."""
+    nodes: [StoreReview]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node StoreReview"""
+type StoreReviewEdge {
+    cursor: Cursor!
+    node: StoreReview
+}
+
+type Webhook {
+    id:ID!
+    appId:String!
+    url :String!
+    eventTopics :[String!]!
+    secret :String!
+    isEnabled :Boolean!
+}
+
+type WebhookLog {
+    id: ID!
+    eventType: String!
+    createdAt: DateTime!
+    payload: String!
+    clientResponseStatus:String!
+    clientResponseCode: Int!
+}
+
+"""Information to aid in pagination."""
+type PageInfo {
+    """When paginating forwards, the cursor to continue."""
+    startCursor: Cursor!
+    """When paginating backwards, the cursor to continue."""
+    endCursor: Cursor!
+    """When paginating forwards, are there more items?"""
+    hasNextPage: Boolean!
+    """When paginating backwards, are there more items?"""
+    hasPreviousPage: Boolean!
+}
+
+scalar Cursor
+
+
+type WebhookLogConnection {
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [WebhookLogEdge]
+    """A list of nodes."""
+    nodes: [WebhookLog]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node """
+type WebhookLogEdge {
+    cursor: Cursor!
+    node: WebhookLog
+}
+
+type WebhooksConnection {
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [WebhookEdge]
+    """A list of nodes."""
+    nodes: [Webhook]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Webhook"""
+type WebhookEdge {
+    cursor: Cursor!
+    node: Webhook
+}
+
+#TODO
+type WebhookStatistics {
+    stats: String!
+}
+
+#TODO
+type OAuthApplicationStatistics {
+    stats: String!
+}
+
+type OAuthApplication {
+    id:ID!
+    createdAt:DateTime!
+    updatedAt:DateTime!
+    createdBy:ID!
+    appName:String!
+    publisherName:String!
+    clientID:String!
+    clientSecret:String!
+    clientDescription:String!
+    redirectURL:String!
+    scopes:[String!]!
+    developers:[String!]!
+    developmentUsers:[String!]!
+    appIcon:String!
+    allowImplicitGrant: AllowImplicitGrant!
+    whiteListedDomains:[String]!
+    termsOfServiceURL:String!
+    privacyURL:String!
+    website:String!
+    contactEmail:String!
+}
+
+enum AllowImplicitGrant {
+    ALLOW
+    DISALLOW
+}
+
+type OAuthApplicationConnection {
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [OAuthApplicationEdge]
+    """A list of nodes."""
+    nodes: [OAuthApplication]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node OAuthApplication"""
+type OAuthApplicationEdge {
+    cursor: Cursor!
+    node: OAuthApplication
+}
+
+enum AppStatus {
+    DEVELOPMENT
+    PRODUCTION
+}
+
+#################### Customers Queries ####################
+type Shipping {
+    firstName: String!
+    lastName: String!
+    company: String!
+    address1: String!
+    address2: String!
+    city: String!
+    state: String!
+    postcode: String!
+    country: String!
+}
+
+type Billing {
+    firstName: String!
+    lastName: String!
+    company: String!
+    address1: String!
+    address2: String!
+    city: String!
+    state: String!
+    postcode: String!
+    country: String!
+    email: String!
+    phone: String!
+}
+
+type Customer {
+    id: ID!
+    email: String!
+    firstName: String!
+    lastName: String!
+    role: String!
+    username: String!
+    isPayingCustomer: Boolean!
+    avatarURL: String!
+    metaData: MetaData!
+    shipping: Shipping!
+    billing: Billing!
+}
+
+#################### Customers Mutations ####################
+input ShippingInput {
+    firstName: String!
+    lastName: String!
+    company: String!
+    address1: String!
+    address2: String!
+    city: String!
+    state: String!
+    postcode: String!
+    country: String!
+}
+
+input BillingInput {
+    firstName: String!
+    lastName: String!
+    company: String!
+    address1: String!
+    address2: String!
+    city: String!
+    state: String!
+    postcode: String!
+    country: String!
+    email: String!
+    phone: String!
+}
+
+input AddCustomerInput {
+    email: String!
+    firstName: String!
+    lastName: String!
+    role: String!
+    username: String!
+    isPayingCustomer: Boolean!
+    avatarURL: String!
+    shipping: ShippingInput!
+    billing: BillingInput!
+}
+
+input UpdateCustomerInput {
+    id: ID!
+    email: String!
+    firstName: String!
+    lastName: String!
+    role: String!
+    username: String!
+    isPayingCustomer: Boolean!
+    avatarURL: String!
+    shipping: ShippingInput!
+    billing: BillingInput!
+}
+
+type CustomerConnection {
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [CustomerEdge]
+    """A list of nodes."""
+    nodes: [Customer]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node Customer"""
+type CustomerEdge {
+    cursor: Cursor!
+    node: Customer
+}
+
+#################### Order Note Queries ####################
+type OrderNote {
+    id: ID!
+    author: String!
+    note: String!
+    customerNote: Boolean!
+    isActive: Boolean!
+}
+
+#################### Order Note Mutations ####################
+input AddOrderNoteInput {
+    author: String!
+    note: String!
+    customerNote: Boolean!
+    isActive: Boolean!
+}
+
+input UpdateOrderNoteInput {
+    id: ID!
+    author: String!
+    note: String!
+    customerNote: Boolean!
+    isActive: Boolean!
+}
+
+type OrderNoteConnection {
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [OrderNoteEdge]
+    """A list of nodes."""
+    nodes: [OrderNote]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node OrderNote"""
+type OrderNoteEdge {
+    cursor: Cursor!
+    node: OrderNote
+}
+
+################ Orders Queries ################
+type Order{
+    id: ID!
+    parentID: ID!
+    orderNumber: Int!
+    orderType: String!
+    storeID: ID!
+    orderItems: OrderItem!
+    serviceType: String!
+    coupon: String!
+    providerID: ID!
+    deliveryDriver: String!
+    deliveryAddress: Address!
+    expectedEarning: Float!
+    earnedAmount: Float!
+    cancellationAndRefundDetails: String!
+    orderKey: String!
+    createdVia: String!
+    version: String!
+    orderStatus: OrderStatus!
+    currency: Currency!
+    discountAmount: Float!
+    discountTax: Float!
+    shippingTotal: Float!
+    shippingTax: Float!
+    cartTax: Float!
+    orderTotalAmount: Float!
+    totalTax: Float!
+    pricesIncludeTax: Boolean!
+    customerIPAddress: String!
+    customerUserAgent: String!
+    customerNote: String!
+    billing: Billing!
+    shipping: Shipping!
+    paymentMethod: PaymentMethodType!
+    paymentMethodTitle: String!
+    transactionID: ID!
+    datePaid: DateTime!
+    dateCompleted: DateTime!
+    cartHash:String!
+    metadata: MetaData!
+    lineItems: LineItems!
+    taxLines: TaxLines!
+    shippingLine: ShippingLines!
+    feeLines: FeeLines!
+    couponLines: CouponLines!
+    refunds: Refunds!
+}
+
+enum OrderStatus{
+    PLACED
+    DECLINED
+    DELIVERED
+    PROCESSING
+}
+
+enum PaymentMethodType{
+    CASH
+    DEBIT
+    CREDIT
+    NETBANKING
+    UPI
+    WALLET
+}
+
+type OrderItem{
+    id: ID!
+    name: String!
+    quantity: Int!
+}
+
+type FeeLines{
+    id: ID!
+    name: String!
+    taxClass: String!
+    taxStatus: String!
+    total: String!
+    totalTax: String!
+    taxes: Taxes!
+    metaData: MetaData!
+}
+
+type CouponLines{
+    id: ID!
+    code: String!
+    discount: String!
+    discountTax: String!
+    metaData: MetaData!
+}
+
+type Refunds{
+    id: ID!
+    reason: String!
+    total: Float!
+}
+
+type ShippingLines {
+    id: Int!
+    methodTitle: String!
+    methodID: String!
+    total: String!
+    totalTax: String!
+    metaData: [String!]!
+    taxes: [String!]!
+}
+
+type TaxLines {
+    id: Int!
+    rateCode: String!
+    rateID: Int!
+    label: String!
+    compound: Boolean!
+    taxTotal: String!
+    shippingTaxTotal: String!
+    metaData: [String!]!
+}
+
+type Taxes {
+    id: Int!
+    total: String!
+    subtotal: String!
+}
+
+type LineItems {
+    id: Int!
+    name: String!
+    productID: Int!
+    variationID: Int!
+    quantity: Int!
+    taxClass: String!
+    subtotal: String!
+    subtotalTax: String!
+    total: String!
+    totalTax: String!
+    sku: String!
+    price: Int!
+    metaData: [String!]!
+    taxes: [Taxes!]!
+}
+
+type MetaData {
+    id: Int!
+    key: String!
+    value: String!
+}
+
+################ Orders Mutations ################
+input OrderItemInput{
+    id: ID!
+    name: String!
+    quantity: Int!
+}
+
+input AddOrderInput{
+    orderItems: OrderItemInput!
+    serviceType: String!
+    coupon: String!
+    providerID: ID!
+    currency: CurrencyInput!
+    discountAmount: Float!
+    discountTax: Float!
+    shippingTotal: Float!
+    shippingTax: Float!
+    cartTax: Float!
+    orderTotalAmount: Float!
+    totalTax: Float!
+    pricesIncludeTax: Boolean!
+    billing: BillingInput!
+    shipping: ShippingInput!
+    paymentMethod: PaymentMethodType!
+    paymentMethodTitle: String!
+}
+
+input UpdateOrderInput{
+    id: ID!
+    orderItems: OrderItemInput!
+    serviceType: String!
+    coupon: String!
+    providerID: ID!
+    currency: CurrencyInput!
+    discountAmount: Float!
+    discountTax: Float!
+    shippingTotal: Float!
+    shippingTax: Float!
+    cartTax: Float!
+    orderTotalAmount: Float!
+    totalTax: Float!
+    pricesIncludeTax: Boolean!
+    billing: BillingInput!
+    shipping: ShippingInput!
+    paymentMethod: PaymentMethodType!
+    paymentMethodTitle: String!
+}
+
+################ Product Image Queries ################
+type ProductImage{
+    id: ID!
+    src: String!
+    name: String!
+    alt: String!
+}
+
+################ Product Image Mutations ################
+input AddProductImageInput{
+    src: String!
+    name: String!
+    alt: String!
+}
+
+input UpdateProductImageInput{
+    id: ID!
+    src: String!
+    name: String!
+    alt: String!
+}
+
+"""List of ProductImage"""
+type ProductImageConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProductImageEdge]
+    """A list of nodes."""
+    nodes: [ProductImage]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node product image"""
+type ProductImageEdge {
+    cursor: Cursor!
+    node: ProductImage
+}
+
+################ Product Download Queries ################
+type ProductDownload{
+    id:ID!
+    name:String!
+    file:String!
+}
+
+################ Product Download Mutations ################
+input AddProductDownloadInput{
+    name:String!
+    file:String!
+}
+
+input UpdateProductDownloadInput{
+    id:ID!
+    name:String!
+    file:String!
+}
+
+"""List of ProductDownload"""
+type ProductDownloadConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProductDownloadEdge]
+    """A list of nodes."""
+    nodes: [ProductDownload]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node product download"""
+type ProductDownloadEdge {
+    cursor: Cursor!
+    node: ProductDownload
+}
+
+################ Product Tag Queries ################
+type ProductTag {
+    id: ID!
+    name: String!
+    slug: String!
+    description: String!
+    count: Int!
+}
+
+################ Product Tag Mutations ################
+input AddProductTagInput {
+    name: String!
+    slug: String!
+    description: String!
+    count: Int!
+}
+
+input UpdateProductTagInput {
+    id: ID!
+    name: String!
+    slug: String!
+    description: String!
+    count: Int!
+}
+
+"""List of ProductTag"""
+type ProductTagConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProductTagEdge]
+    """A list of nodes."""
+    nodes: [ProductTag]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node product Tag"""
+type ProductTagEdge {
+    cursor: Cursor!
+    node: ProductTag
+}
+
+################ Product Metadata Queries ################
+type ProductMetadata{
+    id:ID!
+    key:String!
+    value:String!
+}
+
+################ Product Metadata Queries ################
+input AddProductMetadataInput{
+    key:String!
+    value:String!
+}
+
+input UpdateProductMetadataInput{
+    id:ID!
+    key:String!
+    value:String!
+}
+
+
+"""List of Product Metadata"""
+type ProductMetadataConnection{
+    """Total number of nodes"""
+    totalCount: Int!
+    """A list of edges"""
+    edges: [ProductMetadataEdge]
+    """A list of nodes."""
+    nodes: [ProductMetadata]
+    """Information to aid in pagination."""
+    pageInfo: PageInfo!
+}
+
+""" Paginating the node product Metadata"""
+type ProductMetadataEdge {
+    cursor: Cursor!
+    node: ProductMetadata
+}

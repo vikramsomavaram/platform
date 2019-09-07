@@ -1,0 +1,11 @@
+# Tribe GraphQL Schema
+# © Copyright 2019 - Pandranki Global Private Limited
+
+#check if the user is authenticated or not
+directive @isAuthenticated on QUERY | FIELD | FIELD_DEFINITION
+
+#checks user permission scopes
+directive @hasScope(scopes: [String!]) on QUERY | FIELD | FIELD_DEFINITION
+
+#checks user permission roles
+directive @hasRole(roles: [String!]) on OBJECT | FIELD_DEFINITION
