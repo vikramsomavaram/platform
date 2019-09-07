@@ -45,7 +45,7 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, ctx echo.C
 	if t.templatesMap[name] != "" {
 		templateContent, err := ioutil.ReadFile(t.templatesMap[name])
 		if err != nil {
-			log.Error("error reading template file %q: %v\n", t.templatesMap[name], err)
+			log.Errorf("error reading template file %v: %v\n", t.templatesMap[name], err)
 		}
 		parsedTemplate, terr := t.engine.ParseTemplateLocation(templateContent, t.templatesMap[name], 0)
 		if terr != nil {

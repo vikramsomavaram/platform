@@ -44,7 +44,7 @@ func CreateChat(chat Chat) (*Chat, error) {
 	chat.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(ChatCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &chat)
 	if err != nil {
 		log.Errorln(err)
@@ -210,7 +210,7 @@ func CreateChatMessage(chatMessage ChatMessage) (*ChatMessage, error) {
 	chatMessage.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(ChatMessageCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &chatMessage)
 	if err != nil {
 		log.Errorln(err)

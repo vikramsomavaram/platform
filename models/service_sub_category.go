@@ -43,7 +43,7 @@ func CreateServiceSubCategory(serviceSubCategory ServiceSubCategory) (*ServiceSu
 	serviceSubCategory.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(ServiceCategoriesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &serviceSubCategory)
 	if err != nil {
 		log.Errorln(err)
@@ -77,7 +77,7 @@ func GetServiceSubCategoryByID(ID string) *ServiceSubCategory {
 		return serviceSubCategory
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ServiceCategoriesCollection).FindOne(ctx, filter).Decode(&serviceSubCategory)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

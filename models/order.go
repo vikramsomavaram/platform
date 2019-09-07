@@ -81,7 +81,7 @@ func CreateOrder(order Order) (*Order, error) {
 	order.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	ordersCollection := db.Collection(OrdersCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := ordersCollection.InsertOne(ctx, &order)
 	if err != nil {
 		log.Errorln(err)
@@ -114,7 +114,7 @@ func GetOrderByID(ID string) (*Order, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(OrdersCollection).FindOne(ctx, filter).Decode(&order)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

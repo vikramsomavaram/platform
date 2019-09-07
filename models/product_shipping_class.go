@@ -40,7 +40,7 @@ func CreateProductShippingClass(productShippingClass ProductShippingClass) (*Pro
 	productShippingClass.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(ProductShippingClassCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &productShippingClass)
 	if err != nil {
 		log.Errorln(err)
@@ -74,7 +74,7 @@ func GetProductShippingClassByID(ID string) *ProductShippingClass {
 		return productShippingClass
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProductShippingClassCollection).FindOne(ctx, filter).Decode(&productShippingClass)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

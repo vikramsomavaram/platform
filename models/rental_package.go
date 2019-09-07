@@ -41,7 +41,7 @@ func CreateRentalPackage(rentalPackage RentalPackage) (*RentalPackage, error) {
 	rentalPackage.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(RentalPackageCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &rentalPackage)
 	if err != nil {
 		log.Errorln(err)
@@ -74,7 +74,7 @@ func GetRentalPackageByID(ID string) (*RentalPackage, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(RentalPackageCollection).FindOne(ctx, filter).Decode(&rentalPackage)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

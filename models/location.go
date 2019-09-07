@@ -41,7 +41,7 @@ func CreateGeoFenceLocation(location GeoFenceLocation) (*GeoFenceLocation, error
 	location.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(GeoFenceLocationCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &location)
 	if err != nil {
 		log.Errorln(err)
@@ -74,7 +74,7 @@ func GetGeoFenceLocationByID(ID string) (*GeoFenceLocation, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(GeoFenceLocationCollection).FindOne(ctx, filter).Decode(&location)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -210,7 +210,7 @@ func CreateUserLocation(userLocation *UserLocation) (*UserLocation, error) {
 	userLocation.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(UserLocationLogCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &userLocation)
 	if err != nil {
 		log.Errorln(err)
@@ -244,7 +244,7 @@ func GetUserLocationByID(ID string) (*UserLocation, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(UserLocationLogCollection).FindOne(ctx, filter).Decode(&userLocation)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -373,7 +373,7 @@ func CreateServiceProviderLocation(serviceProviderLocation *ServiceProviderLocat
 	serviceProviderLocation.UpdatedAt = time.Now()
 	db := database.MongoDB
 	collection := db.Collection(ServiceProviderLocationCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &serviceProviderLocation)
 	if err != nil {
 		log.Errorln(err)
@@ -407,7 +407,7 @@ func GetServiceProviderLocationByID(ID string) (*ServiceProviderLocation, error)
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ServiceProviderLocationCollection).FindOne(ctx, filter).Decode(&serviceProviderLocation)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -542,7 +542,7 @@ func CreateGeoFenceRestrictedArea(geoFenceRestrictedArea GeoFenceRestrictedArea)
 	geoFenceRestrictedArea.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(GeoFenceRestrictedAreaCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &geoFenceRestrictedArea)
 	if err != nil {
 		log.Errorln(err)
@@ -572,7 +572,7 @@ func GetGeoFenceRestrictedAreaByID(ID string) (*GeoFenceRestrictedArea, error) {
 	}
 	oID, _ := primitive.ObjectIDFromHex(ID)
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(GeoFenceRestrictedAreaCollection).FindOne(ctx, filter).Decode(&geoFenceRestrictedArea)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

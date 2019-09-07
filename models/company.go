@@ -46,7 +46,7 @@ func CreateServiceCompany(company ServiceCompany) (*ServiceCompany, error) {
 	company.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(ServiceCompaniesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &company)
 	if err != nil {
 		log.Errorln(err)
@@ -81,7 +81,7 @@ func GetServiceCompanyByID(ID string) *ServiceCompany {
 		return company
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ServiceCompaniesCollection).FindOne(ctx, filter).Decode(&company)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

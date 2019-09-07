@@ -65,7 +65,7 @@ func CreateUser(user *User) (*User, error) {
 	user.UpdatedAt = time.Now()
 	db := database.MongoDB
 	Collection := db.Collection(UsersCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := Collection.InsertOne(ctx, &user)
 	if err != nil {
 		log.Errorln(err)
@@ -307,7 +307,7 @@ func CreateUserRole(userRole UserRole) (*UserRole, error) {
 	userRole.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	Collection := db.Collection(UserRoleCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := Collection.InsertOne(ctx, &userRole)
 	if err != nil {
 		log.Errorln(err)
@@ -340,7 +340,7 @@ func GetUserRoleByID(ID string) (*UserRole, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(UserRoleCollection).FindOne(ctx, filter).Decode(&userRole)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -481,7 +481,7 @@ func CreateUserRoleGroup(userRoleGroup *UserRoleGroup) (*UserRoleGroup, error) {
 	userRoleGroup.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	Collection := db.Collection(UserRoleGroupCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := Collection.InsertOne(ctx, &userRoleGroup)
 	if err != nil {
 		log.Errorln(err)
@@ -621,7 +621,7 @@ func CreateUserRolePermission(userRolePermission UserRolePermissions) (*UserRole
 	userRolePermission.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	Collection := db.Collection(UserRolePermissionsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := Collection.InsertOne(ctx, &userRolePermission)
 	if err != nil {
 		log.Errorln(err)
@@ -654,7 +654,7 @@ func GetUserRolePermissionByID(ID string) (*UserRolePermissions, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(UserRolePermissionsCollection).FindOne(ctx, filter).Decode(&userRolePermission)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

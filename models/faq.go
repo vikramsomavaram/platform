@@ -40,7 +40,7 @@ func CreateFAQ(faq FAQ) (*FAQ, error) {
 	faq.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(FAQsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &faq)
 	if err != nil {
 		log.Errorln(err)
@@ -74,7 +74,7 @@ func GetFAQByID(ID string) (*FAQ, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(FAQsCollection).FindOne(ctx, filter).Decode(&faq)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -206,7 +206,7 @@ func CreateFAQCategory(faqCategory FAQCategory) (*FAQCategory, error) {
 	faqCategory.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(FAQsCategoryCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &faqCategory)
 	if err != nil {
 		log.Errorln(err)
@@ -239,7 +239,7 @@ func GetFAQCategoryByID(ID string) (*FAQCategory, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(FAQsCategoryCollection).FindOne(ctx, filter).Decode(&faqCategory)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

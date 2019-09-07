@@ -33,7 +33,7 @@ func CreateVehicleMake(vehicleMake VehicleMake) (*VehicleMake, error) {
 	vehicleMake.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	vehicleMakeCollection := db.Collection(VehicleMakeCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := vehicleMakeCollection.InsertOne(ctx, &vehicleMake)
 	if err != nil {
 		log.Errorln(err)
@@ -66,7 +66,7 @@ func GetVehicleMakeByID(ID string) (*VehicleMake, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(VehicleMakeCollection).FindOne(ctx, filter).Decode(&vehicleMake)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

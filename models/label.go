@@ -39,7 +39,7 @@ func CreateGeneralLabel(generalLabel GeneralLabel) (*GeneralLabel, error) {
 	generalLabel.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(GeneralLabelCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &generalLabel)
 	if err != nil {
 		log.Errorln(err)
@@ -72,7 +72,7 @@ func GetGeneralLabelByID(ID string) (*GeneralLabel, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(GeneralLabelCollection).FindOne(ctx, filter).Decode(&generalLabel)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -205,7 +205,7 @@ func CreateFoodDeliveryLabel(foodDeliveryLabel FoodDeliveryLabel) (*FoodDelivery
 	foodDeliveryLabel.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(FoodDeliveryLabelCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &foodDeliveryLabel)
 	if err != nil {
 		log.Errorln(err)
@@ -238,7 +238,7 @@ func GetFoodDeliveryLabelByID(ID string) (*FoodDeliveryLabel, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(FoodDeliveryLabelCollection).FindOne(ctx, filter).Decode(&foodDeliveryLabel)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -371,7 +371,7 @@ func CreateGroceryDeliveryLabel(groceryDeliveryLabel GroceryDeliveryLabel) (*Gro
 	groceryDeliveryLabel.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(GroceryDeliveryLabelCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &groceryDeliveryLabel)
 	if err != nil {
 		log.Errorln(err)
@@ -405,7 +405,7 @@ func GetGroceryDeliveryLabelByID(ID string) (*GroceryDeliveryLabel, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(GroceryDeliveryLabelCollection).FindOne(ctx, filter).Decode(&groceryDeliveryLabel)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -538,7 +538,7 @@ func CreateWineDeliveryLabel(wineDeliveryLabel WineDeliveryLabel) (*WineDelivery
 	wineDeliveryLabel.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(WineDeliveryLabelCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &wineDeliveryLabel)
 	if err != nil {
 		log.Errorln(err)

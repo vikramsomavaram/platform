@@ -37,7 +37,7 @@ func CreateSMSTemplate(smsTemplate *SMSTemplate) (*SMSTemplate, error) {
 	smsTemplate.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	smsTemplateCollection := db.Collection(SMSTemplateCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := smsTemplateCollection.InsertOne(ctx, &smsTemplate)
 	if err != nil {
 		log.Errorln(err)
@@ -74,7 +74,7 @@ func GetSMSTemplateByID(ID string) (*SMSTemplate, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(SMSTemplateCollection).FindOne(ctx, filter).Decode(&smsTemplate)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

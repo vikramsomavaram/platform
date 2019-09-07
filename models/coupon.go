@@ -61,7 +61,7 @@ func CreateCoupon(coupon Coupon) (*Coupon, error) {
 	coupon.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(CouponCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &coupon)
 	if err != nil {
 		log.Errorln(err)
@@ -94,7 +94,7 @@ func GetCouponByFilter(filter bson.D) *Coupon {
 		//key is empty or not set
 	}
 	filter = append(filter, bson.E{"deletedAt", bson.M{"$exists": false}})
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(CouponCollection).FindOne(ctx, filter).Decode(&coupon)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -131,7 +131,7 @@ func GetCouponByID(ID string) *Coupon {
 		return coupon
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(CouponCollection).FindOne(ctx, filter).Decode(&coupon)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

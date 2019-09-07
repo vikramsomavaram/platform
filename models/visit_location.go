@@ -38,7 +38,7 @@ func CreateVisitLocation(visitLocation VisitLocation) (*VisitLocation, error) {
 	visitLocation.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(VisitLocationCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &visitLocation)
 	if err != nil {
 		log.Errorln(err)

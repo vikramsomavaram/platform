@@ -43,7 +43,7 @@ func CreateProductReview(productReview ProductReview) (*ProductReview, error) {
 	productReview.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(ProductReviewCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &productReview)
 	if err != nil {
 		log.Errorln(err)
@@ -77,7 +77,7 @@ func GetProductReviewByID(ID string) *ProductReview {
 		return productReview
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProductReviewCollection).FindOne(ctx, filter).Decode(&productReview)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

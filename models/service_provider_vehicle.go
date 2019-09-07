@@ -47,7 +47,7 @@ func CreateServiceProviderVehicle(serviceProviderVehicleDetails ServiceProviderV
 	serviceProviderVehicleDetails.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(ServiceProviderVehiclesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &serviceProviderVehicleDetails)
 	if err != nil {
 		log.Errorln(err)
@@ -81,7 +81,7 @@ func GetServiceProviderVehicleByID(ID string) (*ServiceProviderVehicleDetails, e
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ServiceProviderVehiclesCollection).FindOne(ctx, filter).Decode(&serviceProviderVehicle)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

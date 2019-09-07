@@ -40,7 +40,7 @@ func CreateAirportSurcharge(airportSurcharge AirportSurcharge) (*AirportSurcharg
 	airportSurcharge.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(AirportSurchargeCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &airportSurcharge)
 	if err != nil {
 		log.Errorln(err)

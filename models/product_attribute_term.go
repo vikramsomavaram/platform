@@ -41,7 +41,7 @@ func CreateProductAttributeTerm(productAttributeTerm ProductAttributeTerm) (*Pro
 	productAttributeTerm.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(ProductAttributeTermCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &productAttributeTerm)
 	if err != nil {
 		log.Errorln(err)
@@ -75,7 +75,7 @@ func GetProductAttributeTermByID(ID string) *ProductAttributeTerm {
 		return productAttributeTerm
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProductAttributeTermCollection).FindOne(ctx, filter).Decode(&productAttributeTerm)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

@@ -42,7 +42,7 @@ func CreateStoreVehicleType(storeVehicleType StoreVehicleType) (*StoreVehicleTyp
 	storeVehicleType.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(StoreVehicleTypesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &storeVehicleType)
 	if err != nil {
 		log.Errorln(err)
@@ -75,7 +75,7 @@ func GetStoreVehicleTypeByID(ID string) (*StoreVehicleType, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(StoreVehicleTypesCollection).FindOne(ctx, filter).Decode(&storeVehicleType)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

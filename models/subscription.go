@@ -262,7 +262,7 @@ func CreateSubscription(subscription Subscription) (*Subscription, error) {
 	subscription.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(SubscriptionsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &subscription)
 	if err != nil {
 		log.Errorln(err)
@@ -296,7 +296,7 @@ func GetSubscriptionByID(ID string) *Subscription {
 		return subscription
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(SubscriptionsCollection).FindOne(ctx, filter).Decode(&subscription)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

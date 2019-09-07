@@ -73,7 +73,7 @@ func CreateEmailTemplate(emailTemplate *EmailTemplate) (*EmailTemplate, error) {
 	emailTemplate.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(EmailTemplateCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &emailTemplate)
 	if err != nil {
 		log.Errorln(err)
@@ -106,7 +106,7 @@ func GetEmailTemplateByID(ID string) (*EmailTemplate, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(EmailTemplateCollection).FindOne(ctx, filter).Decode(&emailTemplate)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -129,7 +129,7 @@ func GetEmailTemplateByFilter(filter bson.D) (*EmailTemplate, error) {
 	db := database.MongoDB
 	emailTemplate := &EmailTemplate{}
 	filter = append(filter, bson.E{"deletedAt", bson.M{"$exists": false}}) // we dont want deleted documents
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err := db.Collection(EmailTemplateCollection).FindOne(ctx, filter).Decode(&emailTemplate)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

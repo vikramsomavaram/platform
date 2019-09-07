@@ -7,10 +7,10 @@ package directives
 import (
 	"context"
 	"github.com/99designs/gqlgen/graphql"
-	"github.com/vektah/gqlparser/gqlerror"
 	"github.com/tribehq/platform/models"
 	"github.com/tribehq/platform/resolvers"
 	"github.com/tribehq/platform/utils/auth"
+	"github.com/vektah/gqlparser/gqlerror"
 	"strings"
 )
 

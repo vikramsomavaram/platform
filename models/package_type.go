@@ -38,7 +38,7 @@ func CreatePackageType(packageType PackageType) (*PackageType, error) {
 	packageType.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(PackageTypeCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &packageType)
 	if err != nil {
 		log.Errorln(err)
@@ -71,7 +71,7 @@ func GetPackageTypeByID(ID string) (*PackageType, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(PackageTypeCollection).FindOne(ctx, filter).Decode(&packageType)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

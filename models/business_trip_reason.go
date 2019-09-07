@@ -42,7 +42,7 @@ func CreateBusinessTripReason(businessTripReason BusinessTripReason) (*BusinessT
 	businessTripReason.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(BusinessTripReasonCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &businessTripReason)
 	if err != nil {
 		log.Errorln(err)
@@ -76,7 +76,7 @@ func GetBusinessTripReasonByID(ID string) *BusinessTripReason {
 		return businessTripReason
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(BusinessTripReasonCollection).FindOne(ctx, filter).Decode(&businessTripReason)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

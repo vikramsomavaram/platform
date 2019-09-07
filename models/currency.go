@@ -43,7 +43,7 @@ func CreateCurrency(currency Currency) (*Currency, error) {
 	currency.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(CurrenciesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &currency)
 	if err != nil {
 		log.Errorln(err)
@@ -77,7 +77,7 @@ func GetCurrencyByID(ID string) (*Currency, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(CurrenciesCollection).FindOne(ctx, filter).Decode(&currency)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -111,7 +111,7 @@ func GetCurrencies(filter bson.D, limit int, after *string, before *string, firs
 	if err != nil {
 		return
 	}
-	ctx, _ := context.WithTimeout(context.Background(), 3*time.Second)
+	ctx := context.Background()
 	defer cur.Close(ctx)
 	for cur.Next(ctx) {
 		currency := &Currency{}

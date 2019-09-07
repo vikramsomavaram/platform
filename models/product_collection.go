@@ -40,7 +40,7 @@ func CreateProductCollection(productCollection ProductCollection) (*ProductColle
 	productCollection.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(ProductCollectionCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &productCollection)
 	if err != nil {
 		log.Errorln(err)
@@ -73,7 +73,7 @@ func GetProductCollectionByID(ID string) *ProductCollection {
 		return nil
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProductCollectionCollection).FindOne(ctx, filter).Decode(&productCollection)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

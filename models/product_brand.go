@@ -40,7 +40,7 @@ func CreateProductBrand(productBrand ProductBrand) (*ProductBrand, error) {
 	productBrand.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(ProductBrandCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &productBrand)
 	if err != nil {
 		log.Errorln(err)
@@ -73,7 +73,7 @@ func GetProductBrandByID(ID string) *ProductBrand {
 		return nil
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProductBrandCollection).FindOne(ctx, filter).Decode(&productBrand)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

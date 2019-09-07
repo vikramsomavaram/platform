@@ -15,3 +15,9 @@ resolver:
 
 autobind:
   - github.com/tribehq/platform/models
+
+models:
+  ID:
+    model: github.com/tribehq/platform/models.ID
+  DateTime:
+    model: github.com/tribehq/platform/models.Timestamp

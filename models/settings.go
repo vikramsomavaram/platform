@@ -43,7 +43,7 @@ func CreateMarketSettings(setting *MarketSettings) (*MarketSettings, error) {
 	setting.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(MarketSettingsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &setting)
 	if err != nil {
 		log.Errorln(err)
@@ -76,7 +76,7 @@ func GetMarketSettingsByID(ID string) (*MarketSettings, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(MarketSettingsCollection).FindOne(ctx, filter).Decode(&setting)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -162,7 +162,7 @@ func CreateSEOSetting(seoSetting *SEOSetting) (*SEOSetting, error) {
 	seoSetting.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(SEOSettingsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &seoSetting)
 	if err != nil {
 		log.Errorln(err)
@@ -196,7 +196,7 @@ func GetSEOSettingByID(ID string) (*SEOSetting, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(SEOSettingsCollection).FindOne(ctx, filter).Decode(&seoSetting)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

@@ -53,7 +53,7 @@ func CreateInstallation(installation *Installation) (*Installation, error) {
 	installation.UpdatedAt = time.Now()
 	db := database.MongoDB
 	collection := db.Collection(InstallationsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &installation)
 	if err != nil {
 		log.Errorln(err)
@@ -86,7 +86,7 @@ func GetInstallationByID(ID string) (*Installation, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(InstallationsCollection).FindOne(ctx, filter).Decode(&installation)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

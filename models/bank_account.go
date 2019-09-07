@@ -64,7 +64,7 @@ func CreateBankAccount(bankAccount *BankAccount) (*BankAccount, error) {
 	bankAccount.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(BankAccountsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &bankAccount)
 	if err != nil {
 		log.Errorln(err)
@@ -98,7 +98,7 @@ func GetBankAccountByID(ID string) (*BankAccount, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(BankAccountsCollection).FindOne(ctx, filter).Decode(&bankAccount)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

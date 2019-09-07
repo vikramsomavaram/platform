@@ -39,7 +39,7 @@ func CreateStoreReview(storeReview StoreReview) (*StoreReview, error) {
 	storeReview.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(StoreReviewsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &storeReview)
 	if err != nil {
 		log.Errorln(err)
@@ -72,7 +72,7 @@ func GetStoreReviewByID(ID string) (*StoreReview, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(StoreReviewsCollection).FindOne(ctx, filter).Decode(&storeReview)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -216,7 +216,7 @@ func CreateReview(review Review) (*Review, error) {
 	review.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(ReviewsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &review)
 	if err != nil {
 		log.Errorln(err)
@@ -249,7 +249,7 @@ func GetReviewByID(ID string) (*Review, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ReviewsCollection).FindOne(ctx, filter).Decode(&review)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

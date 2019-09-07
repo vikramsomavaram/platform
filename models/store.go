@@ -73,7 +73,7 @@ func CreateStore(store Store) (*Store, error) {
 	store.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(StoresCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &store)
 	if err != nil {
 		log.Errorln(err)
@@ -107,7 +107,7 @@ func GetStoreByID(ID string) *Store {
 		return store
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(StoresCollection).FindOne(ctx, filter).Decode(&store)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -226,7 +226,7 @@ func GetStoreByFilter(filter bson.D) (*Store, error) {
 	}
 
 	filter = append(filter, bson.E{"deletedAt", bson.M{"$exists": false}})
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(StoresCollection).FindOne(ctx, filter).Decode(&store)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -263,7 +263,7 @@ func CreateStoreLocation(store StoreLocation) (*StoreLocation, error) {
 	store.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(StoreLocationsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &store)
 	if err != nil {
 		log.Errorln(err)
@@ -296,7 +296,7 @@ func GetStoreLocationByID(ID string) (*StoreLocation, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(StoreLocationsCollection).FindOne(ctx, filter).Decode(&store)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

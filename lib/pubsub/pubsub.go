@@ -7,20 +7,23 @@ package pubsub
 import (
 	"cloud.google.com/go/pubsub"
 	"context"
-	log "github.com/sirupsen/logrus"
 	"os"
+	log "github.com/sirupsen/logrus"
 )
 
 // PubsubClient represents pubsub client.
 var PubsubClient *pubsub.Client
 
 func init() {
-	pubsubClient, err := configurePubsub(os.Getenv("GOOGLE_CLOUD_PROJECT"))
-	if err != nil {
-		log.Fatal(err)
-	}
+	googleProject := os.Getenv("GOOGLE_CLOUD_PROJECT")
+	if googleProject != "" {
+		pubsubClient, err := configurePubsub(os.Getenv("GOOGLE_CLOUD_PROJECT"))
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	PubsubClient = pubsubClient
+		PubsubClient = pubsubClient
+	}
 }
 
 func configurePubsub(projectID string) (*pubsub.Client, error) {

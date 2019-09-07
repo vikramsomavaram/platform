@@ -46,7 +46,7 @@ func CreateServiceType(serviceType ServiceType) (*ServiceType, error) {
 	serviceType.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(ServiceTypesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &serviceType)
 	if err != nil {
 		log.Errorln(err)
@@ -79,7 +79,7 @@ func GetServiceTypeByID(ID string) (*ServiceType, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ServiceTypesCollection).FindOne(ctx, filter).Decode(&serviceType)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

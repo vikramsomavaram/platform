@@ -45,7 +45,7 @@ func CreateRideProfileType(rideProfileType RideProfileType) (*RideProfileType, e
 	rideProfileType.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(RideProfileTypeCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &rideProfileType)
 	if err != nil {
 		log.Errorln(err)
@@ -78,7 +78,7 @@ func GetRideProfileTypeByID(ID string) (*RideProfileType, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(RideProfileTypeCollection).FindOne(ctx, filter).Decode(&rideProfileType)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

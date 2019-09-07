@@ -46,7 +46,7 @@ func CreateAddress(address Address) (*Address, error) {
 	address.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(AddressesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &address)
 	if err != nil {
 		log.Errorln(err)
@@ -80,7 +80,7 @@ func GetAddressByID(ID string) *Address {
 		return address
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(AddressesCollection).FindOne(ctx, filter).Decode(&address)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

@@ -38,7 +38,7 @@ func CreateOrderStatusUtility(orderStatusUtility OrderStatusUtility) (*OrderStat
 	orderStatusUtility.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(OrderStatusUtilityCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &orderStatusUtility)
 	if err != nil {
 		log.Errorln(err)
@@ -71,7 +71,7 @@ func GetOrderStatusUtilityByID(ID string) (*OrderStatusUtility, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(OrderStatusUtilityCollection).FindOne(ctx, filter).Decode(&orderStatusUtility)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

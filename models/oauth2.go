@@ -150,7 +150,7 @@ func CreateOAuthApplication(oAuthApplication OAuthApplication) (*OAuthApplicatio
 	oAuthApplication.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(OAuthApplicationsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &oAuthApplication)
 	if err != nil {
 		log.Errorln(err)
@@ -183,7 +183,7 @@ func GetOAuthApplicationByID(ID string) (*OAuthApplication, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(OAuthApplicationsCollection).FindOne(ctx, filter).Decode(&oAuthApplication)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -320,7 +320,7 @@ func CreateRefreshToken(refreshToken *RefreshToken) (*RefreshToken, error) {
 	refreshToken.UpdatedAt = time.Now()
 	db := database.MongoDB
 	collection := db.Collection(OAuthRefreshTokensCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &refreshToken)
 	if err != nil {
 		log.Errorln(err)
@@ -353,7 +353,7 @@ func GetRefreshTokenByFilter(filter bson.D) *RefreshToken {
 		//key is empty or not set
 	}
 	filter = append(filter, bson.E{"deletedAt", bson.M{"$exists": false}})
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(OAuthRefreshTokensCollection).FindOne(ctx, filter).Decode(&refreshToken)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -387,7 +387,7 @@ func GetRefreshTokenByID(ID string) (*RefreshToken, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(OAuthRefreshTokensCollection).FindOne(ctx, filter).Decode(&refreshToken)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -576,7 +576,7 @@ type AccessToken struct {
 	CreatedAt        time.Time          `json:"createdAt" bson:"createdAt"`
 	DeletedAt        *time.Time         `json:"deletedAt,omitempty" bson:"deletedAt,omitempty"`
 	UpdatedAt        time.Time          `json:"updatedAt" bson:"updatedAt"`
-	ExpiresAt        time.Time          `json:"updatedAt" bson:"expiresAt"`
+	ExpiresAt        time.Time          `json:"expiresAt" bson:"expiresAt"`
 	AccessToken      string             `json:"accessToken" bson:"accessToken"`
 	TokenType        string             `json:"tokenType" bson:"tokenType"`
 	RefreshToken     *RefreshToken      `json:"refreshToken" bson:"refreshToken,omitempty"`
@@ -624,7 +624,7 @@ func CreateAccessToken(accessToken *AccessToken) (*AccessToken, error) {
 	accessToken.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(OAuthAccessTokensCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &accessToken)
 	if err != nil {
 		log.Errorln(err)
@@ -646,7 +646,7 @@ func CreateAuthorizationCode(authCode *AuthorizationCode) (*AuthorizationCode, e
 	authCode.UpdatedAt = time.Now()
 	db := database.MongoDB
 	collection := db.Collection(OAuthAuthorizationCodeCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &authCode)
 	if err != nil {
 		log.Errorln(err)
@@ -679,7 +679,7 @@ func GetAccessTokenByID(ID string) (*AccessToken, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(OAuthAccessTokensCollection).FindOne(ctx, filter).Decode(&accessToken)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -702,7 +702,7 @@ func GetAuthorizationCodeByFilter(filter bson.D) *AuthorizationCode {
 	db := database.MongoDB
 	authcode := &AuthorizationCode{}
 	filter = append(filter, bson.E{"deletedAt", bson.M{"$exists": false}})
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err := db.Collection(OAuthAuthorizationCodeCollection).FindOne(ctx, filter).Decode(&authcode)
 	if err != nil {
 		if err != mongo.ErrNoDocuments {
@@ -718,7 +718,7 @@ func GetAccessTokenByFilter(filter bson.D) (*AccessToken, error) {
 	db := database.MongoDB
 	accessToken := &AccessToken{}
 	filter = append(filter, bson.E{"deletedAt", bson.M{"$exists": false}})
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err := db.Collection(OAuthAccessTokensCollection).FindOne(ctx, filter).Decode(&accessToken)
 	if err != nil {
 		if err != mongo.ErrNoDocuments {

@@ -40,7 +40,7 @@ func CreateAppVersion(appVersion AppVersion) (*AppVersion, error) {
 	appVersion.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(AppVersionsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &appVersion)
 	if err != nil {
 		log.Errorln(err)
@@ -74,7 +74,7 @@ func GetAppVersionByID(ID string) *AppVersion {
 		return appVersion
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(AppVersionsCollection).FindOne(ctx, filter).Decode(&appVersion)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

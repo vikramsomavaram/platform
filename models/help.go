@@ -40,7 +40,7 @@ func CreateHelpDetail(helpDetail HelpDetail) (*HelpDetail, error) {
 	helpDetail.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(HelpDetailsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &helpDetail)
 	if err != nil {
 		log.Errorln(err)
@@ -73,7 +73,7 @@ func GetHelpDetailByID(ID string) (*HelpDetail, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(HelpDetailsCollection).FindOne(ctx, filter).Decode(&helpDetail)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -206,7 +206,7 @@ func CreateHelpCategory(helpCategory HelpCategory) (*HelpCategory, error) {
 	helpCategory.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(HelpCategoriesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &helpCategory)
 	if err != nil {
 		log.Errorln(err)
@@ -239,7 +239,7 @@ func GetHelpCategoryByID(ID string) (*HelpCategory, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(HelpCategoriesCollection).FindOne(ctx, filter).Decode(&helpCategory)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

@@ -50,7 +50,7 @@ func GetCancelReasonByID(ID string) *CancelReason {
 		return cancelReason
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(CancelReasonCollection).FindOne(ctx, filter).Decode(&cancelReason)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -225,7 +225,7 @@ func CreateCancelReason(cancelReason CancelReason) (*CancelReason, error) {
 	cancelReason.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(CancelReasonCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &cancelReason)
 	if err != nil {
 		log.Errorln(err)

@@ -204,7 +204,7 @@ func CreateWalletTransaction(walletTransaction WalletTransaction) (*WalletTransa
 	walletTransaction.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(WalletTransactionsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &walletTransaction)
 	if err != nil {
 		log.Errorln(err)

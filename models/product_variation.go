@@ -68,7 +68,7 @@ func CreateProductVariation(productVariation ProductVariation) (*ProductVariatio
 	productVariation.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(ProductVariationCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &productVariation)
 	if err != nil {
 		log.Errorln(err)
@@ -97,7 +97,7 @@ func GetProductVariationByID(ID primitive.ObjectID) (*ProductVariation, error) {
 		//key is empty or not set
 	}
 	filter := bson.D{{"_id", ID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProductVariationCollection).FindOne(ctx, filter).Decode(&productVariation)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

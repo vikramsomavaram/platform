@@ -34,7 +34,7 @@ func CreateVehicleModel(vehicleModel VehicleModel) (*VehicleModel, error) {
 	vehicleModel.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	vehicleModelsCollection := db.Collection(VehicleModelsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := vehicleModelsCollection.InsertOne(ctx, &vehicleModel)
 	if err != nil {
 		log.Errorln(err)
@@ -67,7 +67,7 @@ func GetVehicleModelByID(ID string) (*VehicleModel, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(VehicleModelsCollection).FindOne(ctx, filter).Decode(&vehicleModel)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

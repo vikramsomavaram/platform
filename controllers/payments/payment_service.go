@@ -5,5 +5,4 @@
 package payments
 
 type PaymentGateway interface {
-
 }

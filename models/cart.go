@@ -45,7 +45,7 @@ func CreateCart(cart *Cart) (*Cart, error) {
 	cart.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(CartCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &cart)
 	if err != nil {
 		log.Errorln(err)
@@ -80,7 +80,7 @@ func GetCartByID(ID string) *Cart {
 		return cart
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(CartCollection).FindOne(ctx, filter).Decode(&cart)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -114,7 +114,7 @@ func GetCartByFilter(filter bson.D) (*Cart, error) {
 		//key is empty or not set
 	}
 
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(CartCollection).FindOne(ctx, filter).Decode(&cart)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

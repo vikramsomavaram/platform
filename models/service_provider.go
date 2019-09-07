@@ -60,7 +60,7 @@ func CreateServiceProvider(serviceProvider *ServiceProvider) (*ServiceProvider, 
 	serviceProvider.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	providersCollections := db.Collection(ServiceProvidersCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := providersCollections.InsertOne(ctx, &serviceProvider)
 	if err != nil {
 		log.Errorln(err)
@@ -95,7 +95,7 @@ func GetServiceProviderByID(ID string) *ServiceProvider {
 		return serviceProvider
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ServiceProvidersCollection).FindOne(ctx, filter).Decode(&serviceProvider)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -131,7 +131,7 @@ func GetServiceProviderByFilter(filter bson.D) *ServiceProvider {
 	}
 
 	filter = append(filter, bson.E{"deletedAt", bson.M{"$exists": false}})
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ServiceProvidersCollection).FindOne(ctx, filter).Decode(&serviceProvider)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

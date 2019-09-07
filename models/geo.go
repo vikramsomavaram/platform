@@ -70,7 +70,7 @@ func GetCountryByCode(code string) (*Country, error) {
 	db := database.MongoDB
 	country := &Country{}
 	filter := bson.D{{"code", code}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err := db.Collection(CountryCollection).FindOne(ctx, filter).Decode(&country)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -100,7 +100,7 @@ func GetCountryByID(ID string) (*Country, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(CountryCollection).FindOne(ctx, filter).Decode(&country)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -158,7 +158,7 @@ func CreateCountry(country Country) (*Country, error) {
 	country.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(CountryCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &country)
 	if err != nil {
 		log.Errorln(err)
@@ -239,7 +239,7 @@ func GetState(countryCode string, stateCode string) (*State, error) {
 	db := database.MongoDB
 	state := &State{}
 	filter := bson.D{{"countryCode", countryCode}, {Key: "stateCode", Value: stateCode}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err := db.Collection(StatesCollection).FindOne(ctx, filter).Decode(&state)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -269,7 +269,7 @@ func GetStateByID(ID string) (*State, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(StatesCollection).FindOne(ctx, filter).Decode(&state)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -327,7 +327,7 @@ func CreateState(state State) (*State, error) {
 	state.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(StatesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &state)
 	if err != nil {
 		log.Errorln(err)
@@ -408,7 +408,7 @@ func GetCityByCode(code string) (*City, error) {
 	db := database.MongoDB
 	city := &City{}
 	filter := bson.D{{"code", code}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err := db.Collection(CitiesCollection).FindOne(ctx, filter).Decode(&city)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -438,7 +438,7 @@ func GetCityByID(ID string) (*City, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(CitiesCollection).FindOne(ctx, filter).Decode(&city)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -498,7 +498,7 @@ func CreateCity(city City) (*City, error) {
 	city.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(CitiesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &city)
 	if err != nil {
 		log.Errorln(err)

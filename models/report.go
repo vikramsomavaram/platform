@@ -55,7 +55,7 @@ func GetAdminReportByID(ID string) (*AdminReport, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(AdminReportCollection).FindOne(ctx, filter).Decode(&adminReport)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -156,7 +156,7 @@ func GetJobRequestAcceptanceReportByID(ID string) (*JobRequestAcceptanceReport, 
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(JobRequestAcceptanceReportCollection).FindOne(ctx, filter).Decode(&jobRequestAcceptanceReport)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -257,7 +257,7 @@ func GetJobTimeVarianceByID(ID string) (*JobTimeVariance, error) {
 	}
 
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(JobTimeVarianceCollection).FindOne(ctx, filter).Decode(&jobTimeVariance)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -355,7 +355,7 @@ func GetProviderLogReportByID(ID string) (*ProviderLogReport, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProviderLogReportCollection).FindOne(ctx, filter).Decode(&providerLogReport)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -464,7 +464,7 @@ func GetProviderPaymentReportByID(ID string) (*ProviderPaymentReport, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProviderPaymentReportCollection).FindOne(ctx, filter).Decode(&providerPaymentReport)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -578,7 +578,7 @@ func GetStorePaymentReportByID(ID string) (*StorePaymentReport, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(StorePaymentReportCollection).FindOne(ctx, filter).Decode(&storePaymentReport)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -680,7 +680,7 @@ func GetCancelledReportByID(ID string) (*CancelledReport, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(CancelledReportCollection).FindOne(ctx, filter).Decode(&cancelledReport)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -780,7 +780,7 @@ func GetUserWalletReportByID(ID string) (*UserWalletReport, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(UserWalletReportCollection).FindOne(ctx, filter).Decode(&userWalletReport)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

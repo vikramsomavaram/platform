@@ -58,7 +58,7 @@ func CreateWebhook(webhook Webhook) (*Webhook, error) {
 	webhook.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(WebhooksCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &webhook)
 	if err != nil {
 		log.Errorln(err)
@@ -91,7 +91,7 @@ func GetWebhookByID(ID string) (*Webhook, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(WebhooksCollection).FindOne(ctx, filter).Decode(&webhook)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

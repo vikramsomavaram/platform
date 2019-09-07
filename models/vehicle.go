@@ -65,7 +65,7 @@ func CreateServiceVehicleType(serviceVehicleType ServiceVehicleType) (*ServiceVe
 	serviceVehicleType.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	serviceVehicleTypesCollection := db.Collection(ServiceVehicleTypesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := serviceVehicleTypesCollection.InsertOne(ctx, &serviceVehicleType)
 	if err != nil {
 		log.Errorln(err)
@@ -98,7 +98,7 @@ func GetServiceVehicleTypeByID(ID string) (*ServiceVehicleType, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ServiceVehicleTypesCollection).FindOne(ctx, filter).Decode(&serviceVehicleType)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

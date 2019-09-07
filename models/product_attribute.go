@@ -44,7 +44,7 @@ func CreateProductAttribute(product ProductAttribute) (*ProductAttribute, error)
 	product.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(productAttributeCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &product)
 	if err != nil {
 		log.Errorln(err)
@@ -73,7 +73,7 @@ func GetProductAttributeByID(ID string) (*ProductAttribute, error) {
 		//key is empty or not set
 	}
 	filter := bson.D{{"_id", ID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(productAttributeCollection).FindOne(ctx, filter).Decode(&product)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

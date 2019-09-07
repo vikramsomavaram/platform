@@ -67,7 +67,7 @@ func (m *Merchant) GetMerchantByMID(mid string) (*Merchant, error) {
 		//key is empty or not set
 	}
 	filter := bson.D{{"mid", mid}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(MerchantsCollection).FindOne(ctx, filter).Decode(&merchant)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -120,7 +120,7 @@ func CreateMerchant(merchant Merchant) (*Merchant, error) {
 	merchant.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(MerchantsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &merchant)
 	if err != nil {
 		log.Errorln(err)

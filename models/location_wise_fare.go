@@ -40,7 +40,7 @@ func CreateLocationWiseFare(fare LocationWiseFare) (*LocationWiseFare, error) {
 	fare.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(LocationWiseFareCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &fare)
 	if err != nil {
 		log.Errorln(err)
@@ -73,7 +73,7 @@ func GetLocationWiseFareByID(ID string) (*LocationWiseFare, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(LocationWiseFareCollection).FindOne(ctx, filter).Decode(&fare)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

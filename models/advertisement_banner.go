@@ -46,7 +46,7 @@ func CreateAdvertisementBanner(adBanner AdvertisementBanner) (*AdvertisementBann
 	adBanner.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(AdvertisementBannersCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &adBanner)
 	if err != nil {
 		log.Errorln(err)
@@ -81,7 +81,7 @@ func GetAdvertisementBannerByID(ID string) *AdvertisementBanner {
 		return adBanner
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(AdvertisementBannersCollection).FindOne(ctx, filter).Decode(&adBanner)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

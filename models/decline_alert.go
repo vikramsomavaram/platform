@@ -77,7 +77,7 @@ func CreateDeclineAlert(declineAlert DeclineAlert) (*DeclineAlert, error) {
 	declineAlert.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(AlertsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &declineAlert)
 	if err != nil {
 		log.Errorln(err)
@@ -112,7 +112,7 @@ func GetDeclineAlertForProviderByID(ID string) *DeclineAlertForProvider {
 		return declineAlertForProvider
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(AlertsCollection).FindOne(ctx, filter).Decode(&declineAlertForProvider)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -148,7 +148,7 @@ func GetDeclineAlertForUserByID(ID string) *DeclineAlertForUser {
 		return declineAlertForUser
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(AlertsCollection).FindOne(ctx, filter).Decode(&declineAlertForUser)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

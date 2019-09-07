@@ -48,7 +48,7 @@ func CreateEnterpriseAccount(enterpriseAccount EnterpriseAccount) (*EnterpriseAc
 	enterpriseAccount.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(EnterpriseAccountsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &enterpriseAccount)
 	if err != nil {
 		log.Errorln(err)
@@ -81,7 +81,7 @@ func GetEnterpriseAccountByID(ID string) (*EnterpriseAccount, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(EnterpriseAccountsCollection).FindOne(ctx, filter).Decode(&enterpriseAccount)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -239,7 +239,7 @@ func GetEnterpriseAccountPaymentReportByID(ID string) (*EnterpriseAccountPayment
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(EnterpriseAccountPaymentReportsCollection).FindOne(ctx, filter).Decode(&report)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

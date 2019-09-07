@@ -77,7 +77,7 @@ func CreateProductCategory(productCategory ProductCategory) (*ProductCategory, e
 	productCategory.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(ProductCategoriesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &productCategory)
 	if err != nil {
 		log.Errorln(err)
@@ -110,7 +110,7 @@ func GetProductCategoryByID(ID string) *ProductCategory {
 		return nil
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProductCategoriesCollection).FindOne(ctx, filter).Decode(&productCategory)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

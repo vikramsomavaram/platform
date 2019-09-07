@@ -120,7 +120,7 @@ func CreateProduct(product Product) (*Product, error) {
 	product.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(ProductsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &product)
 	if err != nil {
 		log.Errorln(err)
@@ -154,7 +154,7 @@ func GetProductByID(ID string) *Product {
 		return product
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProductsCollection).FindOne(ctx, filter).Decode(&product)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -284,7 +284,7 @@ func CreateProductMetadata(productMetadata ProductMetadata) (*ProductMetadata, e
 	productMetadata.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(ProductMetadataCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &productMetadata)
 	if err != nil {
 		log.Errorln(err)
@@ -318,7 +318,7 @@ func GetProductMetadataByID(ID string) *ProductMetadata {
 		return productMetadata
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProductMetadataCollection).FindOne(ctx, filter).Decode(&productMetadata)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -449,7 +449,7 @@ func CreateProductDownload(product ProductDownload) (*ProductDownload, error) {
 	product.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(ProductDownloadCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &product)
 	if err != nil {
 		log.Errorln(err)
@@ -478,7 +478,7 @@ func GetProductDownloadByID(ID string) (*ProductDownload, error) {
 		//key is empty or not set
 	}
 	filter := bson.D{{"_id", ID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProductDownloadCollection).FindOne(ctx, filter).Decode(&product)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -608,7 +608,7 @@ func CreateProductImage(product ProductImage) (*ProductImage, error) {
 	product.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(productImageCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &product)
 	if err != nil {
 		log.Errorln(err)
@@ -642,7 +642,7 @@ func GetProductImageByID(ID string) *ProductImage {
 		return productImage
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(productImageCollection).FindOne(ctx, filter).Decode(&productImage)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

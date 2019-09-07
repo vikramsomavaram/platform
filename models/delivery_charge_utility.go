@@ -42,7 +42,7 @@ func CreateDeliveryChargesUtility(deliveryChargesUtility DeliveryChargesUtility)
 	deliveryChargesUtility.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(DeliveryChargeUtilitiesCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &deliveryChargesUtility)
 	if err != nil {
 		log.Errorln(err)
@@ -76,7 +76,7 @@ func GetDeliveryChargesUtilityByID(ID string) (*DeliveryChargesUtility, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(DeliveryChargeUtilitiesCollection).FindOne(ctx, filter).Decode(&deliveryChargesUtility)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

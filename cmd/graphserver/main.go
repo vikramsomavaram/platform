@@ -38,7 +38,6 @@ func init() {
 	log.SetReportCaller(true)
 }
 
-
 // GraphQL Based API Server
 func main() {
 
@@ -62,8 +61,6 @@ func main() {
 	e := echo.New()
 	e.HideBanner = true
 	e.HidePort = true
-
-
 
 	//Logging
 	e.Use(echo_logger.LogrusLogger())

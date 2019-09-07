@@ -40,7 +40,7 @@ func CreateProductTag(productTag ProductTag) (*ProductTag, error) {
 	productTag.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	installationCollection := db.Collection(ProductTagCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := installationCollection.InsertOne(ctx, &productTag)
 	if err != nil {
 		log.Errorln(err)
@@ -74,7 +74,7 @@ func GetProductTagByID(ID string) *ProductTag {
 		return productTag
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(ProductTagCollection).FindOne(ctx, filter).Decode(&productTag)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

@@ -35,7 +35,7 @@ func CreateNotification(notification Notification) (*Notification, error) {
 	notification.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(NotificationsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &notification)
 	if err != nil {
 		log.Errorln(err)
@@ -68,7 +68,7 @@ func GetNotificationByID(ID string) (*Notification, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(NotificationsCollection).FindOne(ctx, filter).Decode(&notification)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -205,7 +205,7 @@ func GetPushNotificationByID(ID string) (*PushNotification, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", oID}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(PushNotificationsCollection).FindOne(ctx, filter).Decode(&notification)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

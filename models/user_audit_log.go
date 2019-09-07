@@ -58,7 +58,7 @@ func CreateUserAuditLog(userAuditLog *UserAuditLog) (*UserAuditLog, error) {
 	userAuditLog.CreatedAt = time.Now()
 	db := database.MongoDB
 	collection := db.Collection(UserAuditLogsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &userAuditLog)
 	if err != nil {
 		log.Errorln(err)
@@ -86,7 +86,7 @@ func GetUserAuditLogByID(ID string) (*UserAuditLog, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(UserAuditLogsCollection).FindOne(ctx, filter).Decode(&userAuditLog)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

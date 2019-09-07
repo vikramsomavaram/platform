@@ -55,7 +55,7 @@ func CreateDocument(document Document) (*Document, error) {
 	document.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(DocumentsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &document)
 	if err != nil {
 		log.Errorln(err)
@@ -88,7 +88,7 @@ func GetDocumentByID(ID string) (*Document, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(DocumentsCollection).FindOne(ctx, filter).Decode(&document)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -207,7 +207,7 @@ func CreateRequiredDocument(requiredDocument RequiredDocument) (*RequiredDocumen
 	requiredDocument.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(RequiredDocumentsCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &requiredDocument)
 	if err != nil {
 		log.Errorln(err)
@@ -241,7 +241,7 @@ func GetRequiredDocumentByID(ID string) (*RequiredDocument, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(RequiredDocumentsCollection).FindOne(ctx, filter).Decode(&requiredDocument)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

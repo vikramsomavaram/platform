@@ -42,7 +42,7 @@ func CreateDeliveryVehicleType(deliveryVehicleType DeliveryVehicleType) (*Delive
 	deliveryVehicleType.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(DeliveryVehicleTypeCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &deliveryVehicleType)
 	if err != nil {
 		log.Errorln(err)
@@ -75,7 +75,7 @@ func GetDeliveryVehicleTypeByID(ID string) (*DeliveryVehicleType, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(DeliveryVehicleTypeCollection).FindOne(ctx, filter).Decode(&deliveryVehicleType)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

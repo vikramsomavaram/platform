@@ -38,7 +38,7 @@ func CreatePasswordToken(passwordToken *PasswordToken) (*PasswordToken, error) {
 	passwordToken.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	passwordTokenCollection := db.Collection(PasswordTokenCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := passwordTokenCollection.InsertOne(ctx, &passwordToken)
 	if err != nil {
 		log.Errorln(err)
@@ -53,7 +53,7 @@ func GetPasswordToken(token string) (*PasswordToken, error) {
 	db := database.MongoDB
 	passwordToken := &PasswordToken{}
 	filter := bson.D{{"token", token}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err := db.Collection(PasswordTokenCollection).FindOne(ctx, filter).Decode(&passwordToken)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {

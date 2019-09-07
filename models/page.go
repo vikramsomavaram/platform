@@ -41,7 +41,7 @@ func CreatePage(page Page) (*Page, error) {
 	page.ID = primitive.NewObjectID()
 	db := database.MongoDB
 	collection := db.Collection(PageCollection)
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	_, err := collection.InsertOne(ctx, &page)
 	if err != nil {
 		log.Errorln(err)
@@ -74,7 +74,7 @@ func GetPageByID(ID string) (*Page, error) {
 		return nil, err
 	}
 	filter := bson.D{{"_id", id}, {"deletedAt", bson.M{"$exists": false}}}
-	ctx, _ := context.WithTimeout(context.Background(), 1*time.Second)
+	ctx := context.Background()
 	err = db.Collection(PageCollection).FindOne(ctx, filter).Decode(&page)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
