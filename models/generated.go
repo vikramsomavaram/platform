@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/99designs/gqlgen/graphql"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type AddAddressInput struct {
@@ -64,7 +63,7 @@ type AddBannerInput struct {
 	DisplayOrder    int        `json:"displayOrder"`
 	RedirectURL     string     `json:"redirectURL"`
 	TimePeriod      string     `json:"timePeriod"`
-	AddedDate       time.Time  `json:"addedDate"`
+	AddedDate       string     `json:"addedDate"`
 	TotalImpression string     `json:"totalImpression"`
 	UsedImpression  string     `json:"usedImpression"`
 	Validity        Validity   `json:"validity"`
@@ -114,8 +113,8 @@ type AddCouponInput struct {
 	DiscountAmount float64          `json:"discountAmount"`
 	DiscountType   string           `json:"discountType"`
 	Validity       string           `json:"validity"`
-	ValidityStart  time.Time        `json:"validityStart"`
-	ValidityExpire time.Time        `json:"validityExpire"`
+	ValidityStart  string           `json:"validityStart"`
+	ValidityExpire string           `json:"validityExpire"`
 	UsageLimit     int              `json:"usageLimit"`
 	UsedLimit      int              `json:"usedLimit"`
 	Type           CouponType       `json:"type"`
@@ -318,23 +317,23 @@ type AddOAuthApplicationInput struct {
 }
 
 type AddOrderInput struct {
-	OrderItems         *OrderItemInput    `json:"orderItems"`
-	ServiceType        string             `json:"serviceType"`
-	Coupon             string             `json:"coupon"`
-	ProviderID         primitive.ObjectID `json:"providerID"`
-	Currency           *CurrencyInput     `json:"currency"`
-	DiscountAmount     float64            `json:"discountAmount"`
-	DiscountTax        float64            `json:"discountTax"`
-	ShippingTotal      float64            `json:"shippingTotal"`
-	ShippingTax        float64            `json:"shippingTax"`
-	CartTax            float64            `json:"cartTax"`
-	OrderTotalAmount   float64            `json:"orderTotalAmount"`
-	TotalTax           float64            `json:"totalTax"`
-	PricesIncludeTax   bool               `json:"pricesIncludeTax"`
-	Billing            *BillingInput      `json:"billing"`
-	Shipping           *ShippingInput     `json:"shipping"`
-	PaymentMethod      PaymentMethodType  `json:"paymentMethod"`
-	PaymentMethodTitle string             `json:"paymentMethodTitle"`
+	OrderItems         *OrderItemInput   `json:"orderItems"`
+	ServiceType        string            `json:"serviceType"`
+	Coupon             string            `json:"coupon"`
+	ProviderID         string            `json:"providerID"`
+	Currency           *CurrencyInput    `json:"currency"`
+	DiscountAmount     float64           `json:"discountAmount"`
+	DiscountTax        float64           `json:"discountTax"`
+	ShippingTotal      float64           `json:"shippingTotal"`
+	ShippingTax        float64           `json:"shippingTax"`
+	CartTax            float64           `json:"cartTax"`
+	OrderTotalAmount   float64           `json:"orderTotalAmount"`
+	TotalTax           float64           `json:"totalTax"`
+	PricesIncludeTax   bool              `json:"pricesIncludeTax"`
+	Billing            *BillingInput     `json:"billing"`
+	Shipping           *ShippingInput    `json:"shipping"`
+	PaymentMethod      PaymentMethodType `json:"paymentMethod"`
+	PaymentMethodTitle string            `json:"paymentMethodTitle"`
 }
 
 type AddOrderNoteInput struct {
@@ -351,10 +350,10 @@ type AddOrderStatusUtilityInput struct {
 }
 
 type AddPackageType struct {
-	ID          primitive.ObjectID `json:"id"`
-	PackageType string             `json:"packageType"`
-	Language    string             `json:"language"`
-	IsActive    bool               `json:"isActive"`
+	ID          string `json:"id"`
+	PackageType string `json:"packageType"`
+	Language    string `json:"language"`
+	IsActive    bool   `json:"isActive"`
 }
 
 type AddPackageTypeInput struct {
@@ -453,8 +452,8 @@ type AddProductInput struct {
 	RegularPrice      float64                     `json:"regularPrice"`
 	ServiceType       StoreCategory               `json:"serviceType"`
 	SalePrice         float64                     `json:"salePrice"`
-	DateOnSaleFrom    time.Time                   `json:"dateOnSaleFrom"`
-	DateOnSaleTo      time.Time                   `json:"dateOnSaleTo"`
+	DateOnSaleFrom    string                      `json:"dateOnSaleFrom"`
+	DateOnSaleTo      string                      `json:"dateOnSaleTo"`
 	PriceHTML         string                      `json:"priceHtml"`
 	OnSale            bool                        `json:"onSale"`
 	Purchasable       bool                        `json:"purchasable"`
@@ -533,8 +532,8 @@ type AddProductVariationInput struct {
 	Price             float64                     `json:"price"`
 	RegularPrice      float64                     `json:"regularPrice"`
 	SalePrice         float64                     `json:"salePrice"`
-	DateOnSaleFrom    time.Time                   `json:"dateOnSaleFrom"`
-	DateOnSaleTo      time.Time                   `json:"dateOnSaleTo"`
+	DateOnSaleFrom    string                      `json:"dateOnSaleFrom"`
+	DateOnSaleTo      string                      `json:"dateOnSaleTo"`
 	OnSale            bool                        `json:"onSale"`
 	Status            ProductStatus               `json:"status"`
 	Purchasable       bool                        `json:"purchasable"`
@@ -571,19 +570,19 @@ type AddRentalPackageInput struct {
 }
 
 type AddReviewInput struct {
-	JobID                 primitive.ObjectID `json:"jobId"`
-	UserName              string             `json:"userName"`
-	UserAverageRating     float64            `json:"userAverageRating"`
-	ProviderAverageRating float64            `json:"providerAverageRating"`
-	ProviderName          string             `json:"providerName"`
-	UserRating            float64            `json:"userRating"`
-	ProviderRating        float64            `json:"providerRating"`
-	Type                  ReviewType         `json:"type"`
-	From                  string             `json:"from"`
-	To                    string             `json:"to"`
-	Date                  time.Time          `json:"date"`
-	Comment               string             `json:"comment"`
-	IsActive              bool               `json:"isActive"`
+	JobID                 string     `json:"jobId"`
+	UserName              string     `json:"userName"`
+	UserAverageRating     float64    `json:"userAverageRating"`
+	ProviderAverageRating float64    `json:"providerAverageRating"`
+	ProviderName          string     `json:"providerName"`
+	UserRating            float64    `json:"userRating"`
+	ProviderRating        float64    `json:"providerRating"`
+	Type                  ReviewType `json:"type"`
+	From                  string     `json:"from"`
+	To                    string     `json:"to"`
+	Date                  string     `json:"date"`
+	Comment               string     `json:"comment"`
+	IsActive              bool       `json:"isActive"`
 }
 
 type AddRideProfileTypeInput struct {
@@ -631,24 +630,24 @@ type AddServiceInput struct {
 }
 
 type AddServiceProviderInput struct {
-	FirstName          string             `json:"firstName"`
-	LastName           string             `json:"lastName"`
-	Email              string             `json:"email"`
-	Gender             Gender             `json:"gender"`
-	ProfilePicture     string             `json:"profilePicture"`
-	Country            string             `json:"country"`
-	State              string             `json:"state"`
-	City               string             `json:"city"`
-	Address            *AddAddressInput   `json:"address"`
-	ZipCode            int                `json:"zipCode"`
-	MobileNumber       int                `json:"mobileNumber"`
-	Company            string             `json:"company"`
-	Language           string             `json:"language"`
-	Currency           string             `json:"currency"`
-	BankAccountDetails primitive.ObjectID `json:"bankAccountDetails"`
-	ServiceDescription string             `json:"serviceDescription"`
-	CompanyID          string             `json:"companyID"`
-	Metadata           *string            `json:"metadata"`
+	FirstName          string           `json:"firstName"`
+	LastName           string           `json:"lastName"`
+	Email              string           `json:"email"`
+	Gender             Gender           `json:"gender"`
+	ProfilePicture     string           `json:"profilePicture"`
+	Country            string           `json:"country"`
+	State              string           `json:"state"`
+	City               string           `json:"city"`
+	Address            *AddAddressInput `json:"address"`
+	ZipCode            int              `json:"zipCode"`
+	MobileNumber       int              `json:"mobileNumber"`
+	Company            string           `json:"company"`
+	Language           string           `json:"language"`
+	Currency           string           `json:"currency"`
+	BankAccountDetails string           `json:"bankAccountDetails"`
+	ServiceDescription string           `json:"serviceDescription"`
+	CompanyID          string           `json:"companyID"`
+	Metadata           *string          `json:"metadata"`
 }
 
 type AddServiceProviderVehicleInput struct {
@@ -755,9 +754,9 @@ type AddStoreInput struct {
 }
 
 type AddStoreLocationInput struct {
-	StoreID           *primitive.ObjectID `json:"storeID"`
-	StoreLocationName string              `json:"storeLocationName"`
-	StoreAddress      *AddAddressInput    `json:"storeAddress"`
+	StoreID           *string          `json:"storeID"`
+	StoreLocationName string           `json:"storeLocationName"`
+	StoreAddress      *AddAddressInput `json:"storeAddress"`
 }
 
 type AddStoreVehicleTypeInput struct {
@@ -1095,8 +1094,8 @@ type BillingInput struct {
 }
 
 type Booking struct {
-	JobID     *primitive.ObjectID `json:"jobId"`
-	VehicleID *primitive.ObjectID `json:"vehicleId"`
+	JobID     *string `json:"jobId"`
+	VehicleID *string `json:"vehicleId"`
 }
 
 type BookingFareEstimate struct {
@@ -1112,7 +1111,7 @@ type BookingInput struct {
 	Email                *string                   `json:"email"`
 	Country              string                    `json:"country"`
 	MobileNumber         int                       `json:"mobileNumber"`
-	ServiceSubCategoryID primitive.ObjectID        `json:"serviceSubCategoryID"`
+	ServiceSubCategoryID string                    `json:"serviceSubCategoryID"`
 	RideDetails          *RideDetailsInput         `json:"rideDetails"`
 	DeliveryDetails      *DeliveryDetailsInput     `json:"deliveryDetails"`
 	OtherServiceDetails  *OtherServiceDetailsInput `json:"otherServiceDetails"`
@@ -1193,10 +1192,10 @@ type CartEdge struct {
 }
 
 type ChatNote struct {
-	Type      *string   `json:"type"`
-	Message   string    `json:"message"`
-	CreatedBy string    `json:"createdBy"`
-	CreatedAt time.Time `json:"createdAt"`
+	Type      *string `json:"type"`
+	Message   string  `json:"message"`
+	CreatedBy string  `json:"createdBy"`
+	CreatedAt string  `json:"createdAt"`
 }
 
 //  List of City
@@ -1254,11 +1253,11 @@ type CouponEdge struct {
 }
 
 type CouponLines struct {
-	ID          primitive.ObjectID `json:"id"`
-	Code        string             `json:"code"`
-	Discount    string             `json:"discount"`
-	DiscountTax string             `json:"discountTax"`
-	MetaData    *MetaData          `json:"metaData"`
+	ID          string    `json:"id"`
+	Code        string    `json:"code"`
+	Discount    string    `json:"discount"`
+	DiscountTax string    `json:"discountTax"`
+	MetaData    *MetaData `json:"metaData"`
 }
 
 // List of currencies
@@ -1305,9 +1304,9 @@ type CustomerEdge struct {
 }
 
 type DashboardNotification struct {
-	Action    string    `json:"action"`
-	Actor     *User     `json:"actor"`
-	CreatedAt time.Time `json:"createdAt"`
+	Action    string `json:"action"`
+	Actor     *User  `json:"actor"`
+	CreatedAt string `json:"createdAt"`
 }
 
 //  List of DeclineAlertForProvider
@@ -1392,7 +1391,7 @@ type DeliveryDetailsInput struct {
 	DeliveryInstructions  *string            `json:"deliveryInstructions"`
 	PackageDetails        *string            `json:"packageDetails"`
 	PickUpType            *DeliverPickUpType `json:"pickUpType"`
-	DeliverLater          time.Time          `json:"deliverLater"`
+	DeliverLater          string             `json:"deliverLater"`
 }
 
 //  List of DeliveryVehicleType
@@ -1557,14 +1556,14 @@ type FAQEdge struct {
 }
 
 type FeeLines struct {
-	ID        primitive.ObjectID `json:"id"`
-	Name      string             `json:"name"`
-	TaxClass  string             `json:"taxClass"`
-	TaxStatus string             `json:"taxStatus"`
-	Total     string             `json:"total"`
-	TotalTax  string             `json:"totalTax"`
-	Taxes     *Taxes             `json:"taxes"`
-	MetaData  *MetaData          `json:"metaData"`
+	ID        string    `json:"id"`
+	Name      string    `json:"name"`
+	TaxClass  string    `json:"taxClass"`
+	TaxStatus string    `json:"taxStatus"`
+	Total     string    `json:"total"`
+	TotalTax  string    `json:"totalTax"`
+	Taxes     *Taxes    `json:"taxes"`
+	MetaData  *MetaData `json:"metaData"`
 }
 
 // The `File` type
@@ -1891,16 +1890,16 @@ type InstallationSettingInput struct {
 }
 
 type Invoice struct {
-	ID           primitive.ObjectID `json:"id"`
-	JobID        primitive.ObjectID `json:"jobId"`
-	FromAddress  *Address           `json:"fromAddress"`
-	ToAddress    *Address           `json:"toAddress"`
-	JobStartTime time.Time          `json:"jobStartTime"`
-	JobEndTime   time.Time          `json:"jobEndTime"`
-	Distance     float64            `json:"distance"`
-	BaseFare     float64            `json:"baseFare"`
-	Commission   float64            `json:"commission"`
-	VehicleType  string             `json:"vehicleType"`
+	ID           string   `json:"id"`
+	JobID        string   `json:"jobId"`
+	FromAddress  *Address `json:"fromAddress"`
+	ToAddress    *Address `json:"toAddress"`
+	JobStartTime string   `json:"jobStartTime"`
+	JobEndTime   string   `json:"jobEndTime"`
+	Distance     float64  `json:"distance"`
+	BaseFare     float64  `json:"baseFare"`
+	Commission   float64  `json:"commission"`
+	VehicleType  string   `json:"vehicleType"`
 }
 
 // List of Job
@@ -1983,14 +1982,14 @@ type JobTimeVarianceEdge struct {
 }
 
 type JobUpdate struct {
-	CreatedAt            time.Time  `json:"createdAt"`
-	Status               string     `json:"status"`
-	EndedAt              *time.Time `json:"endedAt"`
-	Latitude             float64    `json:"latitude"`
-	Longitude            float64    `json:"longitude"`
-	ProviderID           string     `json:"providerId"`
-	DeliveryTimeEstimate time.Time  `json:"deliveryTimeEstimate"`
-	Order                *Order     `json:"order"`
+	CreatedAt            string  `json:"createdAt"`
+	Status               string  `json:"status"`
+	EndedAt              *string `json:"endedAt"`
+	Latitude             float64 `json:"latitude"`
+	Longitude            float64 `json:"longitude"`
+	ProviderID           string  `json:"providerId"`
+	DeliveryTimeEstimate string  `json:"deliveryTimeEstimate"`
+	Order                *Order  `json:"order"`
 }
 
 type JobsOverview struct {
@@ -2006,7 +2005,7 @@ type JobsOverview struct {
 type LatestJobs struct {
 	User            *User     `json:"user"`
 	Status          JobStatus `json:"status"`
-	CreatedAt       time.Time `json:"createdAt"`
+	CreatedAt       string    `json:"createdAt"`
 	StartingAddress *Address  `json:"startingAddress"`
 	EndingAddress   *Address  `json:"endingAddress"`
 }
@@ -2119,15 +2118,15 @@ type OrderEdge struct {
 }
 
 type OrderItem struct {
-	ID       primitive.ObjectID `json:"id"`
-	Name     string             `json:"name"`
-	Quantity int                `json:"quantity"`
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Quantity int    `json:"quantity"`
 }
 
 type OrderItemInput struct {
-	ID       primitive.ObjectID `json:"id"`
-	Name     string             `json:"name"`
-	Quantity int                `json:"quantity"`
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Quantity int    `json:"quantity"`
 }
 
 type OrderNoteConnection struct {
@@ -2167,7 +2166,7 @@ type OrderStatusUtilityEdge struct {
 
 type OtherServiceDetailsInput struct {
 	ServiceOrderItems []*ServiceOrderInput `json:"serviceOrderItems"`
-	Schedule          *time.Time           `json:"schedule"`
+	Schedule          *string              `json:"schedule"`
 	DeliveryAddress   *AddAddressInput     `json:"deliveryAddress"`
 }
 
@@ -2220,15 +2219,15 @@ type PageInfo struct {
 }
 
 type PaidEarning struct {
-	ID                     primitive.ObjectID `json:"id"`
-	BookingDate            time.Time          `json:"bookingDate"`
-	FareAmount             float64            `json:"fareAmount"`
-	Commission             float64            `json:"commission"`
-	BookingCharge          float64            `json:"bookingCharge"`
-	Tip                    float64            `json:"tip"`
-	PaymentAfterCommission float64            `json:"paymentAfterCommission"`
-	PaymentMethod          PaymentMethodType  `json:"paymentMethod"`
-	Invoice                *Invoice           `json:"invoice"`
+	ID                     string            `json:"id"`
+	BookingDate            string            `json:"bookingDate"`
+	FareAmount             float64           `json:"fareAmount"`
+	Commission             float64           `json:"commission"`
+	BookingCharge          float64           `json:"bookingCharge"`
+	Tip                    float64           `json:"tip"`
+	PaymentAfterCommission float64           `json:"paymentAfterCommission"`
+	PaymentMethod          PaymentMethodType `json:"paymentMethod"`
+	Invoice                *Invoice          `json:"invoice"`
 }
 
 // List of PaidEarning
@@ -2532,12 +2531,12 @@ type ProviderPaymentReportEdge struct {
 }
 
 type ProviderReview struct {
-	OrderNumber    string    `json:"orderNumber"`
-	FromUserName   string    `json:"fromUserName"`
-	ToProviderName string    `json:"toProviderName"`
-	Rate           string    `json:"rate"`
-	Date           time.Time `json:"date"`
-	Comment        string    `json:"comment"`
+	OrderNumber    string `json:"orderNumber"`
+	FromUserName   string `json:"fromUserName"`
+	ToProviderName string `json:"toProviderName"`
+	Rate           string `json:"rate"`
+	Date           string `json:"date"`
+	Comment        string `json:"comment"`
 }
 
 // List of ProviderWalletTransaction
@@ -2576,15 +2575,15 @@ type PushNotificationInput struct {
 }
 
 type RecentUnpaidEarning struct {
-	ID                     primitive.ObjectID `json:"id"`
-	BookingDate            time.Time          `json:"bookingDate"`
-	FareAmount             float64            `json:"fareAmount"`
-	Commission             float64            `json:"commission"`
-	BookingCharge          float64            `json:"bookingCharge"`
-	Tip                    float64            `json:"tip"`
-	PaymentAfterCommission float64            `json:"paymentAfterCommission"`
-	PaymentMethod          PaymentMethodType  `json:"paymentMethod"`
-	Invoice                *Invoice           `json:"invoice"`
+	ID                     string            `json:"id"`
+	BookingDate            string            `json:"bookingDate"`
+	FareAmount             float64           `json:"fareAmount"`
+	Commission             float64           `json:"commission"`
+	BookingCharge          float64           `json:"bookingCharge"`
+	Tip                    float64           `json:"tip"`
+	PaymentAfterCommission float64           `json:"paymentAfterCommission"`
+	PaymentMethod          PaymentMethodType `json:"paymentMethod"`
+	Invoice                *Invoice          `json:"invoice"`
 }
 
 // List of RecentUnpaidEarning
@@ -2611,9 +2610,9 @@ type ReferralReport struct {
 }
 
 type Refunds struct {
-	ID     primitive.ObjectID `json:"id"`
-	Reason string             `json:"reason"`
-	Total  float64            `json:"total"`
+	ID     string  `json:"id"`
+	Reason string  `json:"reason"`
+	Total  float64 `json:"total"`
 }
 
 //  List of rental packages
@@ -2669,12 +2668,12 @@ type RestaurantEdge struct {
 }
 
 type RestaurantReview struct {
-	OrderNumber      string    `json:"orderNumber"`
-	FromUserName     string    `json:"fromUserName"`
-	ToRestaurantName string    `json:"toRestaurantName"`
-	Rate             string    `json:"rate"`
-	Date             time.Time `json:"date"`
-	Comment          string    `json:"comment"`
+	OrderNumber      string `json:"orderNumber"`
+	FromUserName     string `json:"fromUserName"`
+	ToRestaurantName string `json:"toRestaurantName"`
+	Rate             string `json:"rate"`
+	Date             string `json:"date"`
+	Comment          string `json:"comment"`
 }
 
 // List of Review
@@ -2696,10 +2695,10 @@ type ReviewEdge struct {
 }
 
 type ReviewerAvatarUrls struct {
-	ID    primitive.ObjectID `json:"id"`
-	Num24 string             `json:"num24"`
-	Num48 string             `json:"num48"`
-	Num96 string             `json:"num96"`
+	ID    string `json:"id"`
+	Num24 string `json:"num24"`
+	Num48 string `json:"num48"`
+	Num96 string `json:"num96"`
 }
 
 type ReviewerAvatarUrlsInput struct {
@@ -2713,7 +2712,7 @@ type RideDetailsInput struct {
 	PickUpType            RidePickUpType   `json:"pickUpType"`
 	PickUpLocation        *AddAddressInput `json:"pickUpLocation"`
 	DropOffLocation       *AddAddressInput `json:"dropOffLocation"`
-	RideLater             time.Time        `json:"RideLater"`
+	RideLater             string           `json:"RideLater"`
 	LadiesRide            *bool            `json:"ladiesRide"`
 	HandicapAccessibility *bool            `json:"handicapAccessibility"`
 	ChildSeat             *bool            `json:"childSeat"`
@@ -2814,9 +2813,9 @@ type ServiceEdge struct {
 }
 
 type ServiceOrderInput struct {
-	ServiceTypeID primitive.ObjectID `json:"serviceTypeID"`
-	Quantity      int                `json:"quantity"`
-	DeliveryNotes string             `json:"deliveryNotes"`
+	ServiceTypeID string `json:"serviceTypeID"`
+	Quantity      int    `json:"quantity"`
+	DeliveryNotes string `json:"deliveryNotes"`
 }
 
 //  List of ServiceProvider
@@ -2838,7 +2837,7 @@ type ServiceProviderEdge struct {
 }
 
 type ServiceProviderProfileInput struct {
-	ID                 primitive.ObjectID      `json:"id"`
+	ID                 string                  `json:"id"`
 	Address            *UpdateAddressInput     `json:"address"`
 	Language           string                  `json:"language"`
 	BankAccountDetails *UpdateBankDetailsInput `json:"bankAccountDetails"`
@@ -2847,13 +2846,13 @@ type ServiceProviderProfileInput struct {
 
 type ServiceProviderSignUpInput struct {
 	ServiceCategory    ServiceCategory      `json:"serviceCategory"`
-	ServiceSubCategory primitive.ObjectID   `json:"serviceSubCategory"`
+	ServiceSubCategory string               `json:"serviceSubCategory"`
 	Address            *AddAddressInput     `json:"address"`
 	BankAccountDetails *AddBankDetailsInput `json:"bankAccountDetails"`
 }
 
 type ServiceProviderVehicle struct {
-	ID                  primitive.ObjectID     `json:"id"`
+	ID                  string                 `json:"id"`
 	VehicleCompanyName  string                 `json:"vehicleCompanyName"`
 	VehicleModelName    string                 `json:"vehicleModelName"`
 	VehicleYear         string                 `json:"vehicleYear"`
@@ -3080,13 +3079,13 @@ type StoreConnection struct {
 }
 
 type StoreDetails struct {
-	ID              primitive.ObjectID `json:"id"`
-	StoreName       string             `json:"storeName"`
-	Email           string             `json:"email"`
-	ServiceCategory string             `json:"serviceCategory"`
-	ItemCategories  int                `json:"itemCategories"`
-	MobileNumber    int                `json:"mobileNumber"`
-	EditDocuments   string             `json:"editDocuments"`
+	ID              string `json:"id"`
+	StoreName       string `json:"storeName"`
+	Email           string `json:"email"`
+	ServiceCategory string `json:"serviceCategory"`
+	ItemCategories  int    `json:"itemCategories"`
+	MobileNumber    int    `json:"mobileNumber"`
+	EditDocuments   string `json:"editDocuments"`
 }
 
 //  Paginating the node StoreDetails
@@ -3114,17 +3113,17 @@ type StoreLocationEdge struct {
 }
 
 type StoreOrder struct {
-	OrderID                      primitive.ObjectID `json:"orderID"`
-	OrderDate                    time.Time          `json:"orderDate"`
-	UserName                     string             `json:"userName"`
-	StoreName                    string             `json:"storeName"`
-	ProviderName                 string             `json:"providerName"`
-	DeliveryDriver               string             `json:"deliveryDriver"`
-	OrderTotalAmount             float64            `json:"orderTotalAmount"`
-	ServiceType                  string             `json:"serviceType"`
-	OrderStatus                  string             `json:"orderStatus"`
-	PaymentMethod                string             `json:"paymentMethod"`
-	CancellationAndRefundDetails string             `json:"cancellationAndRefundDetails"`
+	OrderID                      string  `json:"orderID"`
+	OrderDate                    string  `json:"orderDate"`
+	UserName                     string  `json:"userName"`
+	StoreName                    string  `json:"storeName"`
+	ProviderName                 string  `json:"providerName"`
+	DeliveryDriver               string  `json:"deliveryDriver"`
+	OrderTotalAmount             float64 `json:"orderTotalAmount"`
+	ServiceType                  string  `json:"serviceType"`
+	OrderStatus                  string  `json:"orderStatus"`
+	PaymentMethod                string  `json:"paymentMethod"`
+	CancellationAndRefundDetails string  `json:"cancellationAndRefundDetails"`
 }
 
 // List of StorePaymentReport
@@ -3192,7 +3191,7 @@ type StoreSignUpInput struct {
 	MobileNumber       string                   `json:"mobileNumber"`
 	StoreLogo          string                   `json:"storeLogo"`
 	Language           string                   `json:"language"`
-	BankAccountDetails primitive.ObjectID       `json:"bankAccountDetails"`
+	BankAccountDetails string                   `json:"bankAccountDetails"`
 }
 
 //  List of StoreVehicleType
@@ -3214,36 +3213,36 @@ type StoreVehicleTypeEdge struct {
 }
 
 type SubscriberPayload struct {
-	ID        *primitive.ObjectID         `json:"id"`
+	ID        *string                     `json:"id"`
 	Name      *string                     `json:"name"`
 	Email     *string                     `json:"email"`
 	Status    *NewsletterSubscriberStatus `json:"status"`
-	Date      *time.Time                  `json:"date"`
+	Date      *string                     `json:"date"`
 	IPAddress *string                     `json:"ipAddress"`
 }
 
 type SupportAgent struct {
-	ID          primitive.ObjectID   `json:"id"`
+	ID          string               `json:"id"`
 	User        string               `json:"user"`
-	CreatedAt   time.Time            `json:"createdAt"`
-	UpdatedAt   time.Time            `json:"updatedAt"`
+	CreatedAt   string               `json:"createdAt"`
+	UpdatedAt   string               `json:"updatedAt"`
 	IsEnabled   bool                 `json:"isEnabled"`
 	Departments []*SupportDepartment `json:"departments"`
 	Skills      []*SupportSkills     `json:"skills"`
 }
 
 type SupportDepartment struct {
-	ID          primitive.ObjectID `json:"id"`
-	Name        string             `json:"name"`
-	Description string             `json:"description"`
-	CreatedAt   time.Time          `json:"createdAt"`
-	UpdatedAt   time.Time          `json:"updatedAt"`
-	IsEnabled   bool               `json:"isEnabled"`
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	CreatedAt   string `json:"createdAt"`
+	UpdatedAt   string `json:"updatedAt"`
+	IsEnabled   bool   `json:"isEnabled"`
 }
 
 type SupportSkills struct {
-	ID   primitive.ObjectID `json:"id"`
-	Name string             `json:"name"`
+	ID   string `json:"id"`
+	Name string `json:"name"`
 }
 
 type TaxLines struct {
@@ -3270,79 +3269,79 @@ type UnitPrice struct {
 }
 
 type UpdateAddressInput struct {
-	ID                 primitive.ObjectID `json:"id"`
-	Name               string             `json:"name"`
-	FirstName          string             `json:"firstName"`
-	LastName           string             `json:"lastName"`
-	CompanyName        *string            `json:"companyName"`
-	AddressDescription string             `json:"addressDescription"`
-	City               string             `json:"city"`
-	State              string             `json:"state"`
-	Country            string             `json:"country"`
-	PostCode           int                `json:"postCode"`
-	Latitude           float64            `json:"latitude"`
-	Longitute          float64            `json:"longitute"`
+	ID                 string  `json:"id"`
+	Name               string  `json:"name"`
+	FirstName          string  `json:"firstName"`
+	LastName           string  `json:"lastName"`
+	CompanyName        *string `json:"companyName"`
+	AddressDescription string  `json:"addressDescription"`
+	City               string  `json:"city"`
+	State              string  `json:"state"`
+	Country            string  `json:"country"`
+	PostCode           int     `json:"postCode"`
+	Latitude           float64 `json:"latitude"`
+	Longitute          float64 `json:"longitute"`
 }
 
 type UpdateAirportSurchargeInput struct {
-	ID               primitive.ObjectID `json:"id"`
-	AirportLocation  string             `json:"airportLocation"`
-	PickUpSurcharge  string             `json:"pickUpSurcharge"`
-	DropOffSurcharge string             `json:"dropOffSurcharge"`
-	VehicleType      string             `json:"vehicleType"`
-	IsActive         bool               `json:"isActive"`
+	ID               string `json:"id"`
+	AirportLocation  string `json:"airportLocation"`
+	PickUpSurcharge  string `json:"pickUpSurcharge"`
+	DropOffSurcharge string `json:"dropOffSurcharge"`
+	VehicleType      string `json:"vehicleType"`
+	IsActive         bool   `json:"isActive"`
 }
 
 type UpdateAppVersionInput struct {
-	ID             primitive.ObjectID `json:"id"`
-	MinimumVersion string             `json:"minimumVersion"`
-	LatestVersion  string             `json:"latestVersion"`
-	DownloadURL    string             `json:"downloadUrl"`
-	Channel        string             `json:"channel"`
+	ID             string `json:"id"`
+	MinimumVersion string `json:"minimumVersion"`
+	LatestVersion  string `json:"latestVersion"`
+	DownloadURL    string `json:"downloadUrl"`
+	Channel        string `json:"channel"`
 }
 
 type UpdateBankDetailsInput struct {
-	ID                 primitive.ObjectID `json:"id"`
-	Email              string             `json:"email"`
-	AccountHolderName  string             `json:"accountHolderName"`
-	AccountNumber      int                `json:"accountNumber"`
-	BankName           string             `json:"bankName"`
-	BankLocation       string             `json:"bankLocation"`
-	BankCountry        string             `json:"bankCountry"`
-	SwiftCode          string             `json:"swiftCode"`
-	IfscCode           string             `json:"ifscCode"`
-	Metadata           *string            `json:"metadata"`
-	Country            string             `json:"country"`
-	Currency           string             `json:"currency"`
-	DefaultForCurrency bool               `json:"defaultForCurrency"`
-	Fingerprint        string             `json:"fingerprint"`
-	RoutingNumber      string             `json:"routingNumber"`
+	ID                 string  `json:"id"`
+	Email              string  `json:"email"`
+	AccountHolderName  string  `json:"accountHolderName"`
+	AccountNumber      int     `json:"accountNumber"`
+	BankName           string  `json:"bankName"`
+	BankLocation       string  `json:"bankLocation"`
+	BankCountry        string  `json:"bankCountry"`
+	SwiftCode          string  `json:"swiftCode"`
+	IfscCode           string  `json:"ifscCode"`
+	Metadata           *string `json:"metadata"`
+	Country            string  `json:"country"`
+	Currency           string  `json:"currency"`
+	DefaultForCurrency bool    `json:"defaultForCurrency"`
+	Fingerprint        string  `json:"fingerprint"`
+	RoutingNumber      string  `json:"routingNumber"`
 }
 
 type UpdateBannerInput struct {
-	ID              primitive.ObjectID `json:"id"`
-	BannerName      string             `json:"bannerName"`
-	BannerImage     string             `json:"bannerImage"`
-	DisplayOrder    int                `json:"displayOrder"`
-	RedirectURL     string             `json:"redirectURL"`
-	TimePeriod      string             `json:"timePeriod"`
-	AddedDate       time.Time          `json:"addedDate"`
-	TotalImpression string             `json:"totalImpression"`
-	UsedImpression  string             `json:"usedImpression"`
-	Validity        Validity           `json:"validity"`
-	ClickCount      ClickCount         `json:"clickCount"`
-	IsActive        bool               `json:"isActive"`
+	ID              string     `json:"id"`
+	BannerName      string     `json:"bannerName"`
+	BannerImage     string     `json:"bannerImage"`
+	DisplayOrder    int        `json:"displayOrder"`
+	RedirectURL     string     `json:"redirectURL"`
+	TimePeriod      string     `json:"timePeriod"`
+	AddedDate       string     `json:"addedDate"`
+	TotalImpression string     `json:"totalImpression"`
+	UsedImpression  string     `json:"usedImpression"`
+	Validity        Validity   `json:"validity"`
+	ClickCount      ClickCount `json:"clickCount"`
+	IsActive        bool       `json:"isActive"`
 }
 
 type UpdateBusinessTripReasonInput struct {
-	ID               primitive.ObjectID `json:"id"`
-	TripReason       string             `json:"tripReason"`
-	ProfileShortName string             `json:"profileShortName"`
-	OrganizationType string             `json:"organizationType"`
-	ProfileTitle     string             `json:"profileTitle"`
-	TitleDescription string             `json:"titleDescription"`
-	Reason           string             `json:"reason"`
-	IsActive         bool               `json:"isActive"`
+	ID               string `json:"id"`
+	TripReason       string `json:"tripReason"`
+	ProfileShortName string `json:"profileShortName"`
+	OrganizationType string `json:"organizationType"`
+	ProfileTitle     string `json:"profileTitle"`
+	TitleDescription string `json:"titleDescription"`
+	Reason           string `json:"reason"`
+	IsActive         bool   `json:"isActive"`
 }
 
 type UpdateCancelReasonInput struct {
@@ -3354,101 +3353,101 @@ type UpdateCancelReasonInput struct {
 }
 
 type UpdateCityInput struct {
-	ID          primitive.ObjectID `json:"id"`
-	CountryName string             `json:"countryName"`
-	CountryCode string             `json:"countryCode"`
-	StateName   string             `json:"stateName"`
-	StateCode   string             `json:"stateCode"`
-	CityName    string             `json:"cityName"`
-	IsActive    bool               `json:"isActive"`
+	ID          string `json:"id"`
+	CountryName string `json:"countryName"`
+	CountryCode string `json:"countryCode"`
+	StateName   string `json:"stateName"`
+	StateCode   string `json:"stateCode"`
+	CityName    string `json:"cityName"`
+	IsActive    bool   `json:"isActive"`
 }
 
 type UpdateCountryInput struct {
-	ID              primitive.ObjectID `json:"id"`
-	CountryName     string             `json:"countryName"`
-	Code            string             `json:"code"`
-	PhoneCode       string             `json:"phoneCode"`
-	DistanceUnit    DistanceUnits      `json:"distanceUnit"`
-	EmergencyNumber string             `json:"emergencyNumber"`
-	Tax             string             `json:"tax"`
-	IsActive        bool               `json:"isActive"`
+	ID              string        `json:"id"`
+	CountryName     string        `json:"countryName"`
+	Code            string        `json:"code"`
+	PhoneCode       string        `json:"phoneCode"`
+	DistanceUnit    DistanceUnits `json:"distanceUnit"`
+	EmergencyNumber string        `json:"emergencyNumber"`
+	Tax             string        `json:"tax"`
+	IsActive        bool          `json:"isActive"`
 }
 
 type UpdateCouponInput struct {
-	ID             primitive.ObjectID `json:"id"`
-	Code           string             `json:"code"`
-	Description    *string            `json:"description"`
-	DiscountAmount float64            `json:"discountAmount"`
-	DiscountType   string             `json:"discountType"`
-	Validity       string             `json:"validity"`
-	ValidityStart  time.Time          `json:"validityStart"`
-	ValidityExpire time.Time          `json:"validityExpire"`
-	UsageLimit     int                `json:"usageLimit"`
-	Type           CouponType         `json:"type"`
-	UsedLimit      int                `json:"usedLimit"`
-	ServiceType    CouponSystemType   `json:"serviceType"`
-	IsActive       bool               `json:"isActive"`
+	ID             string           `json:"id"`
+	Code           string           `json:"code"`
+	Description    *string          `json:"description"`
+	DiscountAmount float64          `json:"discountAmount"`
+	DiscountType   string           `json:"discountType"`
+	Validity       string           `json:"validity"`
+	ValidityStart  string           `json:"validityStart"`
+	ValidityExpire string           `json:"validityExpire"`
+	UsageLimit     int              `json:"usageLimit"`
+	Type           CouponType       `json:"type"`
+	UsedLimit      int              `json:"usedLimit"`
+	ServiceType    CouponSystemType `json:"serviceType"`
+	IsActive       bool             `json:"isActive"`
 }
 
 type UpdateCurrencyInput struct {
-	ID              primitive.ObjectID `json:"id"`
-	Country         string             `json:"country"`
-	Name            string             `json:"name"`
-	CurrencyCode    string             `json:"currencyCode"`
-	Ratio           string             `json:"ratio"`
-	ThresholdAmount string             `json:"thresholdAmount"`
-	Symbol          string             `json:"symbol"`
-	IsDefault       bool               `json:"isDefault"`
+	ID              string `json:"id"`
+	Country         string `json:"country"`
+	Name            string `json:"name"`
+	CurrencyCode    string `json:"currencyCode"`
+	Ratio           string `json:"ratio"`
+	ThresholdAmount string `json:"thresholdAmount"`
+	Symbol          string `json:"symbol"`
+	IsDefault       bool   `json:"isDefault"`
 }
 
 type UpdateCustomerInput struct {
-	ID               primitive.ObjectID `json:"id"`
-	Email            string             `json:"email"`
-	FirstName        string             `json:"firstName"`
-	LastName         string             `json:"lastName"`
-	Role             string             `json:"role"`
-	Username         string             `json:"username"`
-	IsPayingCustomer bool               `json:"isPayingCustomer"`
-	AvatarURL        string             `json:"avatarURL"`
-	Shipping         *ShippingInput     `json:"shipping"`
-	Billing          *BillingInput      `json:"billing"`
+	ID               string         `json:"id"`
+	Email            string         `json:"email"`
+	FirstName        string         `json:"firstName"`
+	LastName         string         `json:"lastName"`
+	Role             string         `json:"role"`
+	Username         string         `json:"username"`
+	IsPayingCustomer bool           `json:"isPayingCustomer"`
+	AvatarURL        string         `json:"avatarURL"`
+	Shipping         *ShippingInput `json:"shipping"`
+	Billing          *BillingInput  `json:"billing"`
 }
 
 type UpdateDeliveryChargeInput struct {
-	ID                              primitive.ObjectID `json:"id"`
-	LocationName                    string             `json:"locationName"`
-	OrderPrice                      int                `json:"orderPrice"`
-	OrderDeliveryChargesAboveAmount int                `json:"orderDeliveryChargesAboveAmount"`
-	OrderDeliveryChargesBelowAmount int                `json:"orderDeliveryChargesBelowAmount"`
-	FreeOrderDeliveryCharges        int                `json:"freeOrderDeliveryCharges"`
-	FreeDeliveryRadius              int                `json:"freeDeliveryRadius"`
-	OrderTotal                      int                `json:"orderTotal"`
-	IsActive                        bool               `json:"isActive"`
+	ID                              string `json:"id"`
+	LocationName                    string `json:"locationName"`
+	OrderPrice                      int    `json:"orderPrice"`
+	OrderDeliveryChargesAboveAmount int    `json:"orderDeliveryChargesAboveAmount"`
+	OrderDeliveryChargesBelowAmount int    `json:"orderDeliveryChargesBelowAmount"`
+	FreeOrderDeliveryCharges        int    `json:"freeOrderDeliveryCharges"`
+	FreeDeliveryRadius              int    `json:"freeDeliveryRadius"`
+	OrderTotal                      int    `json:"orderTotal"`
+	IsActive                        bool   `json:"isActive"`
 }
 
 type UpdateDeliveryChargesUtilityInput struct {
-	ID                              primitive.ObjectID `json:"id"`
-	Location                        string             `json:"location"`
-	OrderPrice                      int                `json:"orderPrice"`
-	OrderDeliveryChargesAboveAmout  int                `json:"orderDeliveryChargesAboveAmout"`
-	OrderDeliveryChargesBelowAmount int                `json:"orderDeliveryChargesBelowAmount"`
-	FreeDeliveryForOrderAmountAbove int                `json:"freeDeliveryForOrderAmountAbove"`
-	FreeDeliveryRadius              int                `json:"freeDeliveryRadius"`
+	ID                              string `json:"id"`
+	Location                        string `json:"location"`
+	OrderPrice                      int    `json:"orderPrice"`
+	OrderDeliveryChargesAboveAmout  int    `json:"orderDeliveryChargesAboveAmout"`
+	OrderDeliveryChargesBelowAmount int    `json:"orderDeliveryChargesBelowAmount"`
+	FreeDeliveryForOrderAmountAbove int    `json:"freeDeliveryForOrderAmountAbove"`
+	FreeDeliveryRadius              int    `json:"freeDeliveryRadius"`
 }
 
 type UpdateDeliveryVehicleTypeInput struct {
-	ID                              primitive.ObjectID `json:"id"`
-	VehicleType                     string             `json:"vehicleType"`
-	Location                        string             `json:"location"`
-	DeliveryChargeForCompletedOrder float64            `json:"deliveryChargeForCompletedOrder"`
-	DeliveryChargeForCancelledOrder float64            `json:"deliveryChargeForCancelledOrder"`
-	DeliveryRadius                  float64            `json:"deliveryRadius"`
-	Order                           int                `json:"order"`
-	IsActive                        bool               `json:"isActive"`
+	ID                              string  `json:"id"`
+	VehicleType                     string  `json:"vehicleType"`
+	Location                        string  `json:"location"`
+	DeliveryChargeForCompletedOrder float64 `json:"deliveryChargeForCompletedOrder"`
+	DeliveryChargeForCancelledOrder float64 `json:"deliveryChargeForCancelledOrder"`
+	DeliveryRadius                  float64 `json:"deliveryRadius"`
+	Order                           int     `json:"order"`
+	IsActive                        bool    `json:"isActive"`
 }
 
 type UpdateDocumentInput struct {
-	ID           primitive.ObjectID   `json:"id"`
+	ID           string               `json:"id"`
 	ExpiryDate   string               `json:"expiryDate"`
 	Name         string               `json:"name"`
 	URL          string               `json:"url"`
@@ -3458,110 +3457,110 @@ type UpdateDocumentInput struct {
 }
 
 type UpdateEmailTemplateInput struct {
-	ID         primitive.ObjectID `json:"id"`
-	Subject    string             `json:"subject"`
-	Purpose    string             `json:"purpose"`
-	From       string             `json:"from"`
-	TextBody   string             `json:"textBody"`
-	HTMLBody   string             `json:"htmlBody"`
-	Language   string             `json:"language"`
-	TemplateID string             `json:"templateId"`
+	ID         string `json:"id"`
+	Subject    string `json:"subject"`
+	Purpose    string `json:"purpose"`
+	From       string `json:"from"`
+	TextBody   string `json:"textBody"`
+	HTMLBody   string `json:"htmlBody"`
+	Language   string `json:"language"`
+	TemplateID string `json:"templateId"`
 }
 
 type UpdateEmergencyContactInput struct {
-	ID       primitive.ObjectID `json:"id"`
-	Name     string             `json:"name"`
-	MobileNo int                `json:"mobileNo"`
-	EmailID  string             `json:"emailID"`
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	MobileNo int    `json:"mobileNo"`
+	EmailID  string `json:"emailID"`
 }
 
 type UpdateEnterpriseAccountInput struct {
-	ID               primitive.ObjectID `json:"id"`
-	OrganizationName string             `json:"organizationName"`
-	OrganizationType string             `json:"organizationType"`
-	PaymentMethod    string             `json:"paymentMethod"`
-	Email            string             `json:"email"`
-	Country          string             `json:"country"`
-	State            string             `json:"state"`
-	City             string             `json:"city"`
-	Address          *AddAddressInput   `json:"address"`
-	ZipCode          string             `json:"zipCode"`
-	Language         string             `json:"language"`
-	PaymentBy        PaymentBy          `json:"paymentBy"`
-	Phone            string             `json:"phone"`
-	IsActive         bool               `json:"isActive"`
+	ID               string           `json:"id"`
+	OrganizationName string           `json:"organizationName"`
+	OrganizationType string           `json:"organizationType"`
+	PaymentMethod    string           `json:"paymentMethod"`
+	Email            string           `json:"email"`
+	Country          string           `json:"country"`
+	State            string           `json:"state"`
+	City             string           `json:"city"`
+	Address          *AddAddressInput `json:"address"`
+	ZipCode          string           `json:"zipCode"`
+	Language         string           `json:"language"`
+	PaymentBy        PaymentBy        `json:"paymentBy"`
+	Phone            string           `json:"phone"`
+	IsActive         bool             `json:"isActive"`
 }
 
 type UpdateFAQCategoryInput struct {
-	ID           primitive.ObjectID `json:"id"`
-	IsActive     bool               `json:"isActive"`
-	DisplayOrder int                `json:"displayOrder"`
-	Label        string             `json:"label"`
+	ID           string `json:"id"`
+	IsActive     bool   `json:"isActive"`
+	DisplayOrder int    `json:"displayOrder"`
+	Label        string `json:"label"`
 }
 
 type UpdateFAQInput struct {
-	ID           primitive.ObjectID `json:"id"`
-	Category     string             `json:"category"`
-	IsActive     bool               `json:"isActive"`
-	DisplayOrder int                `json:"displayOrder"`
-	Question     string             `json:"question"`
-	Answer       string             `json:"answer"`
+	ID           string `json:"id"`
+	Category     string `json:"category"`
+	IsActive     bool   `json:"isActive"`
+	DisplayOrder int    `json:"displayOrder"`
+	Question     string `json:"question"`
+	Answer       string `json:"answer"`
 }
 
 type UpdateFoodDeliveryLabelInput struct {
-	ID                     primitive.ObjectID `json:"id"`
-	Code                   string             `json:"code"`
-	ValueInEnglishLanguage string             `json:"valueInEnglishLanguage"`
-	LanguageLabel          string             `json:"languageLabel"`
-	IsActive               bool               `json:"isActive"`
+	ID                     string `json:"id"`
+	Code                   string `json:"code"`
+	ValueInEnglishLanguage string `json:"valueInEnglishLanguage"`
+	LanguageLabel          string `json:"languageLabel"`
+	IsActive               bool   `json:"isActive"`
 }
 
 type UpdateGeneralLabelInput struct {
-	ID                     primitive.ObjectID `json:"id"`
-	Code                   string             `json:"code"`
-	ValueInEnglishLanguage string             `json:"valueInEnglishLanguage"`
-	LanguageLabel          string             `json:"languageLabel"`
-	IsActive               bool               `json:"isActive"`
+	ID                     string `json:"id"`
+	Code                   string `json:"code"`
+	ValueInEnglishLanguage string `json:"valueInEnglishLanguage"`
+	LanguageLabel          string `json:"languageLabel"`
+	IsActive               bool   `json:"isActive"`
 }
 
 type UpdateGeoFenceLocationInput struct {
-	ID           primitive.ObjectID `json:"id"`
-	Name         string             `json:"name"`
-	Country      string             `json:"country"`
-	LocationFor  string             `json:"locationFor"`
-	LocationType string             `json:"LocationType"`
-	IsActive     bool               `json:"IsActive"`
-	GeoJSON      string             `json:"GeoJSON"`
+	ID           string `json:"id"`
+	Name         string `json:"name"`
+	Country      string `json:"country"`
+	LocationFor  string `json:"locationFor"`
+	LocationType string `json:"LocationType"`
+	IsActive     bool   `json:"IsActive"`
+	GeoJSON      string `json:"GeoJSON"`
 }
 
 type UpdateGeoFenceRestrictedAreaInput struct {
-	ID              primitive.ObjectID `json:"id"`
-	Address         string             `json:"address"`
-	Area            string             `json:"area"`
-	IsActive        bool               `json:"isActive"`
-	GeoLocationArea string             `json:"geoLocationArea"`
-	RestrictArea    RestrictArea       `json:"restrictArea"`
-	RestrictType    RestrictType       `json:"restrictType"`
+	ID              string       `json:"id"`
+	Address         string       `json:"address"`
+	Area            string       `json:"area"`
+	IsActive        bool         `json:"isActive"`
+	GeoLocationArea string       `json:"geoLocationArea"`
+	RestrictArea    RestrictArea `json:"restrictArea"`
+	RestrictType    RestrictType `json:"restrictType"`
 }
 
 type UpdateGroceryDeliveryLabelInput struct {
-	ID                     primitive.ObjectID `json:"id"`
-	Code                   string             `json:"code"`
-	ValueInEnglishLanguage string             `json:"valueInEnglishLanguage"`
-	LanguageLabel          string             `json:"languageLabel"`
-	IsActive               bool               `json:"isActive"`
+	ID                     string `json:"id"`
+	Code                   string `json:"code"`
+	ValueInEnglishLanguage string `json:"valueInEnglishLanguage"`
+	LanguageLabel          string `json:"languageLabel"`
+	IsActive               bool   `json:"isActive"`
 }
 
 type UpdateHelpCategoryInput struct {
-	ID          primitive.ObjectID `json:"id"`
-	IsActive    bool               `json:"isActive"`
-	Order       string             `json:"order"`
-	Title       string             `json:"title"`
-	CategoryFor HelpCategoryFor    `json:"categoryFor"`
+	ID          string          `json:"id"`
+	IsActive    bool            `json:"isActive"`
+	Order       string          `json:"order"`
+	Title       string          `json:"title"`
+	CategoryFor HelpCategoryFor `json:"categoryFor"`
 }
 
 type UpdateHelpDetailInput struct {
-	ID       primitive.ObjectID `json:"id"`
+	ID       string             `json:"id"`
 	Category HelpDetailCategory `json:"category"`
 	IsActive bool               `json:"isActive"`
 	Order    string             `json:"order"`
@@ -3570,25 +3569,25 @@ type UpdateHelpDetailInput struct {
 }
 
 type UpdateLocationWiseFareInput struct {
-	ID                  primitive.ObjectID `json:"id"`
-	SourceLocation      string             `json:"sourceLocation"`
-	DestinationLocation string             `json:"destinationLocation"`
-	FlatFare            string             `json:"flatFare"`
-	VehicleType         string             `json:"vehicleType"`
-	IsActive            bool               `json:"isActive"`
+	ID                  string `json:"id"`
+	SourceLocation      string `json:"sourceLocation"`
+	DestinationLocation string `json:"destinationLocation"`
+	FlatFare            string `json:"flatFare"`
+	VehicleType         string `json:"vehicleType"`
+	IsActive            bool   `json:"isActive"`
 }
 
 type UpdateManageDocumentInput struct {
-	ID           primitive.ObjectID `json:"id"`
-	DocumentFor  DocumentFor        `json:"documentFor"`
-	Country      string             `json:"country"`
-	ExpireOnDate bool               `json:"expireOnDate"`
-	DocumentName string             `json:"documentName"`
-	IsActive     bool               `json:"isActive"`
+	ID           string      `json:"id"`
+	DocumentFor  DocumentFor `json:"documentFor"`
+	Country      string      `json:"country"`
+	ExpireOnDate bool        `json:"expireOnDate"`
+	DocumentName string      `json:"documentName"`
+	IsActive     bool        `json:"isActive"`
 }
 
 type UpdateMarketSettingsInput struct {
-	ID           primitive.ObjectID        `json:"id"`
+	ID           string                    `json:"id"`
 	General      *GeneralSettingInput      `json:"general"`
 	Email        *EmailSettingInput        `json:"email"`
 	Appearance   *AppearanceSettingInput   `json:"appearance"`
@@ -3601,7 +3600,7 @@ type UpdateMarketSettingsInput struct {
 }
 
 type UpdateOAuthApplicationInput struct {
-	ID                 primitive.ObjectID `json:"id"`
+	ID                 string             `json:"id"`
 	AppName            string             `json:"appName"`
 	PublisherName      string             `json:"publisherName"`
 	ClientDescription  string             `json:"clientDescription"`
@@ -3619,92 +3618,92 @@ type UpdateOAuthApplicationInput struct {
 }
 
 type UpdateOrderInput struct {
-	ID                 primitive.ObjectID `json:"id"`
-	OrderItems         *OrderItemInput    `json:"orderItems"`
-	ServiceType        string             `json:"serviceType"`
-	Coupon             string             `json:"coupon"`
-	ProviderID         primitive.ObjectID `json:"providerID"`
-	Currency           *CurrencyInput     `json:"currency"`
-	DiscountAmount     float64            `json:"discountAmount"`
-	DiscountTax        float64            `json:"discountTax"`
-	ShippingTotal      float64            `json:"shippingTotal"`
-	ShippingTax        float64            `json:"shippingTax"`
-	CartTax            float64            `json:"cartTax"`
-	OrderTotalAmount   float64            `json:"orderTotalAmount"`
-	TotalTax           float64            `json:"totalTax"`
-	PricesIncludeTax   bool               `json:"pricesIncludeTax"`
-	Billing            *BillingInput      `json:"billing"`
-	Shipping           *ShippingInput     `json:"shipping"`
-	PaymentMethod      PaymentMethodType  `json:"paymentMethod"`
-	PaymentMethodTitle string             `json:"paymentMethodTitle"`
+	ID                 string            `json:"id"`
+	OrderItems         *OrderItemInput   `json:"orderItems"`
+	ServiceType        string            `json:"serviceType"`
+	Coupon             string            `json:"coupon"`
+	ProviderID         string            `json:"providerID"`
+	Currency           *CurrencyInput    `json:"currency"`
+	DiscountAmount     float64           `json:"discountAmount"`
+	DiscountTax        float64           `json:"discountTax"`
+	ShippingTotal      float64           `json:"shippingTotal"`
+	ShippingTax        float64           `json:"shippingTax"`
+	CartTax            float64           `json:"cartTax"`
+	OrderTotalAmount   float64           `json:"orderTotalAmount"`
+	TotalTax           float64           `json:"totalTax"`
+	PricesIncludeTax   bool              `json:"pricesIncludeTax"`
+	Billing            *BillingInput     `json:"billing"`
+	Shipping           *ShippingInput    `json:"shipping"`
+	PaymentMethod      PaymentMethodType `json:"paymentMethod"`
+	PaymentMethodTitle string            `json:"paymentMethodTitle"`
 }
 
 type UpdateOrderNoteInput struct {
-	ID           primitive.ObjectID `json:"id"`
-	Author       string             `json:"author"`
-	Note         string             `json:"note"`
-	CustomerNote bool               `json:"customerNote"`
-	IsActive     bool               `json:"isActive"`
+	ID           string `json:"id"`
+	Author       string `json:"author"`
+	Note         string `json:"note"`
+	CustomerNote bool   `json:"customerNote"`
+	IsActive     bool   `json:"isActive"`
 }
 
 type UpdateOrderStatusUtilityInput struct {
-	ID                primitive.ObjectID `json:"id"`
-	StatusTitle       string             `json:"statusTitle"`
-	StatusDescription string             `json:"statusDescription"`
-	IsActive          bool               `json:"isActive"`
+	ID                string `json:"id"`
+	StatusTitle       string `json:"statusTitle"`
+	StatusDescription string `json:"statusDescription"`
+	IsActive          bool   `json:"isActive"`
 }
 
 type UpdatePackageTypeInput struct {
-	ID          primitive.ObjectID `json:"id"`
-	PackageType string             `json:"packageType"`
-	Language    string             `json:"language"`
-	IsActive    bool               `json:"isActive"`
+	ID          string `json:"id"`
+	PackageType string `json:"packageType"`
+	Language    string `json:"language"`
+	IsActive    bool   `json:"isActive"`
 }
 
 type UpdatePageInput struct {
-	ID          primitive.ObjectID `json:"id"`
-	Name        string             `json:"name"`
-	Title       string             `json:"title"`
-	Body        string             `json:"body"`
-	Description string             `json:"description"`
-	Language    string             `json:"language"`
-	IsActive    *bool              `json:"isActive"`
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Title       string `json:"title"`
+	Body        string `json:"body"`
+	Description string `json:"description"`
+	Language    string `json:"language"`
+	IsActive    *bool  `json:"isActive"`
 }
 
 type UpdateProductAttributeInput struct {
-	ID          primitive.ObjectID `json:"id"`
-	Name        string             `json:"name"`
-	Slug        string             `json:"slug"`
-	Type        string             `json:"type"`
-	OrderBy     string             `json:"orderBy"`
-	HasArchives bool               `json:"hasArchives"`
-	Position    int                `json:"position"`
-	Visible     bool               `json:"visible"`
-	Variation   bool               `json:"variation"`
-	Option      []string           `json:"option"`
+	ID          string   `json:"id"`
+	Name        string   `json:"name"`
+	Slug        string   `json:"slug"`
+	Type        string   `json:"type"`
+	OrderBy     string   `json:"orderBy"`
+	HasArchives bool     `json:"hasArchives"`
+	Position    int      `json:"position"`
+	Visible     bool     `json:"visible"`
+	Variation   bool     `json:"variation"`
+	Option      []string `json:"option"`
 }
 
 type UpdateProductAttributeTermInput struct {
-	ID          primitive.ObjectID `json:"id"`
-	Name        string             `json:"name"`
-	Slug        string             `json:"slug"`
-	Description string             `json:"description"`
-	MenuOrder   int                `json:"menuOrder"`
-	Count       int                `json:"count"`
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Slug        string `json:"slug"`
+	Description string `json:"description"`
+	MenuOrder   int    `json:"menuOrder"`
+	Count       int    `json:"count"`
 }
 
 type UpdateProductBrandInput struct {
-	ID            primitive.ObjectID `json:"id"`
-	Type          string             `json:"type"`
-	IsActive      bool               `json:"isActive"`
-	Name          string             `json:"name"`
-	Slug          string             `json:"slug"`
-	Description   string             `json:"description"`
-	Relationships []string           `json:"relationships"`
+	ID            string   `json:"id"`
+	Type          string   `json:"type"`
+	IsActive      bool     `json:"isActive"`
+	Name          string   `json:"name"`
+	Slug          string   `json:"slug"`
+	Description   string   `json:"description"`
+	Relationships []string `json:"relationships"`
 }
 
 type UpdateProductCategoryInput struct {
-	ID           primitive.ObjectID    `json:"id"`
+	ID           string                `json:"id"`
 	Name         string                `json:"name"`
 	Slug         string                `json:"slug"`
 	Parent       int                   `json:"parent"`
@@ -3720,30 +3719,30 @@ type UpdateProductCategoryInput struct {
 }
 
 type UpdateProductCollectionInput struct {
-	ID            primitive.ObjectID `json:"id"`
-	Type          string             `json:"type"`
-	IsActive      bool               `json:"isActive"`
-	Name          string             `json:"name"`
-	Description   string             `json:"description"`
-	Slug          string             `json:"slug"`
-	Relationships []string           `json:"relationships"`
+	ID            string   `json:"id"`
+	Type          string   `json:"type"`
+	IsActive      bool     `json:"isActive"`
+	Name          string   `json:"name"`
+	Description   string   `json:"description"`
+	Slug          string   `json:"slug"`
+	Relationships []string `json:"relationships"`
 }
 
 type UpdateProductDownloadInput struct {
-	ID   primitive.ObjectID `json:"id"`
-	Name string             `json:"name"`
-	File string             `json:"file"`
+	ID   string `json:"id"`
+	Name string `json:"name"`
+	File string `json:"file"`
 }
 
 type UpdateProductImageInput struct {
-	ID   primitive.ObjectID `json:"id"`
-	Src  string             `json:"src"`
-	Name string             `json:"name"`
-	Alt  string             `json:"alt"`
+	ID   string `json:"id"`
+	Src  string `json:"src"`
+	Name string `json:"name"`
+	Alt  string `json:"alt"`
 }
 
 type UpdateProductInput struct {
-	ID                primitive.ObjectID             `json:"id"`
+	ID                string                         `json:"id"`
 	Name              string                         `json:"name"`
 	MenuItem          string                         `json:"menuItem"`
 	Slug              string                         `json:"slug"`
@@ -3760,8 +3759,8 @@ type UpdateProductInput struct {
 	RegularPrice      float64                        `json:"regularPrice"`
 	ServiceType       StoreCategory                  `json:"serviceType"`
 	SalePrice         float64                        `json:"salePrice"`
-	DateOnSaleFrom    time.Time                      `json:"dateOnSaleFrom"`
-	DateOnSaleTo      time.Time                      `json:"dateOnSaleTo"`
+	DateOnSaleFrom    string                         `json:"dateOnSaleFrom"`
+	DateOnSaleTo      string                         `json:"dateOnSaleTo"`
 	PriceHTML         string                         `json:"priceHtml"`
 	OnSale            bool                           `json:"onSale"`
 	Purchasable       bool                           `json:"purchasable"`
@@ -3810,13 +3809,13 @@ type UpdateProductInput struct {
 }
 
 type UpdateProductMetadataInput struct {
-	ID    primitive.ObjectID `json:"id"`
-	Key   string             `json:"key"`
-	Value string             `json:"value"`
+	ID    string `json:"id"`
+	Key   string `json:"key"`
+	Value string `json:"value"`
 }
 
 type UpdateProductReviewInput struct {
-	ID                 primitive.ObjectID       `json:"id"`
+	ID                 string                   `json:"id"`
 	ProductID          string                   `json:"productID"`
 	Status             ProductStatus            `json:"status"`
 	Reviewer           string                   `json:"reviewer"`
@@ -3828,15 +3827,15 @@ type UpdateProductReviewInput struct {
 }
 
 type UpdateProductTagInput struct {
-	ID          primitive.ObjectID `json:"id"`
-	Name        string             `json:"name"`
-	Slug        string             `json:"slug"`
-	Description string             `json:"description"`
-	Count       int                `json:"count"`
+	ID          string `json:"id"`
+	Name        string `json:"name"`
+	Slug        string `json:"slug"`
+	Description string `json:"description"`
+	Count       int    `json:"count"`
 }
 
 type UpdateProductVariationInput struct {
-	ID                primitive.ObjectID             `json:"id"`
+	ID                string                         `json:"id"`
 	ParentProductID   string                         `json:"parentProductID"`
 	Description       string                         `json:"description"`
 	Permalink         string                         `json:"permalink"`
@@ -3844,8 +3843,8 @@ type UpdateProductVariationInput struct {
 	Price             float64                        `json:"price"`
 	RegularPrice      float64                        `json:"regularPrice"`
 	SalePrice         float64                        `json:"salePrice"`
-	DateOnSaleFrom    time.Time                      `json:"dateOnSaleFrom"`
-	DateOnSaleTo      time.Time                      `json:"dateOnSaleTo"`
+	DateOnSaleFrom    string                         `json:"dateOnSaleFrom"`
+	DateOnSaleTo      string                         `json:"dateOnSaleTo"`
 	OnSale            bool                           `json:"onSale"`
 	Status            ProductStatus                  `json:"status"`
 	Purchasable       bool                           `json:"purchasable"`
@@ -3873,56 +3872,56 @@ type UpdateProductVariationInput struct {
 }
 
 type UpdateRentalPackageInput struct {
-	ID                     primitive.ObjectID `json:"id"`
-	Name                   string             `json:"name"`
-	RentalTotalPrice       int                `json:"rentalTotalPrice"`
-	RentalMiles            int                `json:"rentalMiles"`
-	RentalHour             int                `json:"rentalHour"`
-	AdditionalPricePerMile int                `json:"additionalPricePerMile"`
-	AdditionalPricePerMin  int                `json:"additionalPricePerMin"`
+	ID                     string `json:"id"`
+	Name                   string `json:"name"`
+	RentalTotalPrice       int    `json:"rentalTotalPrice"`
+	RentalMiles            int    `json:"rentalMiles"`
+	RentalHour             int    `json:"rentalHour"`
+	AdditionalPricePerMile int    `json:"additionalPricePerMile"`
+	AdditionalPricePerMin  int    `json:"additionalPricePerMin"`
 }
 
 type UpdateReviewInput struct {
-	ID                    primitive.ObjectID `json:"id"`
-	JobID                 primitive.ObjectID `json:"jobId"`
-	UserName              string             `json:"userName"`
-	UserAverageRating     float64            `json:"userAverageRating"`
-	ProviderAverageRating float64            `json:"providerAverageRating"`
-	ProviderName          string             `json:"providerName"`
-	UserRating            float64            `json:"userRating"`
-	ProviderRating        float64            `json:"providerRating"`
-	Type                  ReviewType         `json:"type"`
-	From                  string             `json:"from"`
-	To                    string             `json:"to"`
-	Date                  time.Time          `json:"date"`
-	Comment               string             `json:"comment"`
-	IsActive              bool               `json:"isActive"`
+	ID                    string     `json:"id"`
+	JobID                 string     `json:"jobId"`
+	UserName              string     `json:"userName"`
+	UserAverageRating     float64    `json:"userAverageRating"`
+	ProviderAverageRating float64    `json:"providerAverageRating"`
+	ProviderName          string     `json:"providerName"`
+	UserRating            float64    `json:"userRating"`
+	ProviderRating        float64    `json:"providerRating"`
+	Type                  ReviewType `json:"type"`
+	From                  string     `json:"from"`
+	To                    string     `json:"to"`
+	Date                  string     `json:"date"`
+	Comment               string     `json:"comment"`
+	IsActive              bool       `json:"isActive"`
 }
 
 type UpdateRideProfileTypeInput struct {
-	ID               primitive.ObjectID `json:"id"`
-	ProfileShortName string             `json:"profileShortName"`
-	OrganizationType string             `json:"organizationType"`
-	ProfileTitle     string             `json:"profileTitle"`
-	TitleDescription string             `json:"titleDescription"`
-	ScreenHeading    string             `json:"screenHeading"`
-	ScreenTitle      string             `json:"screenTitle"`
-	ButtonText       string             `json:"buttonText"`
-	ProfileIcon      string             `json:"profileIcon"`
-	WelcomePicture   string             `json:"welcomePicture"`
-	IsActive         *bool              `json:"isActive"`
+	ID               string `json:"id"`
+	ProfileShortName string `json:"profileShortName"`
+	OrganizationType string `json:"organizationType"`
+	ProfileTitle     string `json:"profileTitle"`
+	TitleDescription string `json:"titleDescription"`
+	ScreenHeading    string `json:"screenHeading"`
+	ScreenTitle      string `json:"screenTitle"`
+	ButtonText       string `json:"buttonText"`
+	ProfileIcon      string `json:"profileIcon"`
+	WelcomePicture   string `json:"welcomePicture"`
+	IsActive         *bool  `json:"isActive"`
 }
 
 type UpdateSEOSettingInput struct {
-	ID              *primitive.ObjectID `json:"id"`
-	PageName        *string             `json:"pageName"`
-	PageTitle       *string             `json:"pageTitle"`
-	MetaKeyword     *string             `json:"metaKeyword"`
-	MetaDescription *string             `json:"metaDescription"`
+	ID              *string `json:"id"`
+	PageName        *string `json:"pageName"`
+	PageTitle       *string `json:"pageTitle"`
+	MetaKeyword     *string `json:"metaKeyword"`
+	MetaDescription *string `json:"metaDescription"`
 }
 
 type UpdateServiceCompanyInput struct {
-	ID             primitive.ObjectID  `json:"id"`
+	ID             string              `json:"id"`
 	Name           string              `json:"name"`
 	ProvidersCount int                 `json:"providersCount"`
 	Email          string              `json:"email"`
@@ -3938,46 +3937,46 @@ type UpdateServiceCompanyInput struct {
 }
 
 type UpdateServiceInput struct {
-	ID                        primitive.ObjectID `json:"id"`
-	Name                      string             `json:"name"`
-	PriceBasedOn              PriceBasedOn       `json:"priceBasedOn"`
-	CommissionOnMaterial      bool               `json:"commissionOnMaterial"`
-	Category                  ServiceCategory    `json:"category"`
-	UserCancellationTimeLimit int                `json:"userCancellationTimeLimit"`
-	UserCancellationCharges   float64            `json:"userCancellationCharges"`
-	WaitingTimeLimit          int                `json:"waitingTimeLimit"`
-	WaitingCharges            float64            `json:"waitingCharges"`
-	CategoryViewType          CategoryViewType   `json:"categoryViewType"`
-	Icon                      string             `json:"icon"`
-	DisplayOrder              int                `json:"displayOrder"`
-	Tags                      []string           `json:"tags"`
-	IsActive                  bool               `json:"isActive"`
+	ID                        string           `json:"id"`
+	Name                      string           `json:"name"`
+	PriceBasedOn              PriceBasedOn     `json:"priceBasedOn"`
+	CommissionOnMaterial      bool             `json:"commissionOnMaterial"`
+	Category                  ServiceCategory  `json:"category"`
+	UserCancellationTimeLimit int              `json:"userCancellationTimeLimit"`
+	UserCancellationCharges   float64          `json:"userCancellationCharges"`
+	WaitingTimeLimit          int              `json:"waitingTimeLimit"`
+	WaitingCharges            float64          `json:"waitingCharges"`
+	CategoryViewType          CategoryViewType `json:"categoryViewType"`
+	Icon                      string           `json:"icon"`
+	DisplayOrder              int              `json:"displayOrder"`
+	Tags                      []string         `json:"tags"`
+	IsActive                  bool             `json:"isActive"`
 }
 
 type UpdateServiceProviderInput struct {
-	ID                 primitive.ObjectID `json:"id"`
-	FirstName          string             `json:"firstName"`
-	LastName           string             `json:"lastName"`
-	Email              string             `json:"email"`
-	Gender             Gender             `json:"gender"`
-	ProfilePicture     string             `json:"profilePicture"`
-	Country            string             `json:"country"`
-	State              string             `json:"state"`
-	City               string             `json:"city"`
-	Address            *AddAddressInput   `json:"address"`
-	ZipCode            int                `json:"zipCode"`
-	MobileNumber       int                `json:"mobileNumber"`
-	Company            string             `json:"company"`
-	Language           string             `json:"language"`
-	Currency           string             `json:"currency"`
-	BankAccountDetails primitive.ObjectID `json:"bankAccountDetails"`
-	ServiceDescription string             `json:"serviceDescription"`
-	CompanyID          string             `json:"companyID"`
-	Metadata           *string            `json:"metadata"`
+	ID                 string           `json:"id"`
+	FirstName          string           `json:"firstName"`
+	LastName           string           `json:"lastName"`
+	Email              string           `json:"email"`
+	Gender             Gender           `json:"gender"`
+	ProfilePicture     string           `json:"profilePicture"`
+	Country            string           `json:"country"`
+	State              string           `json:"state"`
+	City               string           `json:"city"`
+	Address            *AddAddressInput `json:"address"`
+	ZipCode            int              `json:"zipCode"`
+	MobileNumber       int              `json:"mobileNumber"`
+	Company            string           `json:"company"`
+	Language           string           `json:"language"`
+	Currency           string           `json:"currency"`
+	BankAccountDetails string           `json:"bankAccountDetails"`
+	ServiceDescription string           `json:"serviceDescription"`
+	CompanyID          string           `json:"companyID"`
+	Metadata           *string          `json:"metadata"`
 }
 
 type UpdateServiceProviderVehicleInput struct {
-	ID                  primitive.ObjectID          `json:"id"`
+	ID                  string                      `json:"id"`
 	VehicleCompanyName  string                      `json:"vehicleCompanyName"`
 	VehicleModelName    string                      `json:"vehicleModelName"`
 	VehicleYear         string                      `json:"vehicleYear"`
@@ -3990,34 +3989,34 @@ type UpdateServiceProviderVehicleInput struct {
 }
 
 type UpdateServiceSubCategoryInput struct {
-	ID           primitive.ObjectID `json:"id"`
-	ServiceID    string             `json:"serviceID"`
-	Name         string             `json:"name"`
-	Description  string             `json:"description"`
-	ServiceType  string             `json:"serviceType"`
-	Icon         string             `json:"icon"`
-	BannerImage  string             `json:"bannerImage"`
-	DisplayOrder int                `json:"displayOrder"`
-	IsActive     bool               `json:"isActive"`
+	ID           string `json:"id"`
+	ServiceID    string `json:"serviceID"`
+	Name         string `json:"name"`
+	Description  string `json:"description"`
+	ServiceType  string `json:"serviceType"`
+	Icon         string `json:"icon"`
+	BannerImage  string `json:"bannerImage"`
+	DisplayOrder int    `json:"displayOrder"`
+	IsActive     bool   `json:"isActive"`
 }
 
 type UpdateServiceTypeInput struct {
-	ID                   primitive.ObjectID `json:"id"`
-	ServiceCategory      string             `json:"serviceCategory"`
-	ServiceSubCategoryID string             `json:"ServiceSubCategoryID"`
-	ServiceType          string             `json:"serviceType"`
-	ServiceDescription   string             `json:"serviceDescription"`
-	Location             string             `json:"location"`
-	FareType             FareType           `json:"fareType"`
-	ServiceCharge        float64            `json:"serviceCharge"`
-	Commission           float64            `json:"commission"`
-	AllowQuantity        bool               `json:"allowQuantity"`
-	DisplayOrder         int                `json:"displayOrder"`
-	IsActive             bool               `json:"isActive"`
+	ID                   string   `json:"id"`
+	ServiceCategory      string   `json:"serviceCategory"`
+	ServiceSubCategoryID string   `json:"ServiceSubCategoryID"`
+	ServiceType          string   `json:"serviceType"`
+	ServiceDescription   string   `json:"serviceDescription"`
+	Location             string   `json:"location"`
+	FareType             FareType `json:"fareType"`
+	ServiceCharge        float64  `json:"serviceCharge"`
+	Commission           float64  `json:"commission"`
+	AllowQuantity        bool     `json:"allowQuantity"`
+	DisplayOrder         int      `json:"displayOrder"`
+	IsActive             bool     `json:"isActive"`
 }
 
 type UpdateServiceVehicleTypeInput struct {
-	ID                           primitive.ObjectID `json:"id"`
+	ID                           string             `json:"id"`
 	VehicleServiceType           VehicleServiceType `json:"vehicleServiceType"`
 	EnablePoolRide               bool               `json:"enablePoolRide"`
 	VehicleType                  VehicleType        `json:"vehicleType"`
@@ -4042,26 +4041,26 @@ type UpdateServiceVehicleTypeInput struct {
 }
 
 type UpdateSmsTemplateInput struct {
-	ID         primitive.ObjectID `json:"id"`
-	Code       string             `json:"code"`
-	Body       string             `json:"body"`
-	Language   string             `json:"language"`
-	TemplateID string             `json:"templateId"`
-	Purpose    string             `json:"purpose"`
-	Title      string             `json:"title"`
+	ID         string `json:"id"`
+	Code       string `json:"code"`
+	Body       string `json:"body"`
+	Language   string `json:"language"`
+	TemplateID string `json:"templateId"`
+	Purpose    string `json:"purpose"`
+	Title      string `json:"title"`
 }
 
 type UpdateStateInput struct {
-	ID          primitive.ObjectID `json:"id"`
-	CountryName string             `json:"countryName"`
-	CountryCode string             `json:"countryCode"`
-	StateName   string             `json:"stateName"`
-	StateCode   string             `json:"stateCode"`
-	IsActive    bool               `json:"isActive"`
+	ID          string `json:"id"`
+	CountryName string `json:"countryName"`
+	CountryCode string `json:"countryCode"`
+	StateName   string `json:"stateName"`
+	StateCode   string `json:"stateCode"`
+	IsActive    bool   `json:"isActive"`
 }
 
 type UpdateStoreInput struct {
-	ID                       primitive.ObjectID          `json:"id"`
+	ID                       string                      `json:"id"`
 	StoreName                string                      `json:"storeName"`
 	ServiceCategory          StoreCategory               `json:"serviceCategory"`
 	Email                    string                      `json:"email"`
@@ -4087,14 +4086,14 @@ type UpdateStoreInput struct {
 }
 
 type UpdateStoreLocationInput struct {
-	ID                primitive.ObjectID  `json:"id"`
-	StoreID           primitive.ObjectID  `json:"storeID"`
+	ID                string              `json:"id"`
+	StoreID           string              `json:"storeID"`
 	StoreLocationName string              `json:"storeLocationName"`
 	StoreAddress      *UpdateAddressInput `json:"storeAddress"`
 }
 
 type UpdateStoreVehicleTypeInput struct {
-	ID                        primitive.ObjectID       `json:"id"`
+	ID                        string                   `json:"id"`
 	Type                      string                   `json:"type"`
 	Location                  StoreVehicleTypeLocation `json:"location"`
 	ChargesForCompletedOrders int                      `json:"chargesForCompletedOrders"`
@@ -4105,68 +4104,68 @@ type UpdateStoreVehicleTypeInput struct {
 }
 
 type UpdateUserInput struct {
-	ID           primitive.ObjectID `json:"id"`
-	FirstName    string             `json:"firstName"`
-	LastName     string             `json:"lastName"`
-	Email        string             `json:"email"`
-	MobileNo     string             `json:"mobileNo"`
-	Password     string             `json:"password"`
-	Gender       Gender             `json:"gender"`
-	ProfilePhoto string             `json:"profilePhoto"`
-	Phone        int                `json:"phone"`
-	Language     string             `json:"language"`
-	Currency     string             `json:"currency"`
-	IsActive     bool               `json:"isActive"`
+	ID           string `json:"id"`
+	FirstName    string `json:"firstName"`
+	LastName     string `json:"lastName"`
+	Email        string `json:"email"`
+	MobileNo     string `json:"mobileNo"`
+	Password     string `json:"password"`
+	Gender       Gender `json:"gender"`
+	ProfilePhoto string `json:"profilePhoto"`
+	Phone        int    `json:"phone"`
+	Language     string `json:"language"`
+	Currency     string `json:"currency"`
+	IsActive     bool   `json:"isActive"`
 }
 
 type UpdateUserRoleGroupInput struct {
-	ID          primitive.ObjectID `json:"id"`
-	Name        string             `json:"name"`
-	Roles       []string           `json:"roles"`
-	Description string             `json:"description"`
+	ID          string   `json:"id"`
+	Name        string   `json:"name"`
+	Roles       []string `json:"roles"`
+	Description string   `json:"description"`
 }
 
 type UpdateUserRoleInput struct {
-	ID          primitive.ObjectID `json:"id"`
-	Name        string             `json:"name"`
-	Description string             `json:"description"`
-	Permissions []string           `json:"permissions"`
+	ID          string   `json:"id"`
+	Name        string   `json:"name"`
+	Description string   `json:"description"`
+	Permissions []string `json:"permissions"`
 }
 
 type UpdateVehicleMakeInput struct {
-	ID       primitive.ObjectID `json:"id"`
-	Make     string             `json:"make"`
-	IsActive bool               `json:"isActive"`
+	ID       string `json:"id"`
+	Make     string `json:"make"`
+	IsActive bool   `json:"isActive"`
 }
 
 type UpdateVehicleModelInput struct {
-	ID       primitive.ObjectID `json:"id"`
-	Make     string             `json:"make"`
-	Model    string             `json:"model"`
-	IsActive bool               `json:"isActive"`
+	ID       string `json:"id"`
+	Make     string `json:"make"`
+	Model    string `json:"model"`
+	IsActive bool   `json:"isActive"`
 }
 
 type UpdateVisitLocationInput struct {
-	ID               primitive.ObjectID `json:"id"`
-	DestinationTitle string             `json:"destinationTitle"`
-	Destination      string             `json:"destination"`
-	IsActive         bool               `json:"isActive"`
+	ID               string `json:"id"`
+	DestinationTitle string `json:"destinationTitle"`
+	Destination      string `json:"destination"`
+	IsActive         bool   `json:"isActive"`
 }
 
 type UpdateWebhookInput struct {
-	ID          primitive.ObjectID `json:"id"`
-	URL         string             `json:"url"`
-	EventTopics []string           `json:"eventTopics"`
-	Secret      string             `json:"secret"`
-	IsEnabled   bool               `json:"isEnabled"`
+	ID          string   `json:"id"`
+	URL         string   `json:"url"`
+	EventTopics []string `json:"eventTopics"`
+	Secret      string   `json:"secret"`
+	IsEnabled   bool     `json:"isEnabled"`
 }
 
 type UpdateWineDeliveryLabelInput struct {
-	ID                     primitive.ObjectID `json:"id"`
-	Code                   string             `json:"code"`
-	ValueInEnglishLanguage string             `json:"valueInEnglishLanguage"`
-	LanguageLabel          string             `json:"languageLabel"`
-	IsActive               bool               `json:"isActive"`
+	ID                     string `json:"id"`
+	Code                   string `json:"code"`
+	ValueInEnglishLanguage string `json:"valueInEnglishLanguage"`
+	LanguageLabel          string `json:"languageLabel"`
+	IsActive               bool   `json:"isActive"`
 }
 
 // The `UploadFile` type
@@ -4195,20 +4194,20 @@ type UserEdge struct {
 }
 
 type UserReferralReport struct {
-	ID                   primitive.ObjectID `json:"id"`
-	MemberName           string             `json:"memberName"`
-	TotalMembersReferred string             `json:"totalMembersReferred"`
-	TotalAmountEarned    string             `json:"totalAmountEarned"`
-	DateReferred         string             `json:"dateReferred"`
+	ID                   string `json:"id"`
+	MemberName           string `json:"memberName"`
+	TotalMembersReferred string `json:"totalMembersReferred"`
+	TotalAmountEarned    string `json:"totalAmountEarned"`
+	DateReferred         string `json:"dateReferred"`
 }
 
 type UserReview struct {
-	OrderNumber      string    `json:"orderNumber"`
-	FromProviderName string    `json:"fromProviderName"`
-	ToUserName       string    `json:"toUserName"`
-	Rate             string    `json:"rate"`
-	Date             time.Time `json:"date"`
-	Comment          string    `json:"comment"`
+	OrderNumber      string `json:"orderNumber"`
+	FromProviderName string `json:"fromProviderName"`
+	ToUserName       string `json:"toUserName"`
+	Rate             string `json:"rate"`
+	Date             string `json:"date"`
+	Comment          string `json:"comment"`
 }
 
 //  List of User roles
@@ -4248,17 +4247,17 @@ type UserRoleGroupEdge struct {
 }
 
 type UserSignUpDetails struct {
-	FirstName    string     `json:"firstName"`
-	LastName     string     `json:"lastName"`
-	Email        string     `json:"email"`
-	Password     string     `json:"password"`
-	MobileNo     *string    `json:"mobileNo"`
-	Country      *string    `json:"country"`
-	State        *string    `json:"state"`
-	City         *string    `json:"city"`
-	Gender       string     `json:"gender"`
-	DateOfBirth  *time.Time `json:"dateOfBirth"`
-	ReferralCode *string    `json:"referralCode"`
+	FirstName    string  `json:"firstName"`
+	LastName     string  `json:"lastName"`
+	Email        string  `json:"email"`
+	Password     string  `json:"password"`
+	MobileNo     *string `json:"mobileNo"`
+	Country      *string `json:"country"`
+	State        *string `json:"state"`
+	City         *string `json:"city"`
+	Gender       string  `json:"gender"`
+	DateOfBirth  *string `json:"dateOfBirth"`
+	ReferralCode *string `json:"referralCode"`
 }
 
 //  List of UserWalletReport
@@ -4328,14 +4327,14 @@ type VehicleServiceOptionInput struct {
 }
 
 type VehicleServiceTypes struct {
-	ServiceID      primitive.ObjectID      `json:"serviceId"`
+	ServiceID      string                  `json:"serviceId"`
 	ServiceName    string                  `json:"serviceName"`
 	IsEnabled      bool                    `json:"isEnabled"`
 	ServiceOptions []*VehicleServiceOption `json:"serviceOptions"`
 }
 
 type VehicleServiceTypesInput struct {
-	ServiceID      primitive.ObjectID           `json:"serviceId"`
+	ServiceID      string                       `json:"serviceId"`
 	ServiceName    string                       `json:"serviceName"`
 	IsEnabled      bool                         `json:"isEnabled"`
 	ServiceOptions []*VehicleServiceOptionInput `json:"serviceOptions"`
@@ -4448,8 +4447,8 @@ type WithdrawalEdge struct {
 }
 
 type ProductData struct {
-	ID   primitive.ObjectID `json:"id"`
-	Type string             `json:"type"`
+	ID   string `json:"id"`
+	Type string `json:"type"`
 }
 
 type AddPaymentMethod string
