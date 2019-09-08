@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+  graphserver: 
+    image: tribecommerce/platform:latest
+    container_name: GraphServer
+    volumes:
+      - ~/creds:/creds
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/creds/key.json
+    ports:
+      - 8080:8080
+    networks:
+      - tribe_network
+
+  oauthserver: 
+    image: tribecommerce/platform:latest
+    container_name: OAuthServer
+    entrypoint: oauthserver
+    volumes:
+      - ~/creds:/creds
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/creds/key.json
+    ports:
+      - 8000:8080
+    networks:
+      - tribe_network
+
+  mongodb: 
+    image: mongo:4.2
+    container_name: MongoDB
+    volumes:
+      - ~/mongo-data:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - tribe_network
+  
+  redis: 
+    image: redis:5.0.5-alpine
+    container_name: Redis
+    volumes:
+      - ~/redis-data:/data
+    ports:
+      - 6379:6379
+    networks:
+      - tribe_network
+
+networks:
+  tribe_network:
+    external:
+      name: tribe_network
