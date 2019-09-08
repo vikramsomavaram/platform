@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  graphserver: 
+  graphserver:
     image: tribecommerce/platform:latest
     container_name: GraphServer
     volumes:
@@ -13,7 +13,7 @@ services:
     networks:
       - tribe_network
 
-  oauthserver: 
+  oauthserver:
     image: tribecommerce/platform:latest
     container_name: OAuthServer
     entrypoint: oauthserver
@@ -26,7 +26,7 @@ services:
     networks:
       - tribe_network
 
-  mongodb: 
+  mongodb:
     image: mongo:4.2
     container_name: MongoDB
     volumes:
@@ -35,8 +35,8 @@ services:
       - 27017:27017
     networks:
       - tribe_network
-  
-  redis: 
+
+  redis:
     image: redis:5.0.5-alpine
     container_name: Redis
     volumes:
