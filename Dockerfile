@@ -1,5 +1,5 @@
 #Use golang as a base Image
-FROM golang:1.12-alpine
+FROM golang:1.13
 
 #Set current working directory
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY go.mod go.sum ./
 COPY . .
 
 # Build the Go app
-RUN go build ./...
+RUN go install ./...
 
 #Expose the port to outside world
 EXPOSE 8080
