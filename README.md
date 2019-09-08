@@ -74,3 +74,13 @@ For enterprise installation & support / customizations please mail to support@tr
 ## Contributing to Tribe Commerce
 
 If you have a patch or have stumbled upon an issue with tribe platform, you can contribute this back to the code. Please read our [contributor guidelines](https://github.com/tribehq/platform/blob/master/.github/CONTRIBUTING.md) for more information how you can do this.
+
+## Contributors 👨🏽‍💻
+* Balamurali Pandranki
+* Vikram Somavaram
+* Srikanth Koppuravuri
+* Chaitanya Rayampally
+* Sanjana Argula
+* Ramya Sai Sanjita Bhavirishetty
+
+And many more awesome [contributors listed here](https://github.com/tribehq/platform/graphs/contributors) 
