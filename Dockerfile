@@ -5,7 +5,9 @@ FROM golang:1.12-alpine
 WORKDIR /app
 
 #Install project dependencies
-RUN apt-get update && apt-get install -y libssl-dev --no-install-recommends
+RUN apt-get update && apt-get install -y libssl-dev --no-install-recommends \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 #Copy go mod and sum files
 COPY go.mod go.sum ./
