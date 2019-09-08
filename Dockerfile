@@ -1,11 +1,11 @@
 #Use golang as a base Image
-FROM golang:latest
+FROM golang:1.12-alpine
 
 #Set current working directory
 WORKDIR /app
 
 #Install project dependencies
-RUN apt-get update && apt-get install -y libssl-dev
+RUN apt-get update && apt-get install -y libssl-dev --no-install-recommends
 
 #Copy go mod and sum files
 COPY go.mod go.sum ./
