@@ -11,7 +11,8 @@
 
 Tribe® is an Open-Source, Real-Time, Extensible, On-Demand Commerce Platform built with Golang. You can use tribe to build anything from Uber to Postmates or Amazon like marketplace itself for on-demand services and e-commerce.
 
-
+### GraphQL Playground : https://dev.graph.tribe.cab
+### OAuth2 Server: https://dev.accounts.tribe.cab
 
 ## Technology Stack and Requirements
 * Golang >= 1.12
@@ -29,6 +30,7 @@ Tribe® is an Open-Source, Real-Time, Extensible, On-Demand Commerce Platform bu
 *   Supports Single-Store and Multi-Store / Multi-Vendor / Peer-to-Peer Marketplaces
 *   Everything Reactive, Real-Time and Blazing Fast!
 *   Headless Commerce framework, which allows different implementations of store-fronts, Admin UIs and client apps. It exposes rich GraphQL and WS APIs.
+*   Realtime Webhooks for event driven commerce and integration with other systems / applications.
 *   Mobile ordering App for customers to make On-Demand orders (iOS and Android using Flutter & Native technologies)
 *   Partner (Driver) Mobile App for deliveries by carriers, drivers or service providers (iOS and Android using Flutter & Native technologies)
 *   Customizing Shopping e-commerce Website for customers to make in-browser On-Demand purchases of food, goods or services
