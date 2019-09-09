@@ -13,6 +13,7 @@ Tribe® is an Open-Source, Real-Time, Extensible, On-Demand Commerce Platform bu
 
 ### GraphQL Playground : https://dev.graph.tribe.cab
 ### OAuth2 Server: https://dev.accounts.tribe.cab
+### Mobile Apps Repository: https://github.com/tribehq/mobile-apps
 
 ## Technology Stack and Requirements
 * Golang >= 1.12
