@@ -84,6 +84,6 @@ If you have a patch or have stumbled upon an issue with tribe platform, you can 
 * Srikanth Koppuravuri
 * Chaitanya Rayampally
 * Sanjana Argula
-* Ramya Sai Sanjita Bhavirishetty
+* Ramyasai Sanjita Bhavirisetty
 
 And many more awesome [contributors listed here](https://github.com/tribehq/platform/graphs/contributors) 
