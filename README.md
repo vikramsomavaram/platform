@@ -7,7 +7,7 @@
 [![GoDoc](https://godoc.org/github.com/tribehq/platform?status.svg)](https://godoc.org/github.com/tribehq/platform)
 [![GitHub release](https://img.shields.io/github/release/tribehq/platform.svg)](https://github.com/tribehq/platform/releases/latest)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/tribe)
-![Discord](https://img.shields.io/discord/619455063584145409)
+[![Discord](https://img.shields.io/discord/619455063584145409)](https://discord.gg/s5zEucn)
 
 Tribe® is an Open-Source, Real-Time, Extensible, On-Demand Commerce Platform built with Golang. You can use tribe to build anything from Uber to Postmates or Amazon like marketplace itself for on-demand services and e-commerce.
 
