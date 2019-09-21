@@ -7,12 +7,13 @@
 [![GoDoc](https://godoc.org/github.com/tribehq/platform?status.svg)](https://godoc.org/github.com/tribehq/platform)
 [![GitHub release](https://img.shields.io/github/release/tribehq/platform.svg)](https://github.com/tribehq/platform/releases/latest)
 [![Join the community on Spectrum](https://withspectrum.github.io/badge/badge.svg)](https://spectrum.chat/tribe)
-![Discord](https://img.shields.io/discord/619455063584145409)
+[![Discord](https://img.shields.io/discord/619455063584145409)](https://discord.gg/s5zEucn)
 
 Tribe® is an Open-Source, Real-Time, Extensible, On-Demand Commerce Platform built with Golang. You can use tribe to build anything from Uber to Postmates or Amazon like marketplace itself for on-demand services and e-commerce.
 
 ### GraphQL Playground : https://dev.graph.tribe.cab
 ### OAuth2 Server: https://dev.accounts.tribe.cab
+### Mobile Apps Repository: https://github.com/tribehq/mobile-apps
 
 ## Technology Stack and Requirements
 * Golang >= 1.12
@@ -83,6 +84,6 @@ If you have a patch or have stumbled upon an issue with tribe platform, you can 
 * Srikanth Koppuravuri
 * Chaitanya Rayampally
 * Sanjana Argula
-* Ramya Sai Sanjita Bhavirishetty
+* Ramyasai Sanjita Bhavirisetty
 
 And many more awesome [contributors listed here](https://github.com/tribehq/platform/graphs/contributors) 
